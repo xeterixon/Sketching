@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="SketchUpp.Toolbar">
+	<ContentView.Content>
+		<Grid HorizontalOptions="FillAndExpand" >
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Button Grid.Row="0" Grid.Column="0" Text="Line" Command="{Binding ActivateToolCommand}" CommandParameter="Line"/>
+			<Button Grid.Row="0" Grid.Column="1" Text="Curve" Command="{Binding ActivateToolCommand}" CommandParameter="Curve"/>
+			<Button Grid.Row="0" Grid.Column="2" Text="Point" Command="{Binding ActivateToolCommand}" CommandParameter="Point"/>
+			<Button Grid.Row="0" Grid.Column="3" Text="Circle" Command="{Binding ActivateToolCommand}" CommandParameter="Circle"/>
+			<Button Grid.Row="0" Grid.Column="4" Text="Rect" Command="{Binding ActivateToolCommand}" CommandParameter="Rectangle"/>
+			<Button Grid.Row="0" Grid.Column="5" Text="Undo" Command="{Binding UndoCommand}"/>
+		</Grid>
+		
+	</ContentView.Content>
+</ContentView>

@@ -1,0 +1,10 @@
+SketchUpp/bin/*/
+SketchUpp/Droid/bin/*
+SketchUpp/Droid/obj/*
+SketchUpp/iOS/bin/*
+SketchUpp/iOS/obj/*
+SketchUpp/obj/*
+SketchUpp/packages/*/*
+SketchUpp/Sketching/*/obj/*
+SketchUpp/Sketching/*/bin/*
+SketchUpp/SketchUpp.userprefs
