@@ -13,7 +13,7 @@ namespace Sketching.Common.Geometries
 			End = new Point(-1, -1);
 			Size = 4;
 		}
-		public Circle(ICircle src):this()
+		public Circle(IGeometryVisual src):this()
 		{
 			Color = src.Color;
 			Size = src.Size;

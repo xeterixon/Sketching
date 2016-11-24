@@ -13,12 +13,12 @@ namespace Sketching.Common.Tools
 		public override void TouchStart(Xamarin.Forms.Point p)
 		{
 			base.TouchStart(p);
-			Mark.Point = p;
+			Geometry.Point = p;
 		}
 		public override void TouchMove(Xamarin.Forms.Point p)
 		{
 			base.TouchMove(p);
-			Mark.Point = p;
+			Geometry.Point = p;
 		}
 		public override void TouchEnd(Xamarin.Forms.Point p)
 		{

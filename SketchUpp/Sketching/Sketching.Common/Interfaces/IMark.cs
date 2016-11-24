@@ -2,8 +2,7 @@
 
 namespace Sketching.Common.Interfaces
 {
-	public interface IMark : IGeometryVisual
+	public interface IMark : IGeometryVisual, IPoint
 	{
-		Point Point { get; set; }
 	}
 }

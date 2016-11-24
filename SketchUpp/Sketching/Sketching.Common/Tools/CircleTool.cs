@@ -7,14 +7,25 @@ namespace Sketching.Common.Tools
 {
 	public class CircleTool : ICircleTool
 	{
-		public IGeometryVisual Geometry { get; set; } = new Circle();
 
 		public string Name { get; set; }
 
 		public ToolType ToolType { get; set; }
 
 		public bool Active { get; set; }
-		private ICircle Circle {get {return (ICircle)Geometry;}}
+
+		public ICircle Geometry { get; set; } = new Circle();
+
+		IGeometryVisual ITool.Geometry {
+			get {
+				return Geometry;
+			}
+
+			set {
+				throw new NotImplementedException();
+			}
+		}
+
 		public CircleTool()
 		{
 			Name = "Circle";
@@ -32,23 +43,23 @@ namespace Sketching.Common.Tools
 
 		private void Init() 
 		{
-			Geometry = new Circle(Circle);
+			Geometry = new Circle(Geometry);
 		}
 
 		public void TouchStart(Point p)
 		{
-			Circle.Start = p;
+			Geometry.Start = p;
 		}
 
 		public void TouchEnd(Point p)
 		{
-			Circle.End = p;
+			Geometry.End = p;
 			Init();
 		}
 
 		public void TouchMove(Point p)
 		{
-			Circle.End = p;
+			Geometry.End = p;
 		}
 	}
 }

@@ -9,14 +9,9 @@ namespace Sketching.Common.Tools
 
 	public abstract class StrokeToolBase : IStrokeTool
 	{
-		public IGeometryVisual Geometry { get; set; } = new Stroke(Xamarin.Forms.Color.Blue, 10);
 		protected virtual void Init()
 		{
-			Geometry = new Stroke(Stroke);
-		}
-		protected IStroke Stroke 
-		{
-			get { return (IStroke)Geometry; }
+			Geometry = new Stroke(Geometry);
 		}
 		public bool Active { get; set; }
 		public virtual void Activate()
@@ -34,18 +29,26 @@ namespace Sketching.Common.Tools
 
 		public string Name { get; set; }
 		public ToolType ToolType { get; set; }
+
+		public IStroke Geometry { get; set;} = new Stroke(Xamarin.Forms.Color.Blue, 10);
+
+		IGeometryVisual ITool.Geometry {
+			get {
+				return Geometry;
+			}
+
+			set {
+				throw new NotImplementedException();
+			}
+		}
 	}
 	public abstract class PointToolBase : IPointTool 
 	{
 		protected virtual void Init()
 		{
-			Geometry = new Mark(Mark);
+			Geometry = new Mark(Geometry);
 		}
 		public bool Active { get; set; }
-		protected IMark Mark 
-		{
-			get { return (IMark)Geometry;}
-		}
 		public virtual void Activate()
 		{
 			Active = true;
@@ -61,7 +64,16 @@ namespace Sketching.Common.Tools
 
 		public string Name { get; set; }
 		public ToolType ToolType { get; set; }
-		public IGeometryVisual Geometry { get; set; } = new Mark();
 
+		public IMark Geometry { get; set; } = new Mark();
+
+		IGeometryVisual ITool.Geometry {
+			get {
+				return Geometry;
+			}
+			set {
+				throw new NotImplementedException();
+			}
+		}
 	}
 }

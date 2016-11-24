@@ -32,7 +32,7 @@ namespace Sketching.Common.Tools
 		}
 		private void AddPoint(Point p)
 		{
-			Stroke.Points.Add(p);
+			Geometry.Points.Add(p);
 		}
 	}
 }

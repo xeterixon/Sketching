@@ -7,7 +7,8 @@ namespace SketchUpp
 		public App()
 		{
 			InitializeComponent();
-			MainPage = new SketchPage();
+			var sketchPage = new SketchPage();
+			MainPage = new NavigationPage(sketchPage);
 		}
 
 		protected override void OnStart()

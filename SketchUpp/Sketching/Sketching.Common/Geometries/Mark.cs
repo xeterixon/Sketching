@@ -7,7 +7,7 @@ namespace Sketching.Common.Geometries
 	public class Mark : IMark
 	{
 		public Mark() { }
-		public Mark(IMark src)
+		public Mark(IGeometryVisual src)
 		{
 			this.Color = src.Color;
 			this.Size = src.Size;

@@ -43,10 +43,10 @@ namespace Sketching.Common.Tools
 		}
 		private void AddPoint(Point p)
 		{
-			if (Stroke.Points.Count < 2) {
-				Stroke.Points.Add(p);
-			} else if (Stroke.Points.Count == 2) {
-				Stroke.Points[1] = p;
+			if (Geometry.Points.Count < 2) {
+				Geometry.Points.Add(p);
+			} else if (Geometry.Points.Count == 2) {
+				Geometry.Points[1] = p;
 			}
 		}
 

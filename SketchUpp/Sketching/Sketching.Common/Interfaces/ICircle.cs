@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace Sketching.Common.Interfaces
 {
-	public interface ICircle : ITwoPoint, IGeometryVisual
+	public interface ICircle : IGeometryVisual, ITwoPoint 
 	{
 		double Radius { get; }
 	}

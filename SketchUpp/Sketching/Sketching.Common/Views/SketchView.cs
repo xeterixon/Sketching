@@ -15,6 +15,8 @@ namespace Sketching.Common.Views
 		//TODO Is this a bit overly designed? We only got one delegate and thats the ToolCollection object....
 		public List<ITouchDelegate> Delegates { get; set; } = new List<ITouchDelegate>();
 		private IToolCollection _tools;
+		private SKSurface _surface;
+		private byte[] _imageData;
 		public IToolCollection ToolCollection {
 			get { return _tools; }
 			set 
@@ -24,10 +26,15 @@ namespace Sketching.Common.Views
 			}
 		}
 		private int _lastCanvasWidth = -1;
+		public byte[] ImageData() 
+		{
+			return _imageData;
+		}
 		public Action<CallbackType> CallbackToNative { get; set; }
 
 		public virtual void Draw(SKSurface surface, SKImageInfo info) 
 		{
+			_surface = surface;
 			if (_lastCanvasWidth != (int)surface.Canvas.ClipBounds.Width) 
 			{
 				_lastCanvasWidth = (int)surface.Canvas.ClipBounds.Width;
@@ -40,15 +47,29 @@ namespace Sketching.Common.Views
 			//This is really not that object oriented... So kill me...
 			foreach (var geom in ToolCollection.Geometries) 
 			{
+				if (!geom.IsValid) continue;
 				if (geom is IStroke)	{ DrawStroke(canvas,(IStroke)geom);}
 				if (geom is ICircle)	{ DrawCircle(canvas, (ICircle)geom);}
 				if (geom is IMark)		{ DrawMark(canvas, (IMark)geom);}
 				if (geom is IRectangle)	{ DrawRectangle(canvas, (IRectangle)geom); }
+				if (geom is IText)		{ DrawText(canvas, (IText)geom);}
+			}
+			//TODO Try to do this on demand, rather than very draw...
+			_imageData = surface.Snapshot().Encode(SKImageEncodeFormat.Jpeg, 100).ToArray();
+		}
+		private void DrawText(SKCanvas canvas, IText text) 
+		{
+			using (var paint = new SKPaint()) 
+			{
+				paint.Color = text.Color.ToSkiaColor();
+				paint.IsAntialias = true;
+				paint.IsStroke = false;
+				paint.TextSize = (float)text.Size;
+				canvas.DrawText(text.Value, (float)text.Point.X, (float)text.Point.Y, paint);
 			}
 		}
 		private void DrawRectangle(SKCanvas canvas, IRectangle rect) 
 		{
-			if (!rect.IsValid) return;
 			using (var paint = new SKPaint()) 
 			{
 				paint.Color = rect.Color.ToSkiaColor();
@@ -61,7 +82,6 @@ namespace Sketching.Common.Views
 		}
 		private void DrawCircle(SKCanvas canvas, ICircle circle) 
 		{
-			if (!circle.IsValid) return;
 			using (var paint = new SKPaint()) 
 			{
 				paint.Color = circle.Color.ToSkiaColor();

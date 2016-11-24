@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentView 
 	xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
@@ -7,8 +7,10 @@
 		<Grid HorizontalOptions="FillAndExpand" >
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="*"/>
@@ -21,7 +23,9 @@
 			<Button Grid.Row="0" Grid.Column="2" Text="Point" Command="{Binding ActivateToolCommand}" CommandParameter="Point"/>
 			<Button Grid.Row="0" Grid.Column="3" Text="Circle" Command="{Binding ActivateToolCommand}" CommandParameter="Circle"/>
 			<Button Grid.Row="0" Grid.Column="4" Text="Rect" Command="{Binding ActivateToolCommand}" CommandParameter="Rectangle"/>
-			<Button Grid.Row="0" Grid.Column="5" Text="Undo" Command="{Binding UndoCommand}"/>
+			<Button Grid.Row="0" Grid.Column="5" Text="Text" Command="{Binding ActivateToolCommand}" CommandParameter="Text"/>
+			<Button Grid.Row="0" Grid.Column="6" Text="Undo" Command="{Binding UndoCommand}"/>
+			<Entry Grid.Row="1"  Text="{Binding Text}" Grid.Column="0" Grid.ColumnSpan="7" IsVisible="{Binding TextToolIsActive}"/>
 		</Grid>
 		
 	</ContentView.Content>

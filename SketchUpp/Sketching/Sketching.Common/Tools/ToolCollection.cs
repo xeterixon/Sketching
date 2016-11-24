@@ -14,14 +14,22 @@ namespace Sketching.Common.Tools
 		void ActivateTool(ITool tool);
 		void ActivateTool(string toolName);
 		List<IGeometryVisual> Geometries { get; set; }
+		ITool ActiveTool { get; }
 		void Undo();
 
 	}
 	public class ToolCollection : IToolCollection
 	{
+		public ITool ActiveTool {
+			get 
+			{
+				return Tools.FirstOrDefault((arg) => arg.Active);
+			}
+		}
 		public ISketchView View { get; set; }
 		public List<ITool> Tools { get; set; } = new List<ITool>();
 		public List<IGeometryVisual> Geometries { get; set; } = new List<IGeometryVisual>();
+		//NOTE Only allow one active tool at a time for now.
 		public void ActivateTool(ITool tool) 
 		{
 			if (tool == null) {

@@ -10,12 +10,7 @@ namespace Sketching.Common.Geometries
 		public double Size { get; set; } = 2;
 		public Color Color { get; set; } = Color.Black;
 		public List<Point> Points { get; set; } = new List<Point>();
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:SketchView.Abstractions.Graphics.Stroke"/> class.
-		/// Note that the points are not copied, only Color and Size.
-		/// </summary>
-		/// <param name="s">S</param>
-		public Stroke(IStroke s) : this()
+		public Stroke(IGeometryVisual s) : this()
 		{
 			Color = s.Color;
 			Size = s.Size;

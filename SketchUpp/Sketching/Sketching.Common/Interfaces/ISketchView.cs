@@ -8,6 +8,6 @@ namespace Sketching.Common.Interfaces
 	public interface ISketchView
 	{
 		Action<CallbackType> CallbackToNative { get; set; }
-		
+		byte[] ImageData();
 	}
 }

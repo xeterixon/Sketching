@@ -6,7 +6,7 @@ namespace Sketching.Common.Geometries
 {
 	public class Rectangle : IRectangle
 	{
-		public Rectangle(IRectangle src) 
+		public Rectangle(IGeometryVisual src) 
 		{
 			Color = src.Color;
 			Size = src.Size;
