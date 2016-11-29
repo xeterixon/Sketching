@@ -10,9 +10,10 @@ namespace Sketching.Common.Tools
 		public LineTool()
 		{
 			Name = "Line";
-			ToolType = Interfaces.ToolType.Line;
 			Geometry = new Geometries.Stroke { Color = Xamarin.Forms.Color.Blue, Size = 10};
 		}
+		public override ToolType ToolType { get { return ToolType.Line;} }
+
 		private void Snap(ref Point p)
 		{
 			if (GridSize < 0) return;

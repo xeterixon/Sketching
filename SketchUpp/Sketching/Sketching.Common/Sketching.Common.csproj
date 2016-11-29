@@ -55,6 +55,7 @@
     <Compile Include="Tools\TextTool.cs" />
     <Compile Include="Geometries\Text.cs" />
     <Compile Include="Interfaces\IText.cs" />
+    <Compile Include="Render\GeometryRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp">
@@ -82,6 +83,7 @@
     <Folder Include="Views\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Render\" />
   </ItemGroup>
   <Import Project="..\Sketching.Shared\Sketching.Shared.projitems" Label="Shared" Condition="Exists('..\Sketching.Shared\Sketching.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

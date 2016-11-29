@@ -14,21 +14,12 @@ namespace Sketching.Common.Tools
 			Geometry = new Stroke(Geometry);
 		}
 		public bool Active { get; set; }
-		public virtual void Activate()
-		{
-			Active = true;
-			Init();
-		}
-		public virtual void Deactivate()
-		{
-			Active = false;
-		}
+		public virtual ToolType ToolType{ get{return Interfaces.ToolType.Undefined;}}
 		public virtual void TouchStart(Point p){ }
 		public virtual void TouchMove(Point p) {}
 		public virtual void TouchEnd(Point p) {}
 
 		public string Name { get; set; }
-		public ToolType ToolType { get; set; }
 
 		public IStroke Geometry { get; set;} = new Stroke(Xamarin.Forms.Color.Blue, 10);
 
@@ -49,21 +40,12 @@ namespace Sketching.Common.Tools
 			Geometry = new Mark(Geometry);
 		}
 		public bool Active { get; set; }
-		public virtual void Activate()
-		{
-			Active = true;
-			Init();
-		}
-		public virtual void Deactivate()
-		{
-			Active = false;
-		}
 		public virtual void TouchStart(Point p) {}
 		public virtual void TouchMove(Point p) { }
 		public virtual void TouchEnd(Point p) { }
 
 		public string Name { get; set; }
-		public ToolType ToolType { get; set; }
+		public virtual ToolType ToolType { get;}
 
 		public IMark Geometry { get; set; } = new Mark();
 

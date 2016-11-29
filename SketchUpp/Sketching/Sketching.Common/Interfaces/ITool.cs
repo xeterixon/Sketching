@@ -24,20 +24,14 @@ namespace Sketching.Common.Interfaces
 	public interface ITool : ITouchDelegate
 	{
 		string Name { get; set; }
-		ToolType ToolType { get; set; } //TODO Remove?
-		void Activate(); //TODO Remove and use Active property only?
-		void Deactivate(); //TODO Remove and use Active property only?
+		ToolType ToolType { get; } //TODO Remove?
 		bool Active { get; set; }
 		IGeometryVisual Geometry{get;set;}
 	}
-	public interface IStrokeTool : ITool<IStroke>
-	{
-	}
-	public interface ICircleTool : ITool<ICircle> 
-	{
-	}
-	public interface IPointTool : ITool<IMark> 
-	{
-	}
+
+	public interface IStrokeTool : ITool<IStroke>{}
+	public interface ILineTool : ITool<ILine> {}
+	public interface ICircleTool : ITool<ICircle> {}
+	public interface IPointTool : ITool<IMark> {}
 
 }

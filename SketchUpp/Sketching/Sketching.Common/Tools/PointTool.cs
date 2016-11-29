@@ -8,8 +8,8 @@ namespace Sketching.Common.Tools
 		public PointTool()
 		{
 			Name = "Point";
-			ToolType = ToolType.Point;
 		}
+		public override ToolType ToolType { get { return ToolType.Point; } }
 		public override void TouchStart(Xamarin.Forms.Point p)
 		{
 			base.TouchStart(p);

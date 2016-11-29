@@ -14,7 +14,6 @@ namespace Sketching.Common.Tools
 		public TextTool()
 		{
 			Name = "Text";
-			ToolType = ToolType.Text;
 			Init();
 		}
 
@@ -23,8 +22,8 @@ namespace Sketching.Common.Tools
 		public IText Geometry { get; set; } = new Text();
 
 		public string Name { get; set; }
+		public  ToolType ToolType { get { return ToolType.Text; } }
 
-		public ToolType ToolType { get; set; }
 		private void Init() 
 		{
 			Geometry = new Text(Geometry);
@@ -36,16 +35,6 @@ namespace Sketching.Common.Tools
 			set {
 				throw new NotImplementedException();
 			}
-		}
-
-		public void Activate()
-		{
-			Active = true;
-		}
-
-		public void Deactivate()
-		{
-			Active = false;
 		}
 
 		public void TouchEnd(Point p)

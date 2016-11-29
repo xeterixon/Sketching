@@ -7,15 +7,9 @@ namespace Sketching.Common.Tools
 {
 	public class CircleTool : ICircleTool
 	{
-
 		public string Name { get; set; }
-
-		public ToolType ToolType { get; set; }
-
 		public bool Active { get; set; }
-
 		public ICircle Geometry { get; set; } = new Circle();
-
 		IGeometryVisual ITool.Geometry {
 			get {
 				return Geometry;
@@ -29,17 +23,8 @@ namespace Sketching.Common.Tools
 		public CircleTool()
 		{
 			Name = "Circle";
-			ToolType = ToolType.Circle;
 		}
-
-		public void Activate()
-		{
-			Active = true;
-		}
-		public void Deactivate()
-		{
-			Active = false;
-		}
+		public ToolType ToolType { get { return ToolType.Circle; } }
 
 		private void Init() 
 		{

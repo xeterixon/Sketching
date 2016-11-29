@@ -13,6 +13,7 @@ namespace Sketching.Common.Tools
 		List<ITool> Tools { get; set; }
 		void ActivateTool(ITool tool);
 		void ActivateTool(string toolName);
+		ITool ToolForGeometry(IGeometryVisual geometry);
 		List<IGeometryVisual> Geometries { get; set; }
 		ITool ActiveTool { get; }
 		void Undo();
@@ -26,6 +27,11 @@ namespace Sketching.Common.Tools
 				return Tools.FirstOrDefault((arg) => arg.Active);
 			}
 		}
+		public ITool ToolForGeometry(IGeometryVisual geometry) 
+		{
+			var tools = Tools.Where((arg) => arg.Geometry.GetType() == geometry.GetType());
+			return tools.FirstOrDefault();
+		}
 		public ISketchView View { get; set; }
 		public List<ITool> Tools { get; set; } = new List<ITool>();
 		public List<IGeometryVisual> Geometries { get; set; } = new List<IGeometryVisual>();
@@ -38,14 +44,14 @@ namespace Sketching.Common.Tools
 			var activeTools = Tools.Where(t => t.Active);
 			foreach (var activeTool in activeTools) 
 			{
-				activeTool.Deactivate();
+				activeTool.Active = false;;
 			}
 			var tl = Tools.FirstOrDefault(t => object.ReferenceEquals(t, tool));
 			if (tl == null) 
 			{
 				throw new InvalidOperationException("Don't activate a tool that's not registered");
 			}
-			tl.Activate();
+			tl.Active = true;
 		}
 		public void ActivateTool(string toolName) 
 		{
