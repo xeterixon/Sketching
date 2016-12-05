@@ -17,6 +17,7 @@ namespace Sketching.Common.Views
 		private IToolCollection _tools;
 		private byte[] _imageData;
 		private GridRenderer _gridRenderer = new GridRenderer();
+		//TODO Should be a bindable property
 		public Xamarin.Forms.Color CanvasBackgroundColor { get; set; } = Color.FromHex("#F0F8FF");
 		public IToolCollection ToolCollection {
 			get { return _tools; }
