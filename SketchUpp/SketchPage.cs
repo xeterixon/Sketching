@@ -23,6 +23,8 @@ namespace SketchUpp
 				VerticalOptions		= LayoutOptions.FillAndExpand,
 				HorizontalOptions	= LayoutOptions.FillAndExpand,
 			};
+
+			_sketchView.RemoveToolbarItem(new CircleTool().Name);
 			
 			ToolbarItems.Add(new ToolbarItem { Text = "Save", Command = SaveCommand });
 			Content = _sketchView;

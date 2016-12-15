@@ -64,26 +64,44 @@ namespace Sketching.Common.Views
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Rectangle.png"), new RectangleTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Point.png"), new PointTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Text.png"), new TextTool(), ActivateToolCommand);
-			AddUndoToolbarItem();
+			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Undo.png"), null, UndoCommand);
 		}
 
 		private void ActivateTool(string toolName)
 		{
 			ToolCollection.ActivateTool(toolName);
+
+			// Unselect all items
+			foreach (var child in toolbarStack.Children.Where(n => n is SketchToolbarItem))
+			{
+				((SketchToolbarItem) child).IsSelected = false;
+			}
+
+			// Select the activated toolbaritem
+			var toolbarItem = (SketchToolbarItem)toolbarStack.Children.FirstOrDefault(n => n is SketchToolbarItem && ((SketchToolbarItem)n).Tool.Name == toolName);
+			if (toolbarItem != null)
+			{
+				toolbarItem.IsSelected = true;
+			}
 		}
 
-		public void AddToolbarItem(ImageSource imageSource, ITool tool, Command<string> command)
+		public void AddToolbarItem(ImageSource imageSource, ITool tool, ICommand command)
 		{
-			if (ToolCollection.Tools.Any(n => n.Name == tool.Name))
+			if (tool != null && ToolCollection.Tools.Any(n => n.Name == tool.Name))
 				throw new VerificationException("Toolname already exists");
 
 			var newSketchToolbarItem = new SketchToolbarItem(imageSource, tool, command)
 			{
 				VerticalOptions = LayoutOptions.FillAndExpand,
-				WidthRequest = ToolbarHeight
+				WidthRequest = ToolbarHeight,
+				IsSelected = toolbarStack.Children.Count == 0 // Select the first added tool
 			};
 			toolbarStack.Children.Add(newSketchToolbarItem);
-			ToolCollection.Tools.Add(tool);
+
+			if (tool != null)
+			{
+				ToolCollection.Tools.Add(tool);
+			}
 		}
 
 		public void RemoveAllToolbarItems()
@@ -93,7 +111,6 @@ namespace Sketching.Common.Views
 			{
 				RemoveToolbarItem(toolName);
 			}
-
 			RemoveUndoToolbarItem();
 		}
 
@@ -106,26 +123,14 @@ namespace Sketching.Common.Views
 			toolbarStack.Children.Remove(toolbarItem);
 		}
 
-		public void AddUndoToolbarItem()
-		{
-			_undoImage = new Image
-			{
-				Source = ImageSource.FromResource("Sketching.Common.Resources.Undo.png"),
-				VerticalOptions = LayoutOptions.FillAndExpand,
-				HorizontalOptions = LayoutOptions.FillAndExpand,
-				Aspect = Aspect.Fill
-			};
-			_undoImage.GestureRecognizers.Add(new TapGestureRecognizer { Command = UndoCommand });
-
-			toolbarStack.Children.Add(_undoImage);
-		}
-
 		public void RemoveUndoToolbarItem()
 		{
-			if (_undoImage != null && toolbarStack.Children.Contains(_undoImage))
-				toolbarStack.Children.Remove(_undoImage);
+			var toolbarItem = (SketchToolbarItem)toolbarStack.Children.FirstOrDefault(n => n is SketchToolbarItem && ((SketchToolbarItem)n).Tool == null);
+			if (toolbarItem != null)
+			{
+				toolbarStack.Children.Remove(toolbarItem);
+			}
 		}
-
 
 		private static void SetToolbarHeight(StackLayout toolbarStack, double height)
 		{
