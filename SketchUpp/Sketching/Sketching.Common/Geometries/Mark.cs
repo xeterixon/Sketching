@@ -6,16 +6,18 @@ namespace Sketching.Common.Geometries
 {
 	public class Mark : IMark
 	{
-		public Mark() { }
-		public Mark(IGeometryVisual src)
+		public Mark():this(Color.Black, 50) { }
+		public Mark(IGeometryVisual src) : this(src.Color, src.Size){}
+		public Mark(Color color, double size)
 		{
-			this.Color = src.Color;
-			this.Size = src.Size;
+			Color = color;
+			Size = size;
 		}
-		public Color Color { get; set; } = Xamarin.Forms.Color.FromRgba(0, 255, 0, 126);
-		public bool IsValid {get {return true;}}
+
+		public Color Color { get; set; }
+		public bool IsValid => true;
 		public Point Point { get; set; }
 
-		public double Size { get; set; } = 50.0;
+		public double Size { get; set; }
 	}
 }

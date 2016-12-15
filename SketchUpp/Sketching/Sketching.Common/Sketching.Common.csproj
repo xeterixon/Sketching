@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -33,7 +33,7 @@
     <Compile Include="Tools\LineTool.cs" />
     <Compile Include="Tools\ToolBase.cs" />
     <Compile Include="Tools\ToolCollection.cs" />
-    <Compile Include="Views\SketchView.cs" />
+    <Compile Include="Views\SketchArea.cs" />
     <Compile Include="Interfaces\ITouchDelegate.cs" />
     <Compile Include="Extensions\SkiaExtensions.cs" />
     <Compile Include="Tools\CurveTool.cs" />
@@ -57,6 +57,12 @@
     <Compile Include="Interfaces\IText.cs" />
     <Compile Include="Render\GeometryRenderer.cs" />
     <Compile Include="Render\GridRenderer.cs" />
+    <Compile Include="Views\SketchView.xaml.cs">
+      <DependentUpon>SketchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SketchToolbarItem.xaml.cs">
+      <DependentUpon>SketchToolbarItem.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp">
@@ -79,12 +85,37 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Geometries\" />
-    <Folder Include="Tools\" />
-    <Folder Include="Views\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Render\" />
+    <EmbeddedResource Include="Views\SketchView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Line.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Curve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\SketchToolbarItem.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Rectangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Point.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Undo.png" />
   </ItemGroup>
   <Import Project="..\Sketching.Shared\Sketching.Shared.projitems" Label="Shared" Condition="Exists('..\Sketching.Shared\Sketching.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

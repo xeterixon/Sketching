@@ -14,7 +14,6 @@ namespace Sketching.Common.Tools
 			Geometry = new Stroke(Geometry);
 		}
 		public bool Active { get; set; }
-		public virtual ToolType ToolType{ get{return Interfaces.ToolType.Undefined;}}
 		public virtual void TouchStart(Point p){ }
 		public virtual void TouchMove(Point p) {}
 		public virtual void TouchEnd(Point p) {}
@@ -45,7 +44,6 @@ namespace Sketching.Common.Tools
 		public virtual void TouchEnd(Point p) { }
 
 		public string Name { get; set; }
-		public virtual ToolType ToolType { get;}
 
 		public IMark Geometry { get; set; } = new Mark();
 

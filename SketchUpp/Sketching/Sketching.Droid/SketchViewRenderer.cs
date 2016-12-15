@@ -9,13 +9,13 @@ using Xamarin.Forms.Platform.Android;
 
 using SKNativeView = SkiaSharp.Views.Android.SKCanvasView;
 
-[assembly: ExportRenderer(typeof(SketchView), typeof(SketchViewRenderer))]
+[assembly: ExportRenderer(typeof(SketchArea), typeof(SketchViewRenderer))]
 namespace Sketching.Droid
 {
 	public class TouchListener : Java.Lang.Object, Android.Views.View.IOnTouchListener
 	{
-		SketchView _view;
-		public TouchListener(SketchView view)
+		SketchArea _view;
+		public TouchListener(SketchArea view)
 		{
 			_view = view;
 		}
@@ -44,10 +44,10 @@ namespace Sketching.Droid
 			return retval;
 		}
 	}
-	public class SketchViewRenderer : ViewRenderer<SketchView, SKNativeView>, Android.Views.View.IOnTouchListener
+	public class SketchViewRenderer : ViewRenderer<SketchArea, SKNativeView>, Android.Views.View.IOnTouchListener
 	{
 
-		protected override void OnElementChanged(ElementChangedEventArgs<SketchView> e)
+		protected override void OnElementChanged(ElementChangedEventArgs<SketchArea> e)
 		{
 			if (e.NewElement != null) 
 			{

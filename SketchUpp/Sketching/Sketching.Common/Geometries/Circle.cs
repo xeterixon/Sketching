@@ -6,18 +6,17 @@ namespace Sketching.Common.Geometries
 {
 	public class Circle : ICircle
 	{
-		public Circle()
+		public Circle() : this(Color.Black, 8) { }
+		public Circle(IGeometryVisual src) : this(src.Color, src.Size) { }
+
+		public Circle(Color color, double size)
 		{
-			Color = Xamarin.Forms.Color.Fuchsia;
-			Start = new Point(-1,-1);
+			Color = color;
+			Start = new Point(-1, -1);
 			End = new Point(-1, -1);
-			Size = 4;
+			Size = size;
 		}
-		public Circle(IGeometryVisual src):this()
-		{
-			Color = src.Color;
-			Size = src.Size;
-		}
+
 		public Color Color { get; set; }
 		public Point End { get; set; }
 		public bool IsValid { get { return Start.X > 0 && End.X > 0; } }

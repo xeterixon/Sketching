@@ -5,17 +5,6 @@ using Xamarin.Forms;
 
 namespace Sketching.Common.Interfaces
 {
-	public enum ToolType
-	{
-		Undefined,
-		Line,
-		Point,
-		Curve,
-		MultiLine,
-		Rectangle,
-		Circle,
-		Text
-	}
 	public interface ITool<T> : ITool 
 		where T: IGeometryVisual
 	{
@@ -24,7 +13,6 @@ namespace Sketching.Common.Interfaces
 	public interface ITool : ITouchDelegate
 	{
 		string Name { get; set; }
-		ToolType ToolType { get; } //TODO Remove?
 		bool Active { get; set; }
 		IGeometryVisual Geometry{get;set;}
 	}

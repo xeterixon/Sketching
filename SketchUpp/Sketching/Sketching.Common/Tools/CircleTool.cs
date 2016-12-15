@@ -20,15 +20,11 @@ namespace Sketching.Common.Tools
 			}
 		}
 
-		public CircleTool()
+		public CircleTool() : this("Circle", 8){}
+		public CircleTool(string name, double size)
 		{
-			Name = "Circle";
-		}
-		public ToolType ToolType { get { return ToolType.Circle; } }
-
-		private void Init() 
-		{
-			Geometry = new Circle(Geometry);
+			Name = name;
+			Geometry.Size = size;
 		}
 
 		public void TouchStart(Point p)
@@ -39,7 +35,12 @@ namespace Sketching.Common.Tools
 		public void TouchEnd(Point p)
 		{
 			Geometry.End = p;
-			Init();
+			ReserGeometry();
+		}
+
+		private void ReserGeometry()
+		{
+			Geometry = new Circle(Geometry);
 		}
 
 		public void TouchMove(Point p)

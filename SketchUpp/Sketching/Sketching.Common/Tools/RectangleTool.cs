@@ -10,12 +10,12 @@ namespace Sketching.Common.Tools
 		{
 			Name = "Rectangle";
 		}
+
 		public bool Active { get; set; }
-		public IGeometryVisual Geometry { get; set; } = new Geometries.Rectangle(Xamarin.Forms.Color.Red, 10);
+		public IGeometryVisual Geometry { get; set; } = new Geometries.Rectangle();
 
 		public string Name { get; set; } 
-		private IRectangle Rectangle {get {return (IRectangle)Geometry;}}
-		public ToolType ToolType { get { return ToolType.Rectangle; } }
+		private IRectangle Rectangle => (IRectangle)Geometry;
 
 		public void TouchEnd(Point p)
 		{

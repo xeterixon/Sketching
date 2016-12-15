@@ -6,15 +6,15 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using SKNativeView = SkiaSharp.Views.iOS.SKCanvasView;
 
-[assembly : ExportRenderer(typeof(SketchView),typeof(SketchViewRenderer))]
+[assembly : ExportRenderer(typeof(SketchArea),typeof(SketchViewRenderer))]
 namespace Sketching.iOS
 {
 	public class TouchGestureRecognizer : UIGestureRecognizer 
 	{
-		SketchView _view;
+		SketchArea _view;
 		UIView _native;
 		nfloat scale;
-		public TouchGestureRecognizer(SketchView view, UIView native) 
+		public TouchGestureRecognizer(SketchArea view, UIView native) 
 		{
 			_view = view;
 			_native = native;
@@ -65,9 +65,9 @@ namespace Sketching.iOS
 		}
 
 	}
-	public class SketchViewRenderer : ViewRenderer<SketchView,SKNativeView>
+	public class SketchViewRenderer : ViewRenderer<SketchArea,SKNativeView>
 	{
-		protected override void OnElementChanged(ElementChangedEventArgs<SketchView> e)
+		protected override void OnElementChanged(ElementChangedEventArgs<SketchArea> e)
 		{
 			if (e.OldElement != null) {
 			}

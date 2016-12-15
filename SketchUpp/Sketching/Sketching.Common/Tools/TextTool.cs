@@ -22,7 +22,6 @@ namespace Sketching.Common.Tools
 		public IText Geometry { get; set; } = new Text();
 
 		public string Name { get; set; }
-		public  ToolType ToolType { get { return ToolType.Text; } }
 
 		private void Init() 
 		{

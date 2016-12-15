@@ -9,9 +9,8 @@ namespace Sketching.Common.Tools
 		public CurveTool()
 		{
 			Name = "Curve";
-			Geometry = new Geometries.Stroke { Color = new Color(1,0,0,0.5) , Size=10};
+			Geometry = new Geometries.Stroke();
 		}
-		public override ToolType ToolType { get { return ToolType.Curve; } }
 
 		public override void TouchStart(Point p)
 		{
