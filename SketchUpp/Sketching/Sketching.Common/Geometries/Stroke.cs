@@ -18,5 +18,6 @@ namespace Sketching.Common.Geometries
 		public Color Color { get; set; }
 		public List<Point> Points { get; set; } = new List<Point>();
 		public bool IsValid => Points.Count > 0;
+		public bool IsHighlighter { get; set; }
 	}	
 }

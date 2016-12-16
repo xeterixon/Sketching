@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Sketching.Common.Views.ToolSettingsView">
+	<ContentView.Content>
+		<StackLayout Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+			<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="50">
+				<Image x:Name="thinLineImage" VerticalOptions="FillAndExpand" Aspect="AspectFit" HorizontalOptions="Start" WidthRequest="40"/>
+				<Slider HorizontalOptions="FillAndExpand" Maximum="20" Minimum="1" Value="{Binding Tool.Geometry.Size}"/>
+				<Image x:Name="thickLineImage" VerticalOptions="FillAndExpand" Aspect="AspectFit" HorizontalOptions="End" WidthRequest="40"/>
+			</StackLayout>
+			<Grid x:Name="colorGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+		</StackLayout>
+	</ContentView.Content>
+</ContentView>

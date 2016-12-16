@@ -23,9 +23,12 @@ namespace Sketching.Common.Render
 			using (var paint = new SKPaint()) {
 				paint.IsStroke = true;
 				paint.StrokeCap = SKStrokeCap.Round;
-				paint.StrokeWidth = (float)s.Size;
+				paint.StrokeWidth = s.IsHighlighter ? (float)s.Size * 10 : (float)s.Size;
 				paint.IsAntialias = true;
-				paint.Color = s.Color.ToSkiaColor();
+				if(s.IsHighlighter)
+					paint.Color = s.Color.MultiplyAlpha(0.3).ToSkiaColor();
+				else
+					paint.Color = s.Color.ToSkiaColor();
 				var first = s.Points.First();
 				var theRest = s.Points.Skip(1);
 				foreach (var point in theRest) {

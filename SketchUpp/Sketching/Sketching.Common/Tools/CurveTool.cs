@@ -1,4 +1,5 @@
 ﻿using System;
+using Sketching.Common.Geometries;
 using Sketching.Common.Interfaces;
 using Xamarin.Forms;
 
@@ -6,10 +7,12 @@ namespace Sketching.Common.Tools
 {
 	public class CurveTool : StrokeToolBase
 	{
-		public CurveTool()
+		public CurveTool() : this("Curve", false){}
+
+		public CurveTool(string name, bool useAsHighlighter)
 		{
-			Name = "Curve";
-			Geometry = new Geometries.Stroke();
+			Name = name;
+			Geometry = new Stroke {IsHighlighter = useAsHighlighter};
 		}
 
 		public override void TouchStart(Point p)
@@ -30,6 +33,12 @@ namespace Sketching.Common.Tools
 			AddPoint(p);
 			Init();
 		}
+
+		protected override void Init()
+		{
+			Geometry = new Stroke(Geometry) {IsHighlighter = Geometry.IsHighlighter};
+		}
+
 		private void AddPoint(Point p)
 		{
 			Geometry.Points.Add(p);

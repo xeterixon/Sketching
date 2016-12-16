@@ -60,6 +60,7 @@ namespace Sketching.Common.Views
 		{
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Line.png"), new LineTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Curve.png"), new CurveTool(), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Stroke.png"), new CurveTool("Stroke", true), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Circle.png"), new CircleTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Rectangle.png"), new RectangleTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Point.png"), new PointTool(), ActivateToolCommand);
@@ -69,6 +70,16 @@ namespace Sketching.Common.Views
 
 		private void ActivateTool(string toolName)
 		{
+			var toolbarItem = (SketchToolbarItem)toolbarStack.Children.FirstOrDefault(n => n is SketchToolbarItem && ((SketchToolbarItem)n).Tool.Name == toolName);
+			if (toolbarItem == null)
+				return;
+
+			if (toolbarItem.IsSelected)
+			{
+				OpenToolSettings(toolbarItem.Tool);
+				return;
+			}
+			
 			ToolCollection.ActivateTool(toolName);
 
 			// Unselect all items
@@ -78,11 +89,13 @@ namespace Sketching.Common.Views
 			}
 
 			// Select the activated toolbaritem
-			var toolbarItem = (SketchToolbarItem)toolbarStack.Children.FirstOrDefault(n => n is SketchToolbarItem && ((SketchToolbarItem)n).Tool.Name == toolName);
-			if (toolbarItem != null)
-			{
-				toolbarItem.IsSelected = true;
-			}
+			toolbarItem.IsSelected = true;
+		}
+
+		private void OpenToolSettings(ITool tool)
+		{
+			// Todo: Fixa färginställningarna
+			Navigation.PushAsync(new ContentPage {Content = new ToolSettingsView(tool)});
 		}
 
 		public void AddToolbarItem(ImageSource imageSource, ITool tool, ICommand command)

@@ -63,6 +63,10 @@
     <Compile Include="Views\SketchToolbarItem.xaml.cs">
       <DependentUpon>SketchToolbarItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ToolSettingsView.xaml.cs">
+      <DependentUpon>ToolSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ToolSettingsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp">
@@ -116,6 +120,19 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ToolSettingsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ThickLine.png" />
+    <EmbeddedResource Include="Resources\ThinLine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Stroke.png" />
   </ItemGroup>
   <Import Project="..\Sketching.Shared\Sketching.Shared.projitems" Label="Shared" Condition="Exists('..\Sketching.Shared\Sketching.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
