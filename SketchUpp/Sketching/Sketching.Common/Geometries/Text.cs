@@ -14,10 +14,14 @@ namespace Sketching.Common.Geometries
 			Color = color;
 			Size = size;
 			Point = new Point(-1, -1);
+			MinSize = 10;
+			MaxSize = 40;
 		}
 
 		public Color Color { get; set; }
 		public bool IsValid => !string.IsNullOrEmpty(Value) && Point.X > 0;
+		public double MinSize { get; set; }
+		public double MaxSize { get; set; }
 
 		public Point Point { get; set; }
 

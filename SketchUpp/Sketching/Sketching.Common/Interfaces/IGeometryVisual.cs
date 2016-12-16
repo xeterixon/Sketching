@@ -13,5 +13,7 @@ namespace Sketching.Common.Interfaces
 		double Size { get; set; }
 		Color Color { get; set; }
 		bool IsValid { get; }
+		double MinSize { get; set; }
+		double MaxSize { get; set; }
 	}
 }

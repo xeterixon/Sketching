@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security;
 using System.Windows.Input;
@@ -60,7 +61,7 @@ namespace Sketching.Common.Views
 		{
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Line.png"), new LineTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Curve.png"), new CurveTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Stroke.png"), new CurveTool("Stroke", true), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Stroke.png"), new CurveTool("Stroke", 50, 100, 0.3), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Circle.png"), new CircleTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Rectangle.png"), new RectangleTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Point.png"), new PointTool(), ActivateToolCommand);
@@ -70,31 +71,36 @@ namespace Sketching.Common.Views
 
 		private void ActivateTool(string toolName)
 		{
-			var toolbarItem = (SketchToolbarItem)toolbarStack.Children.FirstOrDefault(n => n is SketchToolbarItem && ((SketchToolbarItem)n).Tool.Name == toolName);
-			if (toolbarItem == null)
-				return;
-
-			if (toolbarItem.IsSelected)
+			if (!string.IsNullOrEmpty(toolName) && toolName == SelectedTool?.Name)
 			{
-				OpenToolSettings(toolbarItem.Tool);
+				OpenToolSettings(SelectedTool);
 				return;
 			}
-			
+
 			ToolCollection.ActivateTool(toolName);
 
 			// Unselect all items
 			foreach (var child in toolbarStack.Children.Where(n => n is SketchToolbarItem))
 			{
-				((SketchToolbarItem) child).IsSelected = false;
+				var toolBarItem = ((SketchToolbarItem)child);
+				toolBarItem.IsSelected = toolBarItem?.Tool?.Name == toolName;
 			}
+		}
 
-			// Select the activated toolbaritem
-			toolbarItem.IsSelected = true;
+		private ITool SelectedTool
+		{
+			get
+			{
+				var selectedItem = toolbarStack.Children.FirstOrDefault(n => (n as SketchToolbarItem)?.IsSelected == true);
+				if (selectedItem == null)
+					return null;
+
+				return ((SketchToolbarItem) selectedItem).Tool;
+			}
 		}
 
 		private void OpenToolSettings(ITool tool)
 		{
-			// Todo: Fixa färginställningarna
 			Navigation.PushAsync(new ContentPage {Content = new ToolSettingsView(tool)});
 		}
 

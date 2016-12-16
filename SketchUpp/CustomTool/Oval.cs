@@ -27,6 +27,9 @@ namespace SketchUpp.CustomTool
 			}
 		}
 
+		public double MinSize { get; set; } = 1;
+		public double MaxSize { get; set; } = 20;
+
 		public double Size { get; set; } = 1;
 
 		public Point Start {get;set;}

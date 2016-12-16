@@ -12,12 +12,15 @@ namespace Sketching.Common.Geometries
 		{
 			Color = color;
 			Size = size;
+			MinSize = 1;
+			MaxSize = 20;
 		}
 
 		public double Size { get; set; }
 		public Color Color { get; set; }
 		public List<Point> Points { get; set; } = new List<Point>();
 		public bool IsValid => Points.Count > 0;
-		public bool IsHighlighter { get; set; }
+		public double MinSize { get; set; }
+		public double MaxSize { get; set; }
 	}	
 }

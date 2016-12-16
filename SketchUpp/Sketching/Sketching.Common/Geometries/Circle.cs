@@ -15,11 +15,15 @@ namespace Sketching.Common.Geometries
 			Start = new Point(-1, -1);
 			End = new Point(-1, -1);
 			Size = size;
+			MinSize = 1;
+			MaxSize = 20;
 		}
 
 		public Color Color { get; set; }
 		public Point End { get; set; }
 		public bool IsValid { get { return Start.X > 0 && End.X > 0; } }
+		public double MinSize { get; set; }
+		public double MaxSize { get; set; }
 
 		public double Radius {
 			get 
