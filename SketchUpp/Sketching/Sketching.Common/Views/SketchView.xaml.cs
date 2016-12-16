@@ -74,14 +74,8 @@ namespace Sketching.Common.Views
 			// Unselect all items
 			foreach (var child in toolbarStack.Children.Where(n => n is SketchToolbarItem))
 			{
-				((SketchToolbarItem) child).IsSelected = false;
-			}
-
-			// Select the activated toolbaritem
-			var toolbarItem = (SketchToolbarItem)toolbarStack.Children.FirstOrDefault(n => n is SketchToolbarItem && ((SketchToolbarItem)n).Tool.Name == toolName);
-			if (toolbarItem != null)
-			{
-				toolbarItem.IsSelected = true;
+				var toolBarItem = ((SketchToolbarItem)child);
+				toolBarItem.IsSelected = toolBarItem?.Tool?.Name == toolName;
 			}
 		}
 
@@ -90,7 +84,7 @@ namespace Sketching.Common.Views
 			if (tool != null && ToolCollection.Tools.Any(n => n.Name == tool.Name))
 				throw new VerificationException("Toolname already exists");
 
-			var newSketchToolbarItem = new SketchToolbarItem(imageSource, tool, command)
+			var newSketchToolbarItem = new SketchToolbarItem(imageSource, tool, command ?? ActivateToolCommand)
 			{
 				VerticalOptions = LayoutOptions.FillAndExpand,
 				WidthRequest = ToolbarHeight,

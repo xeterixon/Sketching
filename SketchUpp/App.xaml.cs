@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using Sketching.Common.Render;
+using SketchUpp.CustomTool;
+using Xamarin.Forms;
 
 namespace SketchUpp
 {
@@ -7,6 +9,7 @@ namespace SketchUpp
 		public App()
 		{
 			InitializeComponent();
+			GeometryRenderer.AddRenderer(new OvalRenderer());
 			var sketchPage = new SketchPage();
 			MainPage = new NavigationPage(sketchPage);
 		}

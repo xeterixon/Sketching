@@ -35,10 +35,10 @@ namespace Sketching.Common.Tools
 		public void TouchEnd(Point p)
 		{
 			Geometry.End = p;
-			ReserGeometry();
+			ResetGeometry();
 		}
 
-		private void ReserGeometry()
+		private void ResetGeometry()
 		{
 			Geometry = new Circle(Geometry);
 		}
