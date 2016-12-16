@@ -8,3 +8,5 @@ SketchUpp/packages/*/*
 SketchUpp/Sketching/*/obj/*
 SketchUpp/Sketching/*/bin/*
 SketchUpp/SketchUpp.userprefs
+SketchUpp/.vs/*
+*.csproj.user
