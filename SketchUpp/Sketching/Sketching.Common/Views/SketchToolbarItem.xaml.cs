@@ -41,7 +41,6 @@ namespace Sketching.Common.Views
 			InitializeComponent();
 
 			toolImage.Source = imageSource;
-			toolImage.BackgroundColor = Color.Purple;
 			toolImage.GestureRecognizers.Add(new TapGestureRecognizer
 			{
 				Command = tappedCommand,
