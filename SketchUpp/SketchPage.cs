@@ -4,6 +4,7 @@ using Sketching.Common;
 using Sketching.Common.Interfaces;
 using Sketching.Common.Tools;
 using Sketching.Common.Views;
+using SketchUpp.CustomTool;
 using SkiaSharp;
 using Xamarin.Forms;
 
@@ -24,6 +25,8 @@ namespace SketchUpp
 				HorizontalOptions	= LayoutOptions.FillAndExpand,
 			};
 
+			_sketchView.RemoveToolbarItem(new CircleTool().Name);
+			_sketchView.AddToolbarItem(null, new OvalTool(), null);
 			ToolbarItems.Add(new ToolbarItem { Text = "Save", Command = SaveCommand });
 			Content = _sketchView;
 		}

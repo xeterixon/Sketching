@@ -103,7 +103,7 @@ namespace Sketching.Common.Views
 			if (tool != null && ToolCollection.Tools.Any(n => n.Name == tool.Name))
 				throw new VerificationException("Toolname already exists");
 
-			var newSketchToolbarItem = new SketchToolbarItem(imageSource, tool, command)
+			var newSketchToolbarItem = new SketchToolbarItem(imageSource, tool, command ?? ActivateToolCommand)
 			{
 				VerticalOptions = LayoutOptions.FillAndExpand,
 				WidthRequest = ToolbarHeight,
