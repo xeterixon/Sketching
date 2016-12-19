@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Sketching.Common.Interfaces;
 using Xamarin.Forms;
@@ -13,7 +12,7 @@ namespace Sketching.Common.Views
 
 		public ToolSettingsView(ITool tool)
 		{
-			BindingContext = new ToolSettingsViewModel(tool);
+			BindingContext = new ToolSettingsViewModel(tool, Navigation);
 			InitializeComponent();
 			thinLineImage.Source = ImageSource.FromResource("Sketching.Common.Resources.ThinLine.png");
 			thickLineImage.Source = ImageSource.FromResource("Sketching.Common.Resources.ThickLine.png");
@@ -70,11 +69,6 @@ namespace Sketching.Common.Views
 
 		private void FillColorGrid()
 		{
-			var closePageCommand = new TapGestureRecognizer
-			{
-				Command = new Command(() => Navigation.PopAsync())
-			};
-
 			var i = 1;
 			var left = -1;
 			var top = 0;
@@ -88,15 +82,14 @@ namespace Sketching.Common.Views
 				BackgroundColor = color.Value
 			}))
 			{
-				var colorSelector = new TapGestureRecognizer
+				var tapGestureRecognizer = new TapGestureRecognizer
 				{
 					Command = ((ToolSettingsViewModel)BindingContext).ColorSelectedCommand,
-					CommandParameter =label.BackgroundColor
+					CommandParameter = label.BackgroundColor
 				};
 
-				label.GestureRecognizers.Add(colorSelector);
-				label.GestureRecognizers.Add(closePageCommand);
-				
+				label.GestureRecognizers.Add(tapGestureRecognizer);
+
 				left++;
 				if (_orientation == StackOrientation.Vertical)
 				{
@@ -119,40 +112,10 @@ namespace Sketching.Common.Views
 			}
 		}
 
-		private void ColorSelectorOnTapped(object sender, EventArgs eventArgs)
-		{
-			
-			/*
-			var label = (Label)sender;
-			_selectedPenWidth = (int)_slider.Value;
-			_useHighlighter = _highlighter.IsToggled;
-			var selectedColor = label.BackgroundColor;
-			// Check if highlighter is selected
-			if (_highlighter.IsToggled)
-			{
-				selectedColor = selectedColor.MultiplyAlpha(0.3);
-			}
-
-			var paintSettings = new PaintSettings { PaintColor = selectedColor, PenWidth = _selectedPenWidth, UseHighlighter = _useHighlighter };
-			MessagingCenter.Send(new PaintColorSelected { PaintSettings = paintSettings }, PaintColorSelected.Name);
-			*/
-			Navigation.PopAsync();
-		}
-
 		private static Color GetTextColor(Color backgroundColor)
 		{
 			var backgroundColorDelta = ((backgroundColor.R * 0.3) + (backgroundColor.G * 0.6) + (backgroundColor.B * 0.1));
 			return (backgroundColorDelta > 0.4f) ? Color.Black : Color.White; // Returns black or white text depending on the delta channel
-		}
-
-		/// <summary>
-		/// TEMP!!! TA BORT NÄR FÄRGVALET ÄR FÄRDIGT!
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_OnClicked(object sender, EventArgs e)
-		{
-			Navigation.PopAsync();
 		}
 	}
 }

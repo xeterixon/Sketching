@@ -11,7 +11,7 @@ namespace Sketching.Common.Views
 {
 	public partial class SketchView : ContentView
 	{
-		public Command<string> ActivateToolCommand { get; set; }
+		public Command<ITool> ActivateToolCommand { get; set; }
 		public ICommand UndoCommand { get; set; }
 		private Image _undoImage;
 
@@ -46,7 +46,7 @@ namespace Sketching.Common.Views
 		{
 			InitializeComponent();
 			ToolCollection = new ToolCollection();
-			ActivateToolCommand = new Command<string>(ActivateTool);
+			ActivateToolCommand = new Command<ITool>(ActivateTool);
 			UndoCommand = new Command(() => { ToolCollection.Undo(); });
 
 			AddDefaultToolbarItems();
@@ -61,29 +61,29 @@ namespace Sketching.Common.Views
 		{
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Line.png"), new LineTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Curve.png"), new CurveTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Stroke.png"), new CurveTool("Stroke", 50, 100, 0.3), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Highlight.png"), new CurveTool("Highlight", 50, 100, 0.3), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Circle.png"), new CircleTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Rectangle.png"), new RectangleTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Point.png"), new PointTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Text.png"), new TextTool(), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Text.png"), new TextTool(Navigation), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Undo.png"), null, UndoCommand);
 		}
 
-		private void ActivateTool(string toolName)
+		private void ActivateTool(ITool tool)
 		{
-			if (!string.IsNullOrEmpty(toolName) && toolName == SelectedTool?.Name)
-			{
+			if(SelectedTool?.Name == tool?.Name)
+			{ 
 				OpenToolSettings(SelectedTool);
 				return;
 			}
 
-			ToolCollection.ActivateTool(toolName);
+			ToolCollection.ActivateTool(tool);
 
 			// Unselect all items
 			foreach (var child in toolbarStack.Children.Where(n => n is SketchToolbarItem))
 			{
-				var toolBarItem = ((SketchToolbarItem)child);
-				toolBarItem.IsSelected = toolBarItem?.Tool?.Name == toolName;
+				var toolBarItem = (SketchToolbarItem)child;
+				toolBarItem.IsSelected = toolBarItem?.Tool == tool;
 			}
 		}
 
@@ -92,12 +92,19 @@ namespace Sketching.Common.Views
 			get
 			{
 				var selectedItem = toolbarStack.Children.FirstOrDefault(n => (n as SketchToolbarItem)?.IsSelected == true);
-				if (selectedItem == null)
-					return null;
 
-				return ((SketchToolbarItem) selectedItem).Tool;
+				return ((SketchToolbarItem) selectedItem)?.Tool;
 			}
 		}
+
+		private ITool GetTool(Type toolType)
+		{
+			var sketchToolbarItem =
+				(SketchToolbarItem) toolbarStack.Children.FirstOrDefault(n => (n as SketchToolbarItem)?.Tool?.GetType() == toolType);
+
+			return sketchToolbarItem?.Tool;
+		}
+		
 
 		private void OpenToolSettings(ITool tool)
 		{
@@ -120,6 +127,10 @@ namespace Sketching.Common.Views
 			if (tool != null)
 			{
 				ToolCollection.Tools.Add(tool);
+				if (newSketchToolbarItem.IsSelected)
+				{
+					ToolCollection.ActivateTool(tool);
+				}
 			}
 		}
 

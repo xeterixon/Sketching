@@ -1,18 +1,21 @@
 ﻿using System;
 using Sketching.Common.Geometries;
 using Sketching.Common.Interfaces;
+using Sketching.Common.Views;
 using Xamarin.Forms;
 
 namespace Sketching.Common.Tools
 {
 	public class TextTool : ITool<IText>
 	{
+		private INavigation _navigation;
 		public string Text {
 			get { return Geometry.Value; }
 			set { Geometry.Value = value; }
 		}
-		public TextTool()
+		public TextTool(INavigation navigation)
 		{
+			_navigation = navigation;
 			Name = "Text";
 			Init();
 		}
@@ -49,8 +52,19 @@ namespace Sketching.Common.Tools
 
 		public void TouchStart(Point p)
 		{
-			Geometry.Point = p;
-
+			if (string.IsNullOrEmpty(Text))
+			{
+				var textInputView = new TextInputView();
+				textInputView.TextEntryCompleted += (sender, text) =>
+				{
+					Text = text;
+				};
+				_navigation.PushAsync(new ContentPage { Content = textInputView });
+			}
+			else
+			{
+				Geometry.Point = p;
+			}
 		}
 	}
 }

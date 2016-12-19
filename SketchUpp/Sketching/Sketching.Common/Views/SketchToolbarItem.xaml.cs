@@ -1,7 +1,5 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Sketching.Common.Interfaces;
-using SkiaSharp;
 using Xamarin.Forms;
 
 namespace Sketching.Common.Views
@@ -44,7 +42,7 @@ namespace Sketching.Common.Views
 			toolImage.GestureRecognizers.Add(new TapGestureRecognizer
 			{
 				Command = tappedCommand,
-				CommandParameter = tool?.Name
+				CommandParameter = tool
 			});
 
 			Tool = tool;
