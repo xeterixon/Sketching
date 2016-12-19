@@ -73,6 +73,7 @@
       <DependentUpon>ToolSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ToolSettingsViewModel.cs" />
+    <Compile Include="Interfaces\IImage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp">

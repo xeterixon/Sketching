@@ -3,9 +3,16 @@
              xmlns:views="clr-namespace:Sketching.Common.Views;assembly=Sketching.Common"
              x:Class="Sketching.Common.Views.SketchView">
 	<ContentView.Content>
-		<StackLayout>
-			<StackLayout x:Name="toolbarStack" Orientation="Horizontal" HorizontalOptions="Center"/>
-			<views:SketchArea x:Name="sketchArea" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-		</StackLayout>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<ScrollView Orientation="Horizontal" Grid.Row="0">
+				<StackLayout x:Name="toolbarStack" Orientation="Horizontal" HorizontalOptions="Center"/>
+			</ScrollView>
+			<views:SketchArea Grid.Row="1" x:Name="sketchArea" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+		</Grid>
+			
 	</ContentView.Content>
 </ContentView>

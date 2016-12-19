@@ -1,5 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Sketching.Common;
 using Sketching.Common.Interfaces;
 using Sketching.Common.Tools;
@@ -28,9 +32,44 @@ namespace SketchUpp
 			_sketchView.RemoveToolbarItem(new CircleTool().Name);
 			_sketchView.AddToolbarItem(null, new OvalTool(), null);
 			ToolbarItems.Add(new ToolbarItem { Text = "Save", Command = SaveCommand });
+			ToolbarItems.Add(new ToolbarItem { Text = "Photo", Command = new Command(async () => { await TakePhoto(); }) });
+			ToolbarItems.Add(new ToolbarItem { Text = "Album", Command = new Command(async () => { await SelectImage(); }) });
 			Content = _sketchView;
 		}
+		private async Task TakePhoto() 
+		{
+			await CrossMedia.Current.Initialize();
+			if (CrossMedia.Current.IsCameraAvailable) 
+			{
+				var img = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions 
+				{ 
+					DefaultCamera = CameraDevice.Rear	
+				});
+				DecodeImage(img);
 
+			}
+		}
+		private void DecodeImage(MediaFile mf) 
+		{
+			if (mf == null) return;
+			byte[] bytes = null;
+			using (var s = new MemoryStream())
+			{
+				mf.GetStream().CopyTo(s);
+				bytes = s.ToArray();
+			}
+			if (bytes != null) {
+				_sketchView.SketchArea.BackgroundImage = new BackgroundImage { Data = bytes };
+				_sketchView.SketchArea.Redraw();
+			}
+		}
+		private async Task SelectImage() 
+		{
+			await CrossMedia.Current.Initialize();
+			var img = await CrossMedia.Current.PickPhotoAsync();
+			DecodeImage(img);
+
+		}
 		private void SaveImage() 
 		{
 			var data = _sketchView.SketchArea.ImageData();
