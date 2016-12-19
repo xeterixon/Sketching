@@ -6,14 +6,14 @@ namespace Sketching.Common.Geometries
 {
 	public class Mark : IMark
 	{
-		public Mark():this(Color.Black, 50) { }
+		public Mark():this(Color.Black, 40) { }
 		public Mark(IGeometryVisual src) : this(src.Color, src.Size){}
 		public Mark(Color color, double size)
 		{
 			Color = color;
 			Size = size;
-			MinSize = 1;
-			MaxSize = 20;
+			MinSize = 10;
+			MaxSize = 70;
 		}
 
 		public Color Color { get; set; }

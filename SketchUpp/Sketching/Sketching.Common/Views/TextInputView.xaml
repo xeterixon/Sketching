@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Sketching.Common.Views.TextInputView">
+	<ContentView.Content>
+		<StackLayout Margin="10">
+			<Entry  x:Name="textInput" Text="{Binding Text}" Completed="Entry_OnCompleted" Unfocused="Entry_OnCompleted"/>
+		</StackLayout>
+	</ContentView.Content>
+</ContentView>

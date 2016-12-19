@@ -6,14 +6,17 @@ namespace Sketching.Common.Views
 {
 	public class ToolSettingsViewModel
 	{
+		private readonly INavigation _navigation;
 		public ICommand ColorSelectedCommand { get; set; }
 		public ITool Tool { get; set; }
-		public ToolSettingsViewModel(ITool tool)
+		public ToolSettingsViewModel(ITool tool, INavigation navigation)
 		{
+			_navigation = navigation;
 			Tool = tool;
 			ColorSelectedCommand = new Command<Color>(color =>
 			{
 				Tool.Geometry.Color = color.MultiplyAlpha(Tool.Geometry.Color.A);
+				_navigation.PopAsync();
 			});
 		}
 	}

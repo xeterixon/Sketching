@@ -6,7 +6,7 @@ namespace Sketching.Common.Geometries
 {
 	public class Text : IText
 	{
-		public Text() : this(Color.Black, 20) { }
+		public Text() : this(Color.Black, 75) { }
 		public Text(IGeometryVisual src) : this(src.Color, src.Size){}
 		public Text(Color color, double size)
 		{
@@ -14,8 +14,8 @@ namespace Sketching.Common.Geometries
 			Color = color;
 			Size = size;
 			Point = new Point(-1, -1);
-			MinSize = 10;
-			MaxSize = 40;
+			MinSize = 20;
+			MaxSize = 200;
 		}
 
 		public Color Color { get; set; }

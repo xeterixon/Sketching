@@ -69,6 +69,9 @@
     <Compile Include="Render\RectangleRenderer.cs" />
     <Compile Include="Render\MarkRenderer.cs" />
     <Compile Include="Render\TextRenderer.cs" />
+    <Compile Include="Views\TextInputView.xaml.cs">
+      <DependentUpon>TextInputView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ToolSettingsView.xaml.cs">
       <DependentUpon>ToolSettingsView.xaml</DependentUpon>
     </Compile>
@@ -139,7 +142,13 @@
     <EmbeddedResource Include="Resources\ThinLine.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Stroke.png" />
+    <EmbeddedResource Include="Resources\Highlight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\TextInputView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="..\Sketching.Shared\Sketching.Shared.projitems" Label="Shared" Condition="Exists('..\Sketching.Shared\Sketching.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
