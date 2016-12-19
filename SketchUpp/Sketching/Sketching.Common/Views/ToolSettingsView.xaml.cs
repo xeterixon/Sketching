@@ -8,7 +8,7 @@ namespace Sketching.Common.Views
 	public partial class ToolSettingsView : ContentView
 	{
 		private readonly StackOrientation _orientation;
-		private Dictionary<string, Color> _colorPalette;
+		private List<Color> _colorPalette;
 
 		public ToolSettingsView(ITool tool)
 		{
@@ -17,31 +17,38 @@ namespace Sketching.Common.Views
 			thinLineImage.Source = ImageSource.FromResource("Sketching.Common.Resources.ThinLine.png");
 			thickLineImage.Source = ImageSource.FromResource("Sketching.Common.Resources.ThickLine.png");
 			_orientation = Width > Height ? StackOrientation.Horizontal : StackOrientation.Vertical;
-			CreateColorPalette();
+			CreateColorPalette(tool);
 			SetupColorGrid();
 			FillColorGrid();
 		}
 
-		private void CreateColorPalette()
+		private void CreateColorPalette(ITool tool)
 		{
-			_colorPalette = new Dictionary<string, Color>
+			if ((tool as ICustomColorSetup)?.CustomColors != null)
 			{
-				{ "White", Color.White },
-				{ "Silver", Color.Silver },
-				{ "Gray", Color.Gray },
-				{ "Black", Color.Black },
-				{ "Orange", Color.Orange },
-				{ "Yellow", Color.Yellow },
-				{ "Aqua", Color.Aqua },
-				{ "Blue", Color.Blue },
-				{ "Navy", Color.Navy },
-				{ "Lime", Color.Lime },
-				{ "Green", Color.Green },
-				{ "Teal", Color.Teal },
-				{ "Fuchsia", Color.Fuchsia },
-				{ "Red", Color.Red },
-				{ "Purple", Color.Purple },
-			};
+				_colorPalette = (tool as ICustomColorSetup).CustomColors.ToList();
+			}
+			else
+			{
+				_colorPalette = new List<Color>
+				{
+					Color.White,
+					Color.Silver,
+					Color.Gray,
+					Color.Black,
+					Color.Orange,
+					Color.Yellow,
+					Color.Aqua,
+					Color.Blue,
+					Color.Navy,
+					Color.Lime,
+					Color.Green,
+					Color.Teal,
+					Color.Fuchsia,
+					Color.Red,
+					Color.Purple,
+				};
+			}
 		}
 
 
@@ -78,8 +85,8 @@ namespace Sketching.Common.Views
 				VerticalTextAlignment = TextAlignment.Center,
 				FontSize = 10.0,
 				Text = string.Empty,
-				TextColor = GetTextColor(color.Value),
-				BackgroundColor = color.Value
+				TextColor = GetTextColor(color),
+				BackgroundColor = color
 			}))
 			{
 				var tapGestureRecognizer = new TapGestureRecognizer

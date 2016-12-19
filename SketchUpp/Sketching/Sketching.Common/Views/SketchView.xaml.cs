@@ -61,7 +61,7 @@ namespace Sketching.Common.Views
 		{
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Line.png"), new LineTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Curve.png"), new CurveTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Highlight.png"), new CurveTool("Highlight", 50, 100, 0.3), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Highlight.png"), new CurveTool("Highlight", 50, 100, 0.3, null), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Circle.png"), new CircleTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Rectangle.png"), new RectangleTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Point.png"), new PointTool(), ActivateToolCommand);

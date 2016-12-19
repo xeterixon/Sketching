@@ -1,13 +1,14 @@
-﻿using Sketching.Common.Geometries;
+﻿using System.Collections.Generic;
+using Sketching.Common.Geometries;
 using Xamarin.Forms;
 
 namespace Sketching.Common.Tools
 {
 	public class CurveTool : StrokeToolBase
 	{
-		public CurveTool() : this("Curve", 8, 20, 1){}
+		public CurveTool() : this("Curve", 8, 20, 1, null){}
 
-		public CurveTool(string name, double size, double maxSize, double alpha)
+		public CurveTool(string name, double size, double maxSize, double alpha, IEnumerable<Color> customColors) 
 		{
 			Name = name;
 			Geometry = new Stroke
@@ -16,6 +17,7 @@ namespace Sketching.Common.Tools
 				Size = size
 			};
 			Geometry.Color = Geometry.Color.MultiplyAlpha(alpha);
+			CustomColors = customColors;
 		}
 
 		public override void TouchStart(Point p)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Sketching.Common;
 using Sketching.Common.Interfaces;
@@ -27,6 +28,8 @@ namespace SketchUpp
 
 			_sketchView.RemoveToolbarItem(new CircleTool().Name);
 			_sketchView.AddToolbarItem(null, new OvalTool(), null);
+			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Highlight.png", typeof(CurveTool).GetTypeInfo().Assembly), new CurveTool("Fuktpunkter", 50, 100, 0.3, new List<Color> {Color.Red, Color.Orange, Color.Yellow}), null);
+
 			ToolbarItems.Add(new ToolbarItem { Text = "Save", Command = SaveCommand });
 			Content = _sketchView;
 		}
