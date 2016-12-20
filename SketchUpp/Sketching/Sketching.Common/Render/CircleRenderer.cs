@@ -7,10 +7,6 @@ namespace Sketching.Common.Render
 {
 	public class CircleRenderer : IGeometryRenderer
 	{
-		public CircleRenderer()
-		{
-		}
-
 		public Type GeometryType {
 			get {
 				return typeof(ICircle);

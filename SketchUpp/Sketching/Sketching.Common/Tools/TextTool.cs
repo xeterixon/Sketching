@@ -32,7 +32,7 @@ namespace Sketching.Common.Tools
 		}
 		IGeometryVisual ITool.Geometry {
 			get {
-				return this.Geometry;
+				return Geometry;
 			}
 			set {
 				throw new NotImplementedException();

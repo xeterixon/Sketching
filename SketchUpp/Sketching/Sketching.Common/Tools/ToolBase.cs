@@ -20,7 +20,7 @@ namespace Sketching.Common.Tools
 
 		public string Name { get; set; }
 
-		public IStroke Geometry { get; set;} = new Stroke(Xamarin.Forms.Color.Blue, 10);
+		public IStroke Geometry { get; set;} = new Stroke(Color.Blue, 10);
 
 		IGeometryVisual ITool.Geometry {
 			get {

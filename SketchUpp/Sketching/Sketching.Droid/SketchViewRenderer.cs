@@ -1,5 +1,4 @@
-﻿using System;
-using Android.Runtime;
+﻿using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Sketching.Common.Views;
@@ -52,7 +51,7 @@ namespace Sketching.Droid
 			if (e.NewElement != null) 
 			{
 				
-				var view = new SKNativeView(Xamarin.Forms.Forms.Context);
+				var view = new SKNativeView(Forms.Context);
 				view.SetOnTouchListener(new TouchListener(e.NewElement));
 				view.PaintSurface+= Skia_PaintSurface;
 				SetNativeControl(view);

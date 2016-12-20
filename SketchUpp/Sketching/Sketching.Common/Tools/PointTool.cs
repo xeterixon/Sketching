@@ -1,6 +1,4 @@
-﻿using System;
-using Sketching.Common.Interfaces;
-
+﻿using Xamarin.Forms;
 namespace Sketching.Common.Tools
 {
 	public class PointTool : PointToolBase
@@ -9,17 +7,17 @@ namespace Sketching.Common.Tools
 		{
 			Name = "Point";
 		}
-		public override void TouchStart(Xamarin.Forms.Point p)
+		public override void TouchStart(Point p)
 		{
 			base.TouchStart(p);
 			Geometry.Point = p;
 		}
-		public override void TouchMove(Xamarin.Forms.Point p)
+		public override void TouchMove(Point p)
 		{
 			base.TouchMove(p);
 			Geometry.Point = p;
 		}
-		public override void TouchEnd(Xamarin.Forms.Point p)
+		public override void TouchEnd(Point p)
 		{
 			base.TouchEnd(p);
 			Init();

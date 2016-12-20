@@ -22,7 +22,7 @@ namespace Sketching.Common.Render
 		}
 		private int _lastCanvasWidth = -1;
 		private SKPicture _gridPicture;
-		public Xamarin.Forms.Color LineColor =  new Color(0, 0, 0, 0.4);
+		public Color LineColor =  new Color(0, 0, 0, 0.4);
 		public GridRenderer()
 		{
 			LineWidth = 1;

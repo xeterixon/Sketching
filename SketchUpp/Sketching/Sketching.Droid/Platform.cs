@@ -1,5 +1,4 @@
-﻿using System;
-namespace Sketching
+﻿namespace Sketching
 {
 	public static class Platform
 	{

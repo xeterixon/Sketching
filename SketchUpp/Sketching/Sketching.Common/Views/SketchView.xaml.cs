@@ -11,7 +11,6 @@ namespace Sketching.Common.Views
 	{
 		public Command<ITool> ActivateToolCommand { get; set; }
 		public ICommand UndoCommand { get; set; }
-		private Image _undoImage;
 
 		public static readonly BindableProperty ToolCollectionProperty = BindableProperty.Create(nameof(ToolCollection), typeof(IToolCollection), typeof(SketchView), null,
   propertyChanged: ToolCollectionPropertyChanged);

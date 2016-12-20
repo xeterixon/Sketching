@@ -1,6 +1,4 @@
-﻿using System;
-using Sketching.Common.Interfaces;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Sketching.Common.Tools
 {

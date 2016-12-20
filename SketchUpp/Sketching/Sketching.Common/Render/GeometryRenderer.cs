@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Sketching.Common.Extensions;
 using Sketching.Common.Interfaces;
 using SkiaSharp;
 
@@ -25,9 +25,17 @@ namespace Sketching.Common.Render
 			var existing = _renderers.Where((arg) => arg.GeometryType.GetTypeInfo().IsAssignableFrom(renderer.GetType().GetTypeInfo()));
 			if (existing.Any()) 
 			{
-				System.Diagnostics.Debug.WriteLine("A renderer exist allready");
+				throw new InvalidOperationException("Duplicate renderer");
 			}
 			_renderers.Add(renderer);
+		}
+		public static void RemoveRenderer(IGeometryRenderer renderer) 
+		{
+			var r = _renderers.FirstOrDefault((arg) => arg.GeometryType == renderer.GeometryType);
+			if (r != null) 
+			{
+				_renderers.Remove(r);
+			}
 		}
 		public static void Render(SKCanvas canvas, IGeometryVisual geometry)
 		{

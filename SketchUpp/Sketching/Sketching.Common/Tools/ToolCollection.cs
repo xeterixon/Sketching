@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sketching.Common.Geometries;
 using Sketching.Common.Interfaces;
 using Xamarin.Forms;
 
@@ -38,15 +37,16 @@ namespace Sketching.Common.Tools
 		//NOTE Only allow one active tool at a time for now.
 		public void ActivateTool(ITool tool) 
 		{
-			if (tool == null) {
+			if (tool == null) 
+			{
 				throw new NullReferenceException("Tool is null");
-			};
+			}
 			var activeTools = Tools.Where(t => t.Active);
 			foreach (var activeTool in activeTools) 
 			{
-				activeTool.Active = false;;
+				activeTool.Active = false;
 			}
-			var tl = Tools.FirstOrDefault(t => object.ReferenceEquals(t, tool));
+			var tl = Tools.FirstOrDefault(t => ReferenceEquals(t, tool));
 			if (tl == null) 
 			{
 				throw new InvalidOperationException("Don't activate a tool that's not registered");

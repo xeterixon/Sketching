@@ -1,5 +1,4 @@
-﻿using System;
-using Sketching.Common.Interfaces;
+﻿using Sketching.Common.Interfaces;
 using Xamarin.Forms;
 
 namespace Sketching.Common.Geometries
