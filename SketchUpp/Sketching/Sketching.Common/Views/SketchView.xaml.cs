@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security;
 using System.Windows.Input;
 using Sketching.Common.Interfaces;
@@ -61,7 +59,7 @@ namespace Sketching.Common.Views
 		{
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Line.png"), new LineTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Curve.png"), new CurveTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Highlight.png"), new CurveTool("Highlight", 50, 100, 0.3), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Highlight.png"), new CurveTool("Highlight", 50, 100, 0.3, null), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Circle.png"), new CircleTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Rectangle.png"), new RectangleTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Point.png"), new PointTool(), ActivateToolCommand);
@@ -97,15 +95,6 @@ namespace Sketching.Common.Views
 			}
 		}
 
-		private ITool GetTool(Type toolType)
-		{
-			var sketchToolbarItem =
-				(SketchToolbarItem) toolbarStack.Children.FirstOrDefault(n => (n as SketchToolbarItem)?.Tool?.GetType() == toolType);
-
-			return sketchToolbarItem?.Tool;
-		}
-		
-
 		private void OpenToolSettings(ITool tool)
 		{
 			Navigation.PushAsync(new ContentPage {Content = new ToolSettingsView(tool)});
@@ -114,7 +103,7 @@ namespace Sketching.Common.Views
 		public void AddToolbarItem(ImageSource imageSource, ITool tool, ICommand command)
 		{
 			if (tool != null && ToolCollection.Tools.Any(n => n.Name == tool.Name))
-				throw new VerificationException("Toolname already exists");
+				throw new VerificationException("Tool already exists");
 
 			var newSketchToolbarItem = new SketchToolbarItem(imageSource, tool, command ?? ActivateToolCommand)
 			{
@@ -136,27 +125,23 @@ namespace Sketching.Common.Views
 
 		public void RemoveAllToolbarItems()
 		{
-			List<string> toolNames = ToolCollection.Tools.Select(n => n.Name).ToList();
-			foreach (string toolName in toolNames)
+			while (toolbarStack.Children.Any())
 			{
-				RemoveToolbarItem(toolName);
+				RemoveToolbarItem(0);
 			}
-			RemoveUndoToolbarItem();
 		}
 
-		public void RemoveToolbarItem(string toolName)
+		public void RemoveToolbarItem(int index)
 		{
-			var toolbarItem = (SketchToolbarItem)toolbarStack.Children.FirstOrDefault(n => n is SketchToolbarItem && ((SketchToolbarItem)n).Tool.Name == toolName);
+			var toolbarItem = (SketchToolbarItem)toolbarStack.Children[index];
 			if (toolbarItem == null) return;
 
-			ToolCollection.Tools.Remove(toolbarItem.Tool);
-			toolbarStack.Children.Remove(toolbarItem);
-		}
+			if (ToolCollection.Tools.Contains(toolbarItem.Tool))
+			{
+				ToolCollection.Tools.Remove(toolbarItem.Tool);
+			}
 
-		public void RemoveUndoToolbarItem()
-		{
-			var toolbarItem = (SketchToolbarItem)toolbarStack.Children.FirstOrDefault(n => n is SketchToolbarItem && ((SketchToolbarItem)n).Tool == null);
-			if (toolbarItem != null)
+			if (toolbarStack.Children.Contains(toolbarItem))
 			{
 				toolbarStack.Children.Remove(toolbarItem);
 			}

@@ -7,7 +7,7 @@ using Xamarin.Forms;
 namespace Sketching.Common.Tools
 {
 
-	public abstract class StrokeToolBase : IStrokeTool
+	public abstract class StrokeToolBase : IStrokeTool, ICustomColorSetup
 	{
 		protected virtual void Init()
 		{
@@ -31,6 +31,8 @@ namespace Sketching.Common.Tools
 				throw new NotImplementedException();
 			}
 		}
+
+		public IEnumerable<Color> CustomColors { get; set; }
 	}
 	public abstract class PointToolBase : IPointTool 
 	{

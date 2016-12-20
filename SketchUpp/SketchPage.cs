@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using Plugin.Media;
@@ -29,8 +30,14 @@ namespace SketchUpp
 				HorizontalOptions	= LayoutOptions.FillAndExpand,
 			};
 
-			_sketchView.RemoveToolbarItem(new CircleTool().Name);
+			// How to remove tools
+			_sketchView.RemoveToolbarItem(3); // Circle
+			_sketchView.RemoveToolbarItem(2); // Highlight
+
+			// How to add custom tools
 			_sketchView.AddToolbarItem(null, new OvalTool(), null);
+			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Highlight.png", typeof(CurveTool).GetTypeInfo().Assembly), new CurveTool("Fuktpunkter", 50, 100, 0.3, new List<Color> {Color.Red, Color.Orange, Color.Yellow}), null);
+
 			ToolbarItems.Add(new ToolbarItem { Text = "Save", Command = SaveCommand });
 			ToolbarItems.Add(new ToolbarItem { Text = "Photo", Command = new Command(async () => { await TakePhoto(); }) });
 			ToolbarItems.Add(new ToolbarItem { Text = "Album", Command = new Command(async () => { await SelectImage(); }) });
