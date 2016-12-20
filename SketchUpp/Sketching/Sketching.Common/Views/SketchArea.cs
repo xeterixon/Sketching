@@ -14,8 +14,8 @@ namespace Sketching.Common.Views
 		//TODO Is this a bit overly designed? We only got one delegate and thats the ToolCollection object....
 		public List<ITouchDelegate> Delegates { get; set; } = new List<ITouchDelegate>();
 		private IToolCollection _tools;
-		private byte[] _imageData;
-		private GridRenderer _gridRenderer = new GridRenderer();
+		private GridRenderer _gridRenderer = new GridRenderer ();
+		private SKImage _snapShot;
 		private BackgroundImageRenderer _backgroundImageRenderer = new BackgroundImageRenderer();
 		public static readonly BindableProperty CanvasBackgroundColorProperty = BindableProperty.Create(nameof(CanvasBackgroundColor), typeof(Color), typeof(SketchArea), Color.FromHex("#F0F8FF"));
 		public Color CanvasBackgroundColor {
@@ -46,7 +46,7 @@ namespace Sketching.Common.Views
 		}
 		public byte[] ImageData()
 		{
-			return _imageData;
+			return _snapShot?.Encode(SKImageEncodeFormat.Jpeg,100)?.ToArray();
 		}
 		public Action<CallbackType> CallbackToNative { get; set; }
 
@@ -62,7 +62,8 @@ namespace Sketching.Common.Views
 				GeometryRenderer.Render(canvas, geom);
 			}
 			//TODO Try to do this on demand, rather than every draw...
-			_imageData = surface.Snapshot().Encode(SKImageEncodeFormat.Jpeg, 100).ToArray();
+			// Snapshotting without encodeing is rather fast though
+			_snapShot = surface.Snapshot();
 		}
 		public virtual void TouchStart(Point p)
 		{
@@ -78,6 +79,7 @@ namespace Sketching.Common.Views
 		}
 		public virtual void TouchMove(Point p)
 		{
+
 			foreach (var item in Delegates) {
 				item.TouchMove(p);
 			}

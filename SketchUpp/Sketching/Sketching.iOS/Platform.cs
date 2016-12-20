@@ -3,6 +3,9 @@ namespace Sketching
 {
 	public static class Platform
 	{
-		public static void Init(){}
+		public static void Init()
+		{
+			var ignore = new Sketching.iOS.SketchViewRenderer();
+		}
 	}
 }

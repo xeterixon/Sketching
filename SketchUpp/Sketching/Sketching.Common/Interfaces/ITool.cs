@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Sketching.Common.Geometries;
-using Xamarin.Forms;
-
-namespace Sketching.Common.Interfaces
+﻿namespace Sketching.Common.Interfaces
 {
-	public interface ITool<T> : ITool 
-		where T: IGeometryVisual
+	public interface ITool<T> : ITool
+		where T : IGeometryVisual
 	{
 		new T Geometry { get; set; }
 	}
@@ -14,12 +9,12 @@ namespace Sketching.Common.Interfaces
 	{
 		string Name { get; set; }
 		bool Active { get; set; }
-		IGeometryVisual Geometry{get;set;}
+		IGeometryVisual Geometry { get; set; }
 	}
 
-	public interface IStrokeTool : ITool<IStroke>{}
-	public interface ILineTool : ITool<ILine> {}
-	public interface ICircleTool : ITool<ICircle> {}
-	public interface IPointTool : ITool<IMark> {}
+	public interface IStrokeTool : ITool<IStroke> { }
+	public interface ILineTool : ITool<ILine> { }
+	public interface ICircleTool : ITool<ICircle> { }
+	public interface IPointTool : ITool<IMark> { }
 
 }

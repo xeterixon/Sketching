@@ -19,6 +19,7 @@ namespace Sketching.Common.Render
 			AddRenderer(new TextRenderer());
 			AddRenderer(new MarkRenderer());
 		}
+		//NOTE This should probably be a faster look-up-able container than a List, but it works for now...
 		private static List<IGeometryRenderer> _renderers;
 		public static void AddRenderer(IGeometryRenderer renderer) 
 		{

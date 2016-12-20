@@ -24,12 +24,8 @@ namespace Sketching.Common.Render
 				paint.StrokeWidth = (float)s.Size;
 				paint.IsAntialias = true;
 				paint.Color = s.Color.ToSkiaColor();
-				var first = s.Points.First();
-				var theRest = s.Points.Skip(1);
-				foreach (var point in theRest) {
-					canvas.DrawLine((float)first.X, (float)first.Y, (float)point.X, (float)point.Y, paint);
-					first = point;
-				}
+				var points = s.Points.Select(Extensions.SkiaExtensions.Convert).ToArray();
+				canvas.DrawPoints(SKPointMode.Polygon, points, paint);
 			}
 		}
 	}
