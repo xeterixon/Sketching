@@ -5,7 +5,7 @@ using SkiaSharp;
 
 namespace SketchUpp.CustomTool
 {
-	public class OvalRenderer : IRenderer
+	public class OvalRenderer : IGeometryRenderer
 	{
 		public OvalRenderer()
 		{

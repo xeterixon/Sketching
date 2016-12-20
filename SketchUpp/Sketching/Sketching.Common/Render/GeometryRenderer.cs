@@ -11,7 +11,7 @@ namespace Sketching.Common.Render
 	{
 		static GeometryRenderer()
 		{
-			_renderers = new List<IRenderer>();
+			_renderers = new List<IGeometryRenderer>();
 
 			AddRenderer(new StrokeRenderer());
 			AddRenderer(new CircleRenderer());
@@ -19,8 +19,8 @@ namespace Sketching.Common.Render
 			AddRenderer(new TextRenderer());
 			AddRenderer(new MarkRenderer());
 		}
-		private static List<IRenderer> _renderers;
-		public static void AddRenderer(IRenderer renderer) 
+		private static List<IGeometryRenderer> _renderers;
+		public static void AddRenderer(IGeometryRenderer renderer) 
 		{
 			var existing = _renderers.Where((arg) => arg.GeometryType.GetTypeInfo().IsAssignableFrom(renderer.GetType().GetTypeInfo()));
 			if (existing.Any()) 

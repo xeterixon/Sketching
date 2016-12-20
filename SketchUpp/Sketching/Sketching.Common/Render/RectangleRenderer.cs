@@ -5,7 +5,7 @@ using SkiaSharp;
 
 namespace Sketching.Common.Render
 {
-	public class RectangleRenderer : IRenderer
+	public class RectangleRenderer : IGeometryRenderer
 	{
 		public Type GeometryType {
 			get {

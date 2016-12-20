@@ -5,7 +5,7 @@ using SkiaSharp;
 
 namespace Sketching.Common.Render
 {
-	public class CircleRenderer : IRenderer
+	public class CircleRenderer : IGeometryRenderer
 	{
 		public CircleRenderer()
 		{

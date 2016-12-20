@@ -5,7 +5,7 @@ using SkiaSharp;
 
 namespace Sketching.Common.Render
 {
-	public class MarkRenderer : IRenderer
+	public class MarkRenderer : IGeometryRenderer
 	{
 		public Type GeometryType {
 			get {

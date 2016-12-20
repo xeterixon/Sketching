@@ -6,7 +6,7 @@ using SkiaSharp;
 
 namespace Sketching.Common.Render
 {
-	public class StrokeRenderer : IRenderer
+	public class StrokeRenderer : IGeometryRenderer
 	{
 		public Type GeometryType {
 			get {
