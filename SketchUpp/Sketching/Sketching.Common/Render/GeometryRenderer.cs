@@ -31,6 +31,7 @@ namespace Sketching.Common.Render
 		}
 		public static void Render(SKCanvas canvas, IGeometryVisual geometry)
 		{
+			if (!geometry.IsValid) return;
 			var renderer = _renderers.FirstOrDefault((arg) => arg.GeometryType.GetTypeInfo().IsAssignableFrom( geometry.GetType().GetTypeInfo()));
 			if (renderer != null) renderer.Render(canvas, geometry);
 

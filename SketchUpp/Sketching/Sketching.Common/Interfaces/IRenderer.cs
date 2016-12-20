@@ -1,9 +1,10 @@
-﻿using System;
+﻿using SkiaSharp;
+
 namespace Sketching.Common.Interfaces
 {
-	public interface IRenderer 
+	public interface IRenderer
 	{
-		void Render(SkiaSharp.SKCanvas canvas, IGeometryVisual geometry);
-		Type GeometryType { get; }
+		void Setup(SKCanvas canvas);
+		void Render(SKCanvas canvas);
 	}
 }

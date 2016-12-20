@@ -43,13 +43,14 @@ namespace SketchUpp
 			{
 				var img = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions 
 				{ 
-					DefaultCamera = CameraDevice.Rear	
+					DefaultCamera = CameraDevice.Rear,
+					Name = "Background image"
 				});
-				DecodeImage(img);
+				DecodeAndDrawMediaFile(img);
 
 			}
 		}
-		private void DecodeImage(MediaFile mf) 
+		private void DecodeAndDrawMediaFile(MediaFile mf) 
 		{
 			if (mf == null) return;
 			byte[] bytes = null;
@@ -60,14 +61,13 @@ namespace SketchUpp
 			}
 			if (bytes != null) {
 				_sketchView.SketchArea.BackgroundImage = new BackgroundImage { Data = bytes };
-				_sketchView.SketchArea.Redraw();
 			}
 		}
 		private async Task SelectImage() 
 		{
 			await CrossMedia.Current.Initialize();
 			var img = await CrossMedia.Current.PickPhotoAsync();
-			DecodeImage(img);
+			DecodeAndDrawMediaFile(img);
 
 		}
 		private void SaveImage() 

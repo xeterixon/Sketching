@@ -63,7 +63,7 @@
     <Compile Include="Views\SketchToolbarItem.xaml.cs">
       <DependentUpon>SketchToolbarItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IRenderer.cs" />
+    <Compile Include="Interfaces\IGeometryRenderer.cs" />
     <Compile Include="Render\StrokeRenderer.cs" />
     <Compile Include="Render\CircleRenderer.cs" />
     <Compile Include="Render\RectangleRenderer.cs" />
@@ -77,6 +77,8 @@
     </Compile>
     <Compile Include="Views\ToolSettingsViewModel.cs" />
     <Compile Include="Interfaces\IImage.cs" />
+    <Compile Include="Interfaces\IRenderer.cs" />
+    <Compile Include="Render\BackgroundImageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp">

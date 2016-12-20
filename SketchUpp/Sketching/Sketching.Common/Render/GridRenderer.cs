@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sketching.Common.Geometries;
+using Sketching.Common.Interfaces;
 using SkiaSharp;
 using Xamarin.Forms;
 
 namespace Sketching.Common.Render
 {
-	public class GridRenderer
+	public class GridRenderer : IRenderer
 	{
 		private List<Stroke> strokes = new List<Stroke>();
 		private double _lineWidth;
@@ -19,13 +20,16 @@ namespace Sketching.Common.Render
 				_lineWidth = value;
 			}
 		}
+		private int _lastCanvasWidth = -1;
+		private SKPicture _gridPicture;
 		public Xamarin.Forms.Color LineColor =  new Color(0, 0, 0, 0.4);
 		public GridRenderer()
 		{
 			LineWidth = 1;
 		}
-		public void SetupGrid(SKCanvas canvas) 
+		public void Setup(SKCanvas canvas) 
 		{
+
 			strokes.Clear();
 			// try to get roughly 15 vertical lines in portrait, rounding to the nearest 10 pixel
 			if (Config.GridSize < 0) {
@@ -50,15 +54,33 @@ namespace Sketching.Common.Render
 				counter++;
 
 			} while (counter * Config.GridSize < canvas.ClipBounds.Height);
+			// Drawing the grid to a picture.
+			// A tad faster than drawing directly on the canvas. No big impact though
+			var recorder = new SKPictureRecorder();
+			recorder.BeginRecording(canvas.ClipBounds);
+			DrawBackbuffer(recorder.RecordingCanvas);
+			_gridPicture = recorder.EndRecording();
 
 		}
-		public void DrawGrid(SKCanvas canvas) 
+		private void DrawBackbuffer(SKCanvas c) 
 		{
-			//TODO Look into double buffer this so we don't have to draw it every time.
 			foreach (var stroke in strokes) {
-				GeometryRenderer.Render(canvas, stroke);
+				
+				GeometryRenderer.Render(c, stroke);
 			}
-			
+		}
+		public void Render(SKCanvas canvas) 
+		{
+			if (_lastCanvasWidth != (int)canvas.ClipBounds.Width) 
+			{
+				Setup(canvas);
+				_lastCanvasWidth = (int)canvas.ClipBounds.Width;
+			}
+			if (_gridPicture != null) 
+			{
+				canvas.DrawPicture(_gridPicture);
+			}
+
 		}
 	}
 }
