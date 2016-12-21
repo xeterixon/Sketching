@@ -14,6 +14,10 @@ namespace Sketching.Common.Extensions
 		{
 			return new SkiaSharp.SKPoint((float)self.X, (float)self.Y);
 		}
+		public static SkiaSharp.SKPoint Convert(Point p) 
+		{
+			return p.ToSkiaPoint();
+		}
 	}
 }
 

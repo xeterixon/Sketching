@@ -29,7 +29,10 @@ namespace Sketching.iOS
 				p.Y = loc.Y * scale;
 				return true;
 
-			} catch { }
+			} catch(Exception ex)
+			{
+				System.Diagnostics.Debug.Write(ex.Message);
+			}
 			return false;
 			
 		}

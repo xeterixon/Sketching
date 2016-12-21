@@ -10,6 +10,7 @@ namespace Sketching.Common.Render
 	public class GridRenderer : IRenderer
 	{
 		private List<Stroke> strokes = new List<Stroke>();
+		public bool Enabled { get; set; } = true;
 		private double _lineWidth;
 		public double LineWidth {
 			get {
@@ -29,7 +30,7 @@ namespace Sketching.Common.Render
 		}
 		public void Setup(SKCanvas canvas) 
 		{
-
+			if (!Enabled) return;
 			strokes.Clear();
 			// try to get roughly 15 vertical lines in portrait, rounding to the nearest 10 pixel
 			if (Config.GridSize < 0) {
@@ -56,10 +57,12 @@ namespace Sketching.Common.Render
 			} while (counter * Config.GridSize < canvas.ClipBounds.Height);
 			// Drawing the grid to a picture.
 			// A tad faster than drawing directly on the canvas. No big impact though
-			var recorder = new SKPictureRecorder();
-			recorder.BeginRecording(canvas.ClipBounds);
-			DrawBackbuffer(recorder.RecordingCanvas);
-			_gridPicture = recorder.EndRecording();
+			using (var recorder = new SKPictureRecorder()) {
+				recorder.BeginRecording(canvas.ClipBounds);
+				DrawBackbuffer(recorder.RecordingCanvas);
+				_gridPicture = recorder.EndRecording();
+			}
+
 
 		}
 		private void DrawBackbuffer(SKCanvas c) 
@@ -71,6 +74,8 @@ namespace Sketching.Common.Render
 		}
 		public void Render(SKCanvas canvas) 
 		{
+			if (!Enabled) return;
+			
 			if (_lastCanvasWidth != (int)canvas.ClipBounds.Width) 
 			{
 				Setup(canvas);
