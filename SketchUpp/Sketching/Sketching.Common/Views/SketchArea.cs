@@ -15,14 +15,21 @@ namespace Sketching.Common.Views
 		public List<ITouchDelegate> Delegates { get; set; } = new List<ITouchDelegate>();
 		private IToolCollection _tools;
 		private GridRenderer _gridRenderer = new GridRenderer ();
-		private SKImage _snapShot;
 		private BackgroundImageRenderer _backgroundImageRenderer = new BackgroundImageRenderer();
 		public static readonly BindableProperty CanvasBackgroundColorProperty = BindableProperty.Create(nameof(CanvasBackgroundColor), typeof(Color), typeof(SketchArea), Color.FromHex("#F0F8FF"));
 		public Color CanvasBackgroundColor {
 			get { return (Color)GetValue(CanvasBackgroundColorProperty); }
 			set { SetValue(CanvasBackgroundColorProperty, value); }
 		}
-
+		private SKImage _snapShot;
+		public SKImage SnapShot {
+			get { return _snapShot; }
+			private set 
+			{
+				_snapShot?.Dispose();
+				_snapShot = value;
+			}
+		}
 		public IImage BackgroundImage {
 			get { return _backgroundImageRenderer.Image;}
 			set 
@@ -31,8 +38,6 @@ namespace Sketching.Common.Views
 				Redraw();
 			}
 		}
-		// The background image as a bitmap.
-		// A tad faster to render.
 		public IToolCollection ToolCollection {
 			get { return _tools; }
 			set {
@@ -62,8 +67,13 @@ namespace Sketching.Common.Views
 				GeometryRenderer.Render(canvas, geom);
 			}
 			//TODO Try to do this on demand, rather than every draw...
-			// Snapshotting without encodeing is rather fast though
-			_snapShot = surface.Snapshot();
+			// Snapshotting without encoding is rather fast though and does not impact performance that much
+			SnapShot = surface.Snapshot();
+
+			//TODO Look into this
+			// Not really needed, but keeps the memory slightly lower and does not impact performance that much
+			var mem = GC.GetTotalMemory(true);
+			System.Diagnostics.Debug.WriteLine($"Mem {mem}");
 		}
 		public virtual void TouchStart(Point p)
 		{
