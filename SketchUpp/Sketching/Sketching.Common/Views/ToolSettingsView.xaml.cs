@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Sketching.Common.Interfaces;
 using Xamarin.Forms;
@@ -20,6 +21,18 @@ namespace Sketching.Common.Views
 			CreateColorPalette(tool);
 			SetupColorGrid();
 			FillColorGrid();
+
+			// Xamarin.Forms bug still not fixed https://bugzilla.xamarin.com/show_bug.cgi?id=31970
+			// Andreas 2016-12-21
+			if (Device.OS == TargetPlatform.Windows)
+			{
+				var toolInitSize = tool.Geometry.Size;
+				Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
+				{
+					sizeSlider.Value = toolInitSize;
+					return false;
+				});
+			}
 		}
 
 		private void CreateColorPalette(ITool tool)

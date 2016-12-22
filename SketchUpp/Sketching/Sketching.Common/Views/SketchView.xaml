@@ -5,7 +5,7 @@
 	<ContentView.Content>
 		<Grid>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="58"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 			<ScrollView Orientation="Horizontal" Grid.Row="0">

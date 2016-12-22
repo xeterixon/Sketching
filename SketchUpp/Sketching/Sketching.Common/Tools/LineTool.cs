@@ -14,8 +14,8 @@ namespace Sketching.Common.Tools
 		private void Snap(ref Point p)
 		{
 			if (GridSize < 0) return;
-			var x = (int)((p.X + GridSize / 2) / GridSize) * GridSize;
-			var y = (int)((p.Y + GridSize / 2) / GridSize) * GridSize;
+			var x = (int)((p.X + GridSize / 2.0) / GridSize) * GridSize;
+			var y = (int)((p.Y + GridSize / 2.0) / GridSize) * GridSize;
 			p.X = x;
 			p.Y = y;
 
@@ -47,6 +47,5 @@ namespace Sketching.Common.Tools
 				Geometry.Points[1] = p;
 			}
 		}
-
 	}
 }

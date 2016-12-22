@@ -22,18 +22,26 @@ namespace Sketching.Common.Views
 
 		private void Entry_OnCompleted(object sender, EventArgs e)
 		{
+			if (string.IsNullOrEmpty(Text))
+				return;
+
 			TextEntryCompleted?.Invoke(this, Text);
 
 			Navigation.PopAsync();
 		}
 
-		protected override void OnPropertyChanged(string propertyName = null)
+
+		protected override async void OnPropertyChanged(string propertyName = null)
 		{
+			base.OnPropertyChanged(propertyName);
+
 			if (propertyName == WidthProperty.PropertyName)
 			{
+				if (Device.OS == TargetPlatform.Windows)
+					await Task.Delay(TimeSpan.FromMilliseconds(200));
+
 				textInput.Focus();
 			}
-			base.OnPropertyChanged(propertyName);
 		}
 	}
 }

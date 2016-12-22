@@ -10,3 +10,16 @@ SketchUpp/Sketching/*/bin/*
 SketchUpp/SketchUpp.userprefs
 SketchUpp/.vs/*
 *.csproj.user
+/Sketching.UWP/bin
+/Sketching.UWP/obj
+/Sketching.UWP/project.lock.json
+/SketchUpp/SketchUpp.UWP/bin/x86/Debug
+/SketchUpp/SketchUpp.UWP/obj/x86/Debug
+/SketchUpp/SketchUpp.UWP/project.lock.json
+/SketchUpp/Sketching/Sketching.UWP/project.lock.json
+/SketchUpp/UWP/bin/x86/Debug
+/SketchUpp/UWP/obj/x86/Debug
+/SketchUpp/UWP/project.lock.json
+/SketchUpp/UWP/SketchUpp.UWP_TemporaryKey.pfx
+/SketchUpp/UWP/bin/ARM/Debug
+/SketchUpp/UWP/obj/ARM/Debug
