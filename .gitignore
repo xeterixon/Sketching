@@ -21,3 +21,5 @@ SketchUpp/.vs/*
 /SketchUpp/UWP/obj/x86/Debug
 /SketchUpp/UWP/project.lock.json
 /SketchUpp/UWP/SketchUpp.UWP_TemporaryKey.pfx
+/SketchUpp/UWP/bin/ARM/Debug
+/SketchUpp/UWP/obj/ARM/Debug

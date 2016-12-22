@@ -2,7 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Sketching.Common.Views.SketchToolbarItem">
 	<ContentView.Content>
 		<StackLayout Orientation="Vertical">
-			<Image x:Name="toolImage" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill"/>
+			<Image x:Name="toolImage" HeightRequest="50" HorizontalOptions="FillAndExpand" Aspect="AspectFit"/>
 			<ContentView  x:Name="toolLine" HeightRequest="3" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" />
 		</StackLayout>
 	</ContentView.Content>

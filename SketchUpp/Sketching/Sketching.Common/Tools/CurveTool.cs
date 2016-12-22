@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Sketching.Common.Geometries;
 using Xamarin.Forms;
 
@@ -16,7 +17,16 @@ namespace Sketching.Common.Tools
 				MaxSize = maxSize,
 				Size = size
 			};
-			Geometry.Color = Geometry.Color.MultiplyAlpha(alpha);
+
+			if (customColors != null && customColors.Any())
+			{
+				Geometry.Color = customColors.First().MultiplyAlpha(alpha);
+			}
+			else
+			{
+				Geometry.Color = Geometry.Color.MultiplyAlpha(alpha);
+			}
+
 			CustomColors = customColors;
 		}
 

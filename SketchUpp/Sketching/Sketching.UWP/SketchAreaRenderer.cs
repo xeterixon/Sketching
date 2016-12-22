@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Sketching.Common.Interfaces;
@@ -53,8 +53,12 @@ namespace Sketching.UWP
 
 		private void ViewOnPointerMoved(object sender, PointerRoutedEventArgs pointerRoutedEventArgs)
 		{
+			if (!pointerRoutedEventArgs.Pointer.IsInContact)
+				return;
+
 			var point = GetPoint((UIElement)sender, pointerRoutedEventArgs);
 			Element.TouchMove(point);
+
 			Control.Invalidate();
 		}
 
@@ -68,7 +72,8 @@ namespace Sketching.UWP
 		private Point GetPoint(UIElement uiElement, PointerRoutedEventArgs pointerRoutedEventArgs)
 		{
 			var uwpPoint = pointerRoutedEventArgs.GetCurrentPoint(uiElement).Position;
-			return new Point(uwpPoint.X, uwpPoint.Y);
+			var scale = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+			return new Point(uwpPoint.X * scale, uwpPoint.Y * scale);
 		}
 	}
 }
