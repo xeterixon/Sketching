@@ -1,0 +1,42 @@
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Cab.Mobile.Sketching</id>
+    <version>1.0.0</version>
+    <title>Sketching for Xamarin Forms</title>
+    <authors>TorbjornEriksson</authors>
+    <owners>CAB Group AB</owners>
+    <copyright>CAB Group AB</copyright>
+    <licenseUrl>https://github.com/xeterixon/Sketching/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/xeterixon/Sketching</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+    	Sketching view and tools for Xamarin Forms.
+    	Rendering is done using SkiaSharp
+    </description>
+    <tags>xamarin Xamarin.Forms skiasharp sketch draw</tags>
+    <iconUrl>https://github.com/xeterixon/Sketching/blob/master/cab_logo.png</iconUrl>
+    <releaseNotes>
+      [1.0.0] - Initial release
+    </releaseNotes>
+    <dependencies>
+		<dependency id="Xamarin.Forms" version="2.3.3.175" />
+		<dependency id="SkiaSharp.Views.Forms" version="1.55.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <!-- PCL / net  -->
+    <file src="..\Sketching.Common\bin\Release\Sketching.Common.dll" target="lib\portable-net45+win8+wpa81+wp8" />
+
+    <!-- Android -->
+    <file src="..\Sketching.Droid\bin\Release\Sketching.Droid.dll" target="lib\MonoAndroid10" />
+    <file src="..\Sketching.Common\bin\Release\Sketching.Common.dll" target="lib\MonoAndroid10" />
+    <!-- iOS -->
+    <file src="..\Sketching.iOS\bin\Release\Sketching.iOS.dll" target="lib\Xamarin.iOS10" />
+    <file src="..\Sketching.Common\bin\Release\Sketching.Common.dll" target="lib\Xamarin.iOS10" />
+    <!-- UWP -->
+    <!--
+    <file src="..\Sketching.UWP\bin\Release\Sketching.UWP.dll" target="lib\UAP10" />
+    <file src="..\Sketching.Common\bin\Release\Sketching.Common.dll" target="lib\UAP10" />
+    -->
+  </files>
+</package>
