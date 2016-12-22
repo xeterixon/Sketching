@@ -28,16 +28,17 @@ namespace Sketching.Common.Render
 		{
 			LineWidth = 1;
 		}
-		public void Setup(SKCanvas canvas) 
+		public void Setup(SKCanvas canvas, double scale) 
 		{
 			if (!Enabled) return;
 			strokes.Clear();
 			// try to get roughly 15 vertical lines in portrait, rounding to the nearest 10 pixel
-			if (Config.GridSize < 0) {
+//			if (Config.GridSize < 0) 
+			{
 				var theLength = Math.Min(canvas.ClipBounds.Width, canvas.ClipBounds.Height);
 				Config.GridSize = ((((int)theLength / 15) + 5) / 10) * 10;
 			}
-			var baseStroke = new Stroke { Size = LineWidth, Color = LineColor };
+			var baseStroke = new Stroke { Size = LineWidth * scale, Color = LineColor };
 			int counter = 0;
 			do {
 				var stroke = new Stroke(baseStroke);
@@ -72,13 +73,13 @@ namespace Sketching.Common.Render
 				GeometryRenderer.Render(c, stroke);
 			}
 		}
-		public void Render(SKCanvas canvas) 
+		public void Render(SKCanvas canvas, double scale) 
 		{
 			if (!Enabled) return;
 			
 			if (_lastCanvasWidth != (int)canvas.ClipBounds.Width) 
 			{
-				Setup(canvas);
+				Setup(canvas, scale);
 				_lastCanvasWidth = (int)canvas.ClipBounds.Width;
 			}
 			if (_gridPicture != null) 

@@ -10,13 +10,13 @@ namespace Sketching.Common.Extensions
 		{
 			return new SkiaSharp.SKColor((byte)(self.R*255),(byte) (self.G* 255),(byte) (self.B* 255), (byte)(self.A* 255));
 		}
+		public static SkiaSharp.SKPoint ToSkiaPoint(this Point self, double scale) 
+		{
+			return new SkiaSharp.SKPoint((float)(self.X * scale),(float)( self.Y * scale));
+		}
 		public static SkiaSharp.SKPoint ToSkiaPoint(this Point self) 
 		{
 			return new SkiaSharp.SKPoint((float)self.X, (float)self.Y);
-		}
-		public static SkiaSharp.SKPoint Convert(Point p) 
-		{
-			return p.ToSkiaPoint();
 		}
 	}
 }

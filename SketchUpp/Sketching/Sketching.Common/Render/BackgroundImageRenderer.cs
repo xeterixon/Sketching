@@ -20,7 +20,7 @@ namespace Sketching.Common.Renderer
 				_image = value;
 			}
 		}
-		public void Setup(SKCanvas canvas) { }
+		public void Setup(SKCanvas canvas, double scale) { }
 		private SKImage ResizeImage(SKRect canvasSize, byte[] data)
 		{
 			var bm = ResizeBitmap(canvasSize, data);
@@ -29,6 +29,7 @@ namespace Sketching.Common.Renderer
 		private SKBitmap ResizeBitmap(SKRect canvasSize, byte[] data)
 		{
 			using (var orgBitmap = SKBitmap.Decode(data)) {
+				Image.Width = orgBitmap.Width;
 				var scale = Math.Min(canvasSize.Width / (double)orgBitmap.Width, canvasSize.Height / (double)orgBitmap.Height);
 				var bm = new SKBitmap((int)(orgBitmap.Width * scale), (int)(orgBitmap.Height * scale));
 				var canvas = new SKCanvas(bm);
@@ -58,7 +59,7 @@ namespace Sketching.Common.Renderer
 			}
 			canvas.DrawBitmap(_scaledBitmap, 0, 0);
 		}
-		public void Render(SKCanvas canvas) 
+		public void Render(SKCanvas canvas, double scale) 
 		{
 			// Rendering a bitmap is a tad faster than rendering a image. Keeping the code, though
 			RenderBitmap(canvas);

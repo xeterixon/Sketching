@@ -79,7 +79,7 @@ namespace SketchUpp
 		}
 		private void SaveImage() 
 		{
-			var data = _sketchView.SketchArea.ImageData();
+			var data = _sketchView.SketchArea.LargeImageData();
 			Navigation.PushAsync(new SnapShotPage(data));
 		}
 	}

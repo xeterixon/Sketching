@@ -21,6 +21,7 @@ namespace Sketching.Common.Views
 			get { return (Color)GetValue(CanvasBackgroundColorProperty); }
 			set { SetValue(CanvasBackgroundColorProperty, value); }
 		}
+		private Size LastCanvasSize = new Size();
 		private SKImage _snapShot;
 		public SKImage SnapShot {
 			get { return _snapShot; }
@@ -49,22 +50,40 @@ namespace Sketching.Common.Views
 		{
 			CallbackToNative?.Invoke(CallbackType.Repaint);
 		}
+		public byte[] LargeImageData() 
+		{
+			var image = RenderToFullResolution();
+			return image.Encode(SKImageEncodeFormat.Jpeg, 100).ToArray();
+		}
 		public byte[] ImageData()
 		{
 			return _snapShot?.Encode(SKImageEncodeFormat.Jpeg,100)?.ToArray();
 		}
+		public SKImage RenderToFullResolution() 
+		{
+			var scale = 1.0;
+			// get the background image, if any, to scale things
+			var bgWidth = BackgroundImage?.Width;
+			if (bgWidth != null) 
+			{
+				scale = bgWidth.Value / LastCanvasSize.Width;
+			}
+			using (var surface = SKSurface.Create((int)(LastCanvasSize.Width * scale), (int)(LastCanvasSize.Height * scale), SKImageInfo.PlatformColorType, SKAlphaType.Premul)) 
+			{
+				Draw(surface, scale);
+				return surface.Snapshot();
+			}
+		}
 		public Action<CallbackType> CallbackToNative { get; set; }
-
-		public virtual void Draw(SKSurface surface, SKImageInfo info)
+		private void Draw(SKSurface surface , double scale) 
 		{
 			var canvas = surface.Canvas;
 			surface.Canvas.Clear(CanvasBackgroundColor.ToSkiaColor());
+			_gridRenderer.Render(canvas, scale);
 			if (ToolCollection == null) return;
-			_backgroundImageRenderer.Render(canvas);
-			_gridRenderer.Render(canvas);
-			foreach (var geom in ToolCollection.Geometries) 
-			{
-				GeometryRenderer.Render(canvas, geom);
+			_backgroundImageRenderer.Render(canvas, scale);
+			foreach (var geom in ToolCollection.Geometries) {
+				GeometryRenderer.Render(canvas, geom, scale);
 			}
 			//TODO Try to do this on demand, rather than every draw...
 			// Snapshotting without encoding is rather fast though and does not impact performance that much
@@ -73,7 +92,13 @@ namespace Sketching.Common.Views
 			//TODO Look into this
 			// Not really needed, but keeps the memory slightly lower and does not impact performance that much
 			var mem = GC.GetTotalMemory(true);
-			System.Diagnostics.Debug.WriteLine($"Mem {mem}");
+			System.Diagnostics.Debug.WriteLine($"Mem {mem}");			
+		}
+		public virtual void Draw(SKSurface surface, SKImageInfo info)
+		{
+			LastCanvasSize.Width = surface.Canvas.ClipDeviceBounds.Width;
+			LastCanvasSize.Height = surface.Canvas.ClipBounds.Height;
+			Draw(surface, 1.0);
 		}
 		public virtual void TouchStart(Point p)
 		{

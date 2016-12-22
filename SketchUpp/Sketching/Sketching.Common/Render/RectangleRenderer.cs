@@ -2,6 +2,7 @@
 using Sketching.Common.Extensions;
 using Sketching.Common.Interfaces;
 using SkiaSharp;
+using Xamarin.Forms;
 
 namespace Sketching.Common.Render
 {
@@ -13,15 +14,15 @@ namespace Sketching.Common.Render
 			}
 		}
 
-		public void Render(SKCanvas canvas, IGeometryVisual gemoetry)
+		public void Render(SKCanvas canvas, IGeometryVisual gemoetry, double scale )
 		{
 			var rect = gemoetry as IRectangle;
 			using (var paint = new SKPaint()) {
 				paint.Color = rect.Color.ToSkiaColor();
 				paint.IsAntialias = true;
 				paint.IsStroke = true;
-				paint.StrokeWidth = (float)rect.Size;
-				canvas.DrawRect(new SKRect((float)rect.Start.X, (float)rect.Start.Y, (float)rect.End.X, (float)rect.End.Y), paint);
+				paint.StrokeWidth = (float)(rect.Size*scale);
+				canvas.DrawRect(Helper.Converter.ToSKRect(rect.Start, rect.End,scale), paint);
 			}
 		}
 	}

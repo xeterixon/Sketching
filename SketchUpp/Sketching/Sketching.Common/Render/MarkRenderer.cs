@@ -13,16 +13,16 @@ namespace Sketching.Common.Render
 			}
 		}
 
-		public void Render(SKCanvas canvas, IGeometryVisual gemoetry)
+		public void Render(SKCanvas canvas, IGeometryVisual gemoetry, double scale)
 		{
 			var mark = gemoetry as IMark;
 			using (var paint = new SKPaint()) {
 				paint.Color = mark.Color.ToSkiaColor();
 				paint.IsAntialias = true;
 				paint.IsStroke = false;
-				paint.StrokeWidth = (float)mark.Size;
+				paint.StrokeWidth = (float)(mark.Size * scale);
 				paint.StrokeCap = SKStrokeCap.Round;
-				canvas.DrawPoint((float)mark.Point.X, (float)mark.Point.Y, paint);
+				canvas.DrawPoint((float)(mark.Point.X*scale), (float)(mark.Point.Y*scale), paint);
 
 			}
 			

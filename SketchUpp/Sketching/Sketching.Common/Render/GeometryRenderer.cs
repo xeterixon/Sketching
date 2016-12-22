@@ -38,11 +38,11 @@ namespace Sketching.Common.Render
 				_renderers.Remove(r);
 			}
 		}
-		public static void Render(SKCanvas canvas, IGeometryVisual geometry)
+		public static void Render(SKCanvas canvas, IGeometryVisual geometry, double scale=1.0)
 		{
 			if (!geometry.IsValid) return;
 			var renderer = _renderers.FirstOrDefault((arg) => arg.GeometryType.GetTypeInfo().IsAssignableFrom( geometry.GetType().GetTypeInfo()));
-			if (renderer != null) renderer.Render(canvas, geometry);
+			if (renderer != null) renderer.Render(canvas, geometry, scale);
 
 		}
 

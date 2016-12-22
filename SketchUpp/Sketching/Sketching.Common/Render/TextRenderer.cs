@@ -13,15 +13,15 @@ namespace Sketching.Common.Render
 			}
 		}
 
-		public void Render(SKCanvas canvas, IGeometryVisual gemoetry)
+		public void Render(SKCanvas canvas, IGeometryVisual gemoetry, double scale)
 		{
 			var text = gemoetry as IText;
 			using (var paint = new SKPaint()) {
 				paint.Color = text.Color.ToSkiaColor();
 				paint.IsAntialias = true;
 				paint.IsStroke = false;
-				paint.TextSize = (float)text.Size;
-				canvas.DrawText(text.Value, (float)text.Point.X, (float)text.Point.Y, paint);
+				paint.TextSize = (float)(text.Size *scale);
+				canvas.DrawText(text.Value, (float)(text.Point.X*scale), (float)(text.Point.Y*scale), paint);
 			}
 
 		}

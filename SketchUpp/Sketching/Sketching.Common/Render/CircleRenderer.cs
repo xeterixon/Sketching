@@ -13,15 +13,15 @@ namespace Sketching.Common.Render
 			}
 		}
 
-		public void Render(SKCanvas canvas, IGeometryVisual gemoetry)
+		public void Render(SKCanvas canvas, IGeometryVisual gemoetry, double scale )
 		{
 			var circle = gemoetry as ICircle;
 			using (var paint = new SKPaint()) {
 				paint.Color = circle.Color.ToSkiaColor();
 				paint.IsAntialias = true;
 				paint.IsStroke = true;
-				paint.StrokeWidth = (float)circle.Size;
-				canvas.DrawCircle((float)circle.Start.X, (float)circle.Start.Y, (float)circle.Radius, paint);
+				paint.StrokeWidth = (float) (circle.Size * scale);
+				canvas.DrawCircle((float)(circle.Start.X*scale), (float)(circle.Start.Y *scale), (float)(circle.Radius*scale), paint);
 			}
 			
 		}
