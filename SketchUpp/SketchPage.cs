@@ -29,6 +29,7 @@ namespace SketchUpp
 				VerticalOptions		= LayoutOptions.FillAndExpand,
 				HorizontalOptions	= LayoutOptions.FillAndExpand,
 			};
+			_sketchView.SketchArea.CanDrawOutsideImageBounds = false;
 
 			// How to remove tools
 			_sketchView.RemoveToolbarItem(3); // Circle

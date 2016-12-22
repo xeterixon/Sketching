@@ -6,10 +6,14 @@ namespace Sketching.Common.Renderer
 {
 	public class BackgroundImageRenderer : IRenderer
 	{
+		//NOTE This might be kept in memory a bit to long...
 		private SKBitmap _scaledBitmap;
 		private SKImage _scaledImage;
 		private IImage _image;
 		private int _lastClipWidth = -1;
+		//NOTE The "ImageDisplay*" properties are used for clipping the drawing.... Doesn't work well, but well enough
+		public int ImageDisplayWidth = int.MaxValue;
+		public int ImageDisplayHeight =int.MaxValue;
 		public IImage Image {
 			get {
 				return _image;
@@ -24,14 +28,18 @@ namespace Sketching.Common.Renderer
 		private SKImage ResizeImage(SKRect canvasSize, byte[] data)
 		{
 			var bm = ResizeBitmap(canvasSize, data);
+			//TODO Does this leak?
 			return SKImage.FromBitmap(bm);
 		}
 		private SKBitmap ResizeBitmap(SKRect canvasSize, byte[] data)
 		{
 			using (var orgBitmap = SKBitmap.Decode(data)) {
-				Image.Width = orgBitmap.Width;
+				Image.Width  = orgBitmap.Width;
+				Image.Height = orgBitmap.Height;
 				var scale = Math.Min(canvasSize.Width / (double)orgBitmap.Width, canvasSize.Height / (double)orgBitmap.Height);
 				var bm = new SKBitmap((int)(orgBitmap.Width * scale), (int)(orgBitmap.Height * scale));
+				ImageDisplayWidth  = bm.Width ;
+				ImageDisplayHeight = bm.Height;
 				var canvas = new SKCanvas(bm);
 				canvas.DrawBitmap(orgBitmap, new SKRect(0, 0, bm.Width, bm.Height));
 				return bm;
