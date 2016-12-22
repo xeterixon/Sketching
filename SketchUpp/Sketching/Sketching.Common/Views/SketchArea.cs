@@ -21,6 +21,13 @@ namespace Sketching.Common.Views
 			get { return (Color)GetValue(CanvasBackgroundColorProperty); }
 			set { SetValue(CanvasBackgroundColorProperty, value); }
 		}
+		public static readonly BindableProperty CanDrawOutsideImageBoundsProperty = BindableProperty.Create(nameof(CanDrawOutsideImageBounds), typeof(bool), typeof(SketchArea), true);
+		public bool CanDrawOutsideImageBounds {
+			get { return (bool)GetValue(CanDrawOutsideImageBoundsProperty); }
+			set { SetValue(CanDrawOutsideImageBoundsProperty, value); }
+		}
+
+		private bool RestictArea => CanDrawOutsideImageBounds == false && BackgroundImage != null;
 		private Size LastCanvasSize = new Size();
 		private SKImage _snapShot;
 		public SKImage SnapShot {
@@ -52,23 +59,32 @@ namespace Sketching.Common.Views
 		}
 		public byte[] LargeImageData() 
 		{
-			var image = RenderToFullResolution();
+			var image = RenderToOriginalResolutionAndClipToImage();
 			return image.Encode(SKImageEncodeFormat.Jpeg, 100).ToArray();
 		}
 		public byte[] ImageData()
 		{
 			return _snapShot?.Encode(SKImageEncodeFormat.Jpeg,100)?.ToArray();
 		}
-		public SKImage RenderToFullResolution() 
+		public SKImage RenderToOriginalResolutionAndClipToImage() 
 		{
 			var scale = 1.0;
 			// get the background image, if any, to scale things
 			var bgWidth = BackgroundImage?.Width;
+			var w = LastCanvasSize.Width;
+			var h = LastCanvasSize.Height;
 			if (bgWidth != null) 
 			{
 				scale = bgWidth.Value / LastCanvasSize.Width;
+				//Clip to image. 
+				if (!CanDrawOutsideImageBounds) 
+				{
+					w = BackgroundImage.Width / scale;
+					h = BackgroundImage.Height / scale;
+				}
+
 			}
-			using (var surface = SKSurface.Create((int)(LastCanvasSize.Width * scale), (int)(LastCanvasSize.Height * scale), SKImageInfo.PlatformColorType, SKAlphaType.Premul)) 
+			using (var surface = SKSurface.Create((int)(w * scale), (int)(h * scale), SKImageInfo.PlatformColorType, SKAlphaType.Premul)) 
 			{
 				Draw(surface, scale);
 				return surface.Snapshot();
@@ -102,6 +118,7 @@ namespace Sketching.Common.Views
 		}
 		public virtual void TouchStart(Point p)
 		{
+			if (!IsTouchPointValid(p)) return;
 			foreach (var item in Delegates) {
 				item.TouchStart(p);
 			}
@@ -114,10 +131,20 @@ namespace Sketching.Common.Views
 		}
 		public virtual void TouchMove(Point p)
 		{
-
+			if (!IsTouchPointValid(p)) {
+				TouchEnd(p);
+				return;
+			}
 			foreach (var item in Delegates) {
 				item.TouchMove(p);
 			}
+		}
+		private bool IsTouchPointValid(Point p) 
+		{
+			if (!RestictArea) return true;
+			if (p.X > _backgroundImageRenderer.ImageDisplayWidth) return false;
+			if (p.Y > _backgroundImageRenderer.ImageDisplayHeight) return false;
+			return true;
 		}
 	}
 }

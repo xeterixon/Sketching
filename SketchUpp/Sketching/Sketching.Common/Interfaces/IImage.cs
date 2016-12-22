@@ -6,6 +6,7 @@ namespace Sketching.Common.Interfaces
 	{
 		byte[] Data { get; set; }
 		double Width { get; set; }
+		double Height { get; set; }
 	}
 
 	//TODO Move/Remove this...
@@ -13,5 +14,6 @@ namespace Sketching.Common.Interfaces
 	{
 		public byte[] Data { get; set;}
 		public double Width { get; set; }
+		public double Height { get; set; }
 	}
 }
