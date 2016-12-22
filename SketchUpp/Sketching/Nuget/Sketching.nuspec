@@ -30,13 +30,13 @@
     <!-- Android -->
     <file src="..\Sketching.Droid\bin\Release\Sketching.Droid.dll" target="lib\MonoAndroid10" />
     <file src="..\Sketching.Common\bin\Release\Sketching.Common.dll" target="lib\MonoAndroid10" />
+
     <!-- iOS -->
     <file src="..\Sketching.iOS\bin\Release\Sketching.iOS.dll" target="lib\Xamarin.iOS10" />
     <file src="..\Sketching.Common\bin\Release\Sketching.Common.dll" target="lib\Xamarin.iOS10" />
+
     <!-- UWP -->
-    <!--
     <file src="..\Sketching.UWP\bin\Release\Sketching.UWP.dll" target="lib\UAP10" />
     <file src="..\Sketching.Common\bin\Release\Sketching.Common.dll" target="lib\UAP10" />
-    -->
   </files>
 </package>
