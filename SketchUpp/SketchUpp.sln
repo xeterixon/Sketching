@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{3180750A-B
 	ProjectSection(SolutionItems) = preProject
 		..\LICENSE = ..\LICENSE
 		..\README.md = ..\README.md
+		Sketching\Nuget\Sketching.nuspec = Sketching\Nuget\Sketching.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sketching.UWP", "Sketching\Sketching.UWP\Sketching.UWP.csproj", "{EEFCE846-7441-4C17-B312-515DA930CD65}"
