@@ -81,6 +81,7 @@
     <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Render\BackgroundImageRenderer.cs" />
     <Compile Include="Helper\Converter.cs" />
+    <Compile Include="Pages\FixedRotationPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp">
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helper\" />
+    <Folder Include="Pages\" />
   </ItemGroup>
   <Import Project="..\Sketching.Shared\Sketching.Shared.projitems" Label="Shared" Condition="Exists('..\Sketching.Shared\Sketching.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

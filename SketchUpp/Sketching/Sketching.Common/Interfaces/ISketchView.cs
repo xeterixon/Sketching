@@ -9,6 +9,6 @@ namespace Sketching.Common.Interfaces
 	{
 		//TODO Rename? It's not that visible to the end user, though...
 		Action<CallbackType> CallbackToNative { get; set; }
-		byte[] ImageData();
+		IImage ImageData();
 	}
 }

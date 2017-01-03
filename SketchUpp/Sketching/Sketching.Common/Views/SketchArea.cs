@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sketching.Common.Extensions;
+using Sketching.Common.Helper;
 using Sketching.Common.Interfaces;
 using Sketching.Common.Render;
 using Sketching.Common.Renderer;
@@ -57,14 +58,26 @@ namespace Sketching.Common.Views
 		{
 			CallbackToNative?.Invoke(CallbackType.Repaint);
 		}
-		public byte[] LargeImageData() 
+		public IImage LargeImageData() 
 		{
 			var image = RenderToOriginalResolutionAndClipToImage();
-			return image.Encode(SKImageEncodeFormat.Jpeg, 100).ToArray();
+			return new BackgroundImage 
+			{
+				Data = image.Encode(SKImageEncodeFormat.Jpeg, 100).ToArray(),
+				Width = image.Width,
+				Height = image.Height
+			};
 		}
-		public byte[] ImageData()
+		public IImage ImageData()
 		{
-			return _snapShot?.Encode(SKImageEncodeFormat.Jpeg,100)?.ToArray();
+			var image = new BackgroundImage();
+			if (_snapShot != null)
+			{
+				image.Data = _snapShot.Encode(SKImageEncodeFormat.Jpeg, 100).ToArray();
+				image.Width = _snapShot.Width;
+				image.Height = _snapShot.Height;
+			}
+			return image;
 		}
 		public SKImage RenderToOriginalResolutionAndClipToImage() 
 		{
@@ -108,7 +121,7 @@ namespace Sketching.Common.Views
 			//TODO Look into this
 			// Not really needed, but keeps the memory slightly lower and does not impact performance that much
 			var mem = GC.GetTotalMemory(true);
-			System.Diagnostics.Debug.WriteLine($"Mem {mem}");			
+			System.Diagnostics.Debug.WriteLine($"Mem {mem}");
 		}
 		public virtual void Draw(SKSurface surface, SKImageInfo info)
 		{
