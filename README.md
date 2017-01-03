@@ -1,8 +1,9 @@
 # Sketching
 Sketching is a Xamarin.Form wrapper around SkiaSharp.
 
-There is a requirement to be able to create a simple floorplan in an app we are developing. 
-Since that's not the core function of our app we decieded to open source it.
+There is a requirement to be able to create a simple floorplan in an app we are developing.
+
+Since that's not the core function of our app we decided to open source it.
 Perhaps someone else has the need for that as well.
 
 The main "product" will be some kind of sketching view that can be added to a Xamarin.Forms app. 
