@@ -14,6 +14,7 @@ namespace SketchUpp
 			Title = "Image";
 			var i = new Image();
 			i.Source = ImageSource.FromStream(() => new MemoryStream(image.Data));
+			var size = Sketching.Common.Helper.Image.ImageSize(image.Data);
 			Content = i;
 			
 		}
