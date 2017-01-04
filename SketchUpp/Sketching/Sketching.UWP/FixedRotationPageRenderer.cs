@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Windows.Graphics.Display;
+﻿using Windows.Graphics.Display;
 using Windows.System.Profile;
 using Windows.UI.ViewManagement;
 using Sketching.Common.Pages;
@@ -38,18 +37,8 @@ namespace Sketching.UWP
 			DisplayInformation.AutoRotationPreferences = _prevOrientation;
 		}
 
-		protected override void OnDisconnectVisualChildren()
-		{
-			System.Diagnostics.Debug.WriteLine("Dis");
-			base.OnDisconnectVisualChildren();
-		}
-
 		private bool IsDesktop => UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse &&
 		                          AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop";
 
-		protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
-		{
-			base.OnElementPropertyChanged(sender, e);
-		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿namespace Sketching
+﻿ // ReSharper disable once CheckNamespace
+namespace Sketching
 {
 	public static class Platform
 	{

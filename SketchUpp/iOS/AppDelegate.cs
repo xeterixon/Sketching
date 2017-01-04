@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using Sketching.Common.Pages;
 using UIKit;
 using Xamarin.Forms;

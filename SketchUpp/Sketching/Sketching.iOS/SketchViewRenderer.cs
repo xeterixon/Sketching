@@ -98,24 +98,5 @@ namespace Sketching.iOS
 		{
 			Element.Draw(e.Surface,e.Info);
 		}
-
-		void HandleSwipe(UIPanGestureRecognizer obj)
-		{
-			var loc = obj.LocationInView(this);
-			var s = UIScreen.MainScreen.Scale;
-			loc.X *= s;
-			loc.Y *= s;
-			if (obj.State == UIGestureRecognizerState.Began) {
-				Element.TouchStart(loc.ToPoint());
-			}
-			if (obj.State == UIGestureRecognizerState.Ended || 
-			    obj.State == UIGestureRecognizerState.Cancelled) {
-				Element.TouchEnd(loc.ToPoint());
-			}
-			if (obj.State == UIGestureRecognizerState.Changed) {
-				Element.TouchMove(loc.ToPoint());
-			}
-			Control.SetNeedsDisplay();
-		}
 	}
 }
