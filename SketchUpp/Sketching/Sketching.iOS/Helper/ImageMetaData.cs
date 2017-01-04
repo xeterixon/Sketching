@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Foundation;
 using Sketching.Common.Interfaces;
 using UIKit;
@@ -8,7 +9,9 @@ namespace Sketching.iOS.Helper
 {
 	public class ImageMetaData : IImageMetaData
 	{
-		public Size ImageSize(byte[] imageData)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+		public async Task<Size> ImageSize(byte[] imageData)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 		{
 			try {
 				

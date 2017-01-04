@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Sketching.Common.Interfaces;
 using Xamarin.Forms;
 
@@ -8,9 +9,9 @@ namespace Sketching.Common.Helper
 	{
 		//This is set from platform-dependant code
 		public static IImageMetaData ImageMetaDataImplementation;
-		public static Size ImageSize(byte [] imageData) 
+		public static async Task<Size> ImageSize(byte [] imageData) 
 		{
-			return ImageMetaDataImplementation.ImageSize(imageData);
+			return await ImageMetaDataImplementation.ImageSize(imageData);
 		}
 	}
 }

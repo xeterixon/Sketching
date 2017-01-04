@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Sketching.Common.Interfaces
 {
 	public interface IImageMetaData
 	{
-		Size ImageSize(byte[] imageData);
+		Task<Size> ImageSize(byte[] imageData);
 	}
 }
