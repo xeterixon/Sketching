@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Sketching.UWP
+// ReSharper disable once CheckNamespace
+namespace Sketching
 {
 	public static class Platform
 	{
