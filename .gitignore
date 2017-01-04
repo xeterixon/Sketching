@@ -16,10 +16,11 @@ SketchUpp/.vs/*
 /SketchUpp/SketchUpp.UWP/bin/x86/Debug
 /SketchUpp/SketchUpp.UWP/obj/x86/Debug
 /SketchUpp/SketchUpp.UWP/project.lock.json
-/SketchUpp/Sketching/Sketching.UWP/project.lock.json
+project.lock.json
 /SketchUpp/UWP/bin/x86/Debug
 /SketchUpp/UWP/obj/x86/Debug
-/SketchUpp/UWP/project.lock.json
 /SketchUpp/UWP/SketchUpp.UWP_TemporaryKey.pfx
-/SketchUpp/UWP/bin/ARM/Debug
-/SketchUpp/UWP/obj/ARM/Debug
+/SketchUpp/UWP/bin
+SketchUpp/UWP/obj
+SketchUpp/SketchUpp.sln.DotSettings.user
+SketchUpp/SketchUpp.sln.DotSettings.user
