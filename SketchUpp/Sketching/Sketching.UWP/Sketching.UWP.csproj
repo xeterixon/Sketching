@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FixedRotationPageRenderer.cs" />
+    <Compile Include="Helper\ImageMetaData.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SketchAreaRenderer.cs" />

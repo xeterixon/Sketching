@@ -20,7 +20,7 @@ namespace SketchUpp
 		public SketchPage()
 		{
 			Title = "Sketching";
-			SaveCommand = new Command(SaveImage);
+			SaveCommand = new Command(async ()=> { await SaveImage(); });
 			_sketchView = new SketchView {
 				VerticalOptions = LayoutOptions.FillAndExpand,
 				HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -71,10 +71,12 @@ namespace SketchUpp
 			DecodeAndDrawMediaFile(img);
 
 		}
-		private void SaveImage()
+		private async Task SaveImage()
 		{
 			var data = _sketchView.SketchArea.LargeImageData();
-			Navigation.PushAsync(new SnapShotPage(data));
+			var page = new SnapShotPage();
+			await page.SetImage(data);
+			await Navigation.PushAsync(page);
 		}
 	}
 }

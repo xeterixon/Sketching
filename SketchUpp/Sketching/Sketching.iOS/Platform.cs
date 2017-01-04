@@ -1,11 +1,16 @@
-﻿ // ReSharper disable once CheckNamespace
+﻿
+using Sketching.iOS;
+using Sketching.iOS.Helper;
+
+// ReSharper disable once CheckNamespace
 namespace Sketching
 {
 	public static class Platform
 	{
 		public static void Init()
 		{
-			var ignore = new Sketching.iOS.SketchViewRenderer();
+			var ignore1 = new SketchViewRenderer();
+			Sketching.Common.Helper.Image.ImageMetaDataImplementation = new ImageMetaData();
 		}
 	}
 }

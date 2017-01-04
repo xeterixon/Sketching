@@ -96,6 +96,7 @@
     <Compile Include="Platform.cs" />
     <Compile Include="SketchViewRenderer.cs" />
     <Compile Include="FixedRotationPageRenderer.cs" />
+    <Compile Include="Helper\ImageMetaData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -110,7 +111,9 @@
       <Name>Sketching.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\Sketching.Shared\Sketching.Shared.projitems" Label="Shared" Condition="Exists('..\Sketching.Shared\Sketching.Shared.projitems')" />
+  <ItemGroup>
+    <Folder Include="Helper\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
