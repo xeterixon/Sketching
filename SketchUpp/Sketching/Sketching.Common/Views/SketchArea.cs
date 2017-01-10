@@ -98,6 +98,7 @@ namespace Sketching.Common.Views
 				//Clip to image. 
 				if (!CanDrawOutsideImageBounds)
 				{
+					scale = bgWidth.Value / _backgroundImageRenderer.ImageDisplayWidth;
 					w = BackgroundImage.Width / scale;
 					h = BackgroundImage.Height / scale;
 				}
