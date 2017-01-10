@@ -26,6 +26,7 @@ namespace Sketching.UWP
 				e.NewElement.CallbackToNative = CallbackToNative;
 
 				SetNativeControl(view);
+				Control.Invalidate();
 			}
 
 			base.OnElementChanged(e);
