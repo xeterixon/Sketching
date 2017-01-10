@@ -1,7 +1,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Cab.Mobile.Sketching</id>
-		<version>1.0.1</version>
+		<version>1.0.2</version>
 		<title>Sketching for Xamarin Forms</title>
 		<authors>TorbjornEriksson</authors>
 		<owners>CAB Group AB</owners>
@@ -18,6 +18,7 @@
 		<releaseNotes>
 			[1.0.0] - Initial release
 			[1.0.1] - Added image meta data helper
+			[1.0.2] - Fixed scaling issue
 		</releaseNotes>
 		<dependencies>
 		<dependency id="Xamarin.Forms" version="2.3.3.175" />
