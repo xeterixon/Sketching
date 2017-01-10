@@ -15,15 +15,17 @@ namespace Sketching.Common.Views
 		//TODO Is this a bit overly designed? We only got one delegate and thats the ToolCollection object....
 		public List<ITouchDelegate> Delegates { get; set; } = new List<ITouchDelegate>();
 		private IToolCollection _tools;
-		private GridRenderer _gridRenderer = new GridRenderer ();
+		private GridRenderer _gridRenderer = new GridRenderer();
 		private BackgroundImageRenderer _backgroundImageRenderer = new BackgroundImageRenderer();
 		public static readonly BindableProperty CanvasBackgroundColorProperty = BindableProperty.Create(nameof(CanvasBackgroundColor), typeof(Color), typeof(SketchArea), Color.FromHex("#F0F8FF"));
-		public Color CanvasBackgroundColor {
+		public Color CanvasBackgroundColor
+		{
 			get { return (Color)GetValue(CanvasBackgroundColorProperty); }
 			set { SetValue(CanvasBackgroundColorProperty, value); }
 		}
 		public static readonly BindableProperty CanDrawOutsideImageBoundsProperty = BindableProperty.Create(nameof(CanDrawOutsideImageBounds), typeof(bool), typeof(SketchArea), true);
-		public bool CanDrawOutsideImageBounds {
+		public bool CanDrawOutsideImageBounds
+		{
 			get { return (bool)GetValue(CanDrawOutsideImageBoundsProperty); }
 			set { SetValue(CanDrawOutsideImageBoundsProperty, value); }
 		}
@@ -31,37 +33,41 @@ namespace Sketching.Common.Views
 		private bool RestictArea => CanDrawOutsideImageBounds == false && BackgroundImage != null;
 		private Size LastCanvasSize = new Size();
 		private SKImage _snapShot;
-		public SKImage SnapShot {
+		public SKImage SnapShot
+		{
 			get { return _snapShot; }
-			private set 
+			private set
 			{
 				_snapShot?.Dispose();
 				_snapShot = value;
 			}
 		}
-		public IImage BackgroundImage {
-			get { return _backgroundImageRenderer.Image;}
-			set 
+		public IImage BackgroundImage
+		{
+			get { return _backgroundImageRenderer.Image; }
+			set
 			{
 				_backgroundImageRenderer.Image = value;
 				Redraw();
 			}
 		}
-		public IToolCollection ToolCollection {
+		public IToolCollection ToolCollection
+		{
 			get { return _tools; }
-			set {
+			set
+			{
 				_tools = value;
 				_tools.View = this;
 			}
 		}
-		public void Redraw() 
+		public void Redraw()
 		{
 			CallbackToNative?.Invoke(CallbackType.Repaint);
 		}
-		public IImage LargeImageData() 
+		public IImage LargeImageData()
 		{
 			var image = RenderToOriginalResolutionAndClipToImage();
-			return new BackgroundImage 
+			return new BackgroundImage
 			{
 				Data = image.Encode(SKImageEncodeFormat.Jpeg, 100).ToArray(),
 				Width = image.Width,
@@ -79,39 +85,40 @@ namespace Sketching.Common.Views
 			}
 			return image;
 		}
-		public SKImage RenderToOriginalResolutionAndClipToImage() 
+		public SKImage RenderToOriginalResolutionAndClipToImage()
 		{
 			var scale = 1.0;
 			// get the background image, if any, to scale things
 			var bgWidth = BackgroundImage?.Width;
 			var w = LastCanvasSize.Width;
 			var h = LastCanvasSize.Height;
-			if (bgWidth != null) 
+			if (bgWidth != null)
 			{
 				scale = bgWidth.Value / LastCanvasSize.Width;
 				//Clip to image. 
-				if (!CanDrawOutsideImageBounds) 
+				if (!CanDrawOutsideImageBounds)
 				{
 					w = BackgroundImage.Width / scale;
 					h = BackgroundImage.Height / scale;
 				}
 
 			}
-			using (var surface = SKSurface.Create((int)(w * scale), (int)(h * scale), SKImageInfo.PlatformColorType, SKAlphaType.Premul)) 
+			using (var surface = SKSurface.Create((int)(w * scale), (int)(h * scale), SKImageInfo.PlatformColorType, SKAlphaType.Premul))
 			{
 				Draw(surface, scale);
 				return surface.Snapshot();
 			}
 		}
 		public Action<CallbackType> CallbackToNative { get; set; }
-		private void Draw(SKSurface surface , double scale) 
+		private void Draw(SKSurface surface, double scale)
 		{
 			var canvas = surface.Canvas;
 			surface.Canvas.Clear(CanvasBackgroundColor.ToSkiaColor());
 			_gridRenderer.Render(canvas, scale);
 			if (ToolCollection == null) return;
 			_backgroundImageRenderer.Render(canvas, scale);
-			foreach (var geom in ToolCollection.Geometries) {
+			foreach (var geom in ToolCollection.Geometries)
+			{
 				GeometryRenderer.Render(canvas, geom, scale);
 			}
 			//TODO Try to do this on demand, rather than every draw...
@@ -132,27 +139,31 @@ namespace Sketching.Common.Views
 		public virtual void TouchStart(Point p)
 		{
 			if (!IsTouchPointValid(p)) return;
-			foreach (var item in Delegates) {
+			foreach (var item in Delegates)
+			{
 				item.TouchStart(p);
 			}
 		}
 		public virtual void TouchEnd(Point p)
 		{
-			foreach (var item in Delegates) {
+			foreach (var item in Delegates)
+			{
 				item.TouchEnd(p);
 			}
 		}
 		public virtual void TouchMove(Point p)
 		{
-			if (!IsTouchPointValid(p)) {
+			if (!IsTouchPointValid(p))
+			{
 				TouchEnd(p);
 				return;
 			}
-			foreach (var item in Delegates) {
+			foreach (var item in Delegates)
+			{
 				item.TouchMove(p);
 			}
 		}
-		private bool IsTouchPointValid(Point p) 
+		private bool IsTouchPointValid(Point p)
 		{
 			if (!RestictArea) return true;
 			if (p.X > _backgroundImageRenderer.ImageDisplayWidth) return false;

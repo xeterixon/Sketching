@@ -15,7 +15,9 @@ namespace Sketching.Common.Render
 
 			AddRenderer(new StrokeRenderer());
 			AddRenderer(new CircleRenderer());
+			AddRenderer(new OvalRenderer());
 			AddRenderer(new RectangleRenderer());
+			AddRenderer(new FilledRectangleRenderer());
 			AddRenderer(new TextRenderer());
 			AddRenderer(new MarkRenderer());
 		}
