@@ -79,7 +79,7 @@ namespace Sketching.Common.Views
 			}
 			return image;
 		}
-		private SKImage RenderToOriginalResolutionAndClipToImage() 
+		public SKImage RenderToOriginalResolutionAndClipToImage() 
 		{
 			var scale = 1.0;
 			// get the background image, if any, to scale things
@@ -88,11 +88,10 @@ namespace Sketching.Common.Views
 			var h = LastCanvasSize.Height;
 			if (bgWidth != null) 
 			{
-				scale = bgWidth.Value / LastCanvasSize.Width ;
+				scale = bgWidth.Value / LastCanvasSize.Width;
 				//Clip to image. 
-				if (!CanDrawOutsideImageBounds)
+				if (!CanDrawOutsideImageBounds) 
 				{
-					scale = bgWidth.Value / _backgroundImageRenderer.ImageDisplayWidth;
 					w = BackgroundImage.Width / scale;
 					h = BackgroundImage.Height / scale;
 				}
