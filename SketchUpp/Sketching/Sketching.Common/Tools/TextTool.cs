@@ -6,13 +6,32 @@ using Xamarin.Forms;
 
 namespace Sketching.Common.Tools
 {
-	public class TextTool : ITool<IText>
+	public class TextTool : ITextTool
 	{
-		private INavigation _navigation;
-		public string Text {
+		public string Name { get; set; }
+		public bool Active { get; set; }
+		public IText Geometry { get; set; } = new Text();
+		public bool CanUseFill { get; set; } = true;
+
+		public string Text
+		{
 			get { return Geometry.Value; }
 			set { Geometry.Value = value; }
 		}
+
+		IGeometryVisual ITool.Geometry
+		{
+			get
+			{
+				return Geometry;
+			}
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		private INavigation _navigation;
 		public TextTool(INavigation navigation)
 		{
 			_navigation = navigation;
@@ -20,23 +39,9 @@ namespace Sketching.Common.Tools
 			Init();
 		}
 
-		public bool Active { get; set; }
-
-		public IText Geometry { get; set; } = new Text();
-
-		public string Name { get; set; }
-
-		private void Init() 
+		private void Init()
 		{
 			Geometry = new Text(Geometry);
-		}
-		IGeometryVisual ITool.Geometry {
-			get {
-				return Geometry;
-			}
-			set {
-				throw new NotImplementedException();
-			}
 		}
 
 		public void TouchEnd(Point p)

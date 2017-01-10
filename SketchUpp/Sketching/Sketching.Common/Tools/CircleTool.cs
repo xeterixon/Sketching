@@ -10,17 +10,22 @@ namespace Sketching.Common.Tools
 		public string Name { get; set; }
 		public bool Active { get; set; }
 		public ICircle Geometry { get; set; } = new Circle();
-		IGeometryVisual ITool.Geometry {
-			get {
+		public bool CanUseFill { get; set; } = true;
+
+		IGeometryVisual ITool.Geometry
+		{
+			get
+			{
 				return Geometry;
 			}
 
-			set {
+			set
+			{
 				throw new NotImplementedException();
 			}
 		}
 
-		public CircleTool() : this("Circle", 8){}
+		public CircleTool() : this("Circle", 8) { }
 		public CircleTool(string name, double size)
 		{
 			Name = name;

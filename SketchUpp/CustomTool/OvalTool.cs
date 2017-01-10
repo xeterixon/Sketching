@@ -10,6 +10,7 @@ namespace SketchUpp.CustomTool
 		public bool Active { get; set; }
 
 		public IOval Geometry { get; set; } = new Oval { Size = 8, Color = Color.Maroon};
+		public bool CanUseFill { get; set; }
 
 		public string Name { get; set; } = "Oval";
 

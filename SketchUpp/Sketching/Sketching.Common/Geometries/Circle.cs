@@ -5,12 +5,13 @@ namespace Sketching.Common.Geometries
 {
 	public class Circle : ICircle
 	{
-		public Circle() : this(Color.Black, 8) { }
-		public Circle(IGeometryVisual src) : this(src.Color, src.Size) { }
+		public Circle() : this(Color.Black, 8, false) { }
+		public Circle(IGeometryVisual src) : this(src.Color, src.Size, src.IsFilled) { }
 
-		public Circle(Color color, double size)
+		public Circle(Color color, double size, bool isFilled)
 		{
 			Color = color;
+			IsFilled = isFilled;
 			Start = new Point(-1, -1);
 			End = new Point(-1, -1);
 			Size = size;
@@ -19,13 +20,15 @@ namespace Sketching.Common.Geometries
 		}
 
 		public Color Color { get; set; }
+		public bool IsFilled { get; set; }
 		public Point End { get; set; }
 		public bool IsValid { get { return Start.X > 0 && End.X > 0; } }
 		public double MinSize { get; set; }
 		public double MaxSize { get; set; }
 
-		public double Radius {
-			get 
+		public double Radius
+		{
+			get
 			{
 				if (!IsValid) return 0.0;
 				return Start.Distance(End);

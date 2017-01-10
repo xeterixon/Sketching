@@ -12,7 +12,7 @@ namespace Sketching.Common.Tools
 
 		public bool Active { get; set; }
 		public IGeometryVisual Geometry { get; set; } = new Geometries.FilledRectangle();
-
+		public bool CanUseFill { get; set; } = true;
 		public string Name { get; set; }
 		private IFilledRectangle FilledRectangle => (IFilledRectangle)Geometry;
 

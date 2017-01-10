@@ -7,6 +7,7 @@
 				<Slider x:Name="sizeSlider" HorizontalOptions="FillAndExpand" Maximum="{Binding Tool.Geometry.MaxSize}" Minimum="{Binding Tool.Geometry.MinSize}" Value="{Binding Tool.Geometry.Size}"/>
 				<Image x:Name="thickLineImage" VerticalOptions="FillAndExpand" Aspect="AspectFit" HorizontalOptions="End" WidthRequest="40"/>
 			</StackLayout>
+      <Switch IsVisible="{Binding Tool.CanUseFill}" IsToggled="{Binding Tool.Geometry.IsFilled}" />
 			<Grid x:Name="colorGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
 		</StackLayout>
 	</ContentView.Content>

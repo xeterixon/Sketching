@@ -14,19 +14,16 @@ namespace Sketching.Common.Geometries
 		public Oval(IGeometryVisual o) : base()
 		{
 			Color = o.Color;
+			IsFilled = o.IsFilled;
 			Size = o.Size;
 		}
 		public Color Color { get; set; }
-
+		public bool IsFilled { get; set; }
 		public Point End { get; set; }
-
 		public bool IsValid => Start.X > 0 && End.X > 0;
-
 		public double MinSize { get; set; } = 1;
 		public double MaxSize { get; set; } = 20;
-
 		public double Size { get; set; } = 1;
-
 		public Point Start { get; set; }
 	}
 }

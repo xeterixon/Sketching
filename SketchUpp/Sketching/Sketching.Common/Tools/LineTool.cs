@@ -9,6 +9,7 @@ namespace Sketching.Common.Tools
 		{
 			Name = "Line";
 			Geometry = new Geometries.Stroke();
+			CanUseFill = false;
 		}
 
 		private void Snap(ref Point p)
@@ -20,30 +21,37 @@ namespace Sketching.Common.Tools
 			p.Y = y;
 
 		}
+
 		public override void TouchStart(Point p)
 		{
 			base.TouchStart(p);
 			Snap(ref p);
 			AddPoint(p);
-			
+
 		}
+
 		public override void TouchMove(Point p)
 		{
 			base.TouchMove(p);
 			Snap(ref p);
 			AddPoint(p);
-			
+
 		}
+
 		public override void TouchEnd(Point p)
 		{
 			base.TouchEnd(p);
 			Init();
 		}
+
 		private void AddPoint(Point p)
 		{
-			if (Geometry.Points.Count < 2) {
+			if (Geometry.Points.Count < 2)
+			{
 				Geometry.Points.Add(p);
-			} else if (Geometry.Points.Count == 2) {
+			}
+			else if (Geometry.Points.Count == 2)
+			{
 				Geometry.Points[1] = p;
 			}
 		}

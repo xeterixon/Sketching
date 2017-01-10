@@ -5,15 +5,18 @@ namespace Sketching.Common.Geometries
 {
 	public class Rectangle : IRectangle
 	{
-		public Rectangle() : this(Color.Black, 8) { }
-		public Rectangle(IGeometryVisual src) : this(src.Color, src.Size){}
-		public Rectangle(Color color, double size) 
+		public Rectangle() : this(Color.Black, 8, false) { }
+		public Rectangle(IGeometryVisual src) : this(src.Color, src.Size, src.IsFilled) { }
+		public Rectangle(Color color, double size, bool isFilled)
 		{
 			Color = color;
+			IsFilled = isFilled;
 			Size = size;
 			MinSize = 1;
 			MaxSize = 20;
 		}
+
+		public bool IsFilled { get; set; }
 		public bool IsValid { get { return Start.X > 0 && End.X > 0; } }
 		public double MinSize { get; set; }
 		public double MaxSize { get; set; }

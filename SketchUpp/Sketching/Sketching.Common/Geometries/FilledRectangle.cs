@@ -6,16 +6,19 @@ namespace Sketching.Common.Geometries
 {
 	public class FilledRectangle : IFilledRectangle
 	{
-		public FilledRectangle() : this(Color.Black, 8) { }
-		public FilledRectangle(IGeometryVisual src) : this(src.Color, src.Size) { }
-		public FilledRectangle(Color color, double size)
+		public FilledRectangle() : this(Color.Black, 8, false) { }
+		public FilledRectangle(IGeometryVisual src) : this(src.Color, src.Size, src.IsFilled) { }
+		public FilledRectangle(Color color, double size, bool isFilled)
 		{
 			Color = color;
+			IsFilled = isFilled;
 			FillColor = color.ToFillColor();
 			Size = size;
 			MinSize = 1;
 			MaxSize = 20;
 		}
+
+		public bool IsFilled { get; set; }
 		public bool IsValid { get { return Start.X > 0 && End.X > 0; } }
 		public double MinSize { get; set; }
 		public double MaxSize { get; set; }

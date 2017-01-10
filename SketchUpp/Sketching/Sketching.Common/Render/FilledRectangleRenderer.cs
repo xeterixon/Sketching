@@ -12,9 +12,9 @@ namespace Sketching.Common.Render
 		public void Render(SKCanvas canvas, IGeometryVisual gemoetry, double scale)
 		{
 			var rect = gemoetry as IFilledRectangle;
+			if (rect == null || !rect.IsValid) return;
 			using (var paint = new SKPaint())
 			{
-				if (rect == null) return;
 				// Draw Rect
 				paint.Color = rect.Color.ToSkiaColor();
 				paint.IsAntialias = true;

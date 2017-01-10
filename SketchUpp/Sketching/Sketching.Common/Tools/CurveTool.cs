@@ -36,12 +36,14 @@ namespace Sketching.Common.Tools
 			AddPoint(p);
 
 		}
+
 		public override void TouchMove(Point p)
 		{
 			base.TouchMove(p);
 			AddPoint(p);
 
 		}
+
 		public override void TouchEnd(Point p)
 		{
 			base.TouchEnd(p);

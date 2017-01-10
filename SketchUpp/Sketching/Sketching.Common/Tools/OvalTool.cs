@@ -5,14 +5,12 @@ using Xamarin.Forms;
 
 namespace Sketching.Common.Tools
 {
-	public class OvalTool : ITool<IOval>
+	public class OvalTool : IOvalTool
 	{
-
-		public bool Active { get; set; }
-
-		public IOval Geometry { get; set; } = new Oval { Size = 8, Color = Color.Black };
-
 		public string Name { get; set; } = "Oval";
+		public bool Active { get; set; }
+		public IOval Geometry { get; set; } = new Oval { Size = 8, Color = Color.Black };
+		public bool CanUseFill { get; set; } = true;
 
 		IGeometryVisual ITool.Geometry
 		{
