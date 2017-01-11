@@ -13,6 +13,7 @@ namespace Sketching.Common.Views
 		public event EventHandler<string> TextEntryCompleted;
 		public string Text { get; set; }
 
+		private bool canPop = true; 
 		public TextInputView()
 		{
 			InitializeComponent();
@@ -22,6 +23,8 @@ namespace Sketching.Common.Views
 
 		private void Entry_OnCompleted(object sender, EventArgs e)
 		{
+			if (!canPop) return;
+			canPop = false;
 			if (string.IsNullOrEmpty(Text))
 				return;
 
