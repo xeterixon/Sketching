@@ -18,6 +18,7 @@ namespace SketchUpp.CustomTool
 			Size = o.Size;
 		}
 		public Color Color { get; set; }
+		public bool IsFilled { get; set; }
 
 		public Point End { get; set; }
 

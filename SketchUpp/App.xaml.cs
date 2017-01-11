@@ -9,7 +9,7 @@ namespace SketchUpp
 		public App()
 		{
 			InitializeComponent();
-			GeometryRenderer.AddRenderer(new OvalRenderer());
+			//GeometryRenderer.AddRenderer(new OvalRenderer());
 			var sketchPage = new SketchPage();
 			MainPage = new NavigationPage(sketchPage);
 		}

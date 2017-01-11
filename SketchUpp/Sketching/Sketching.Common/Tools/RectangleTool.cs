@@ -1,35 +1,48 @@
-﻿using Sketching.Common.Interfaces;
+﻿using System;
+using Sketching.Common.Interfaces;
 using Xamarin.Forms;
 
 namespace Sketching.Common.Tools
 {
-	public class RectangleTool : ITool
+	public class RectangleTool : IRectangleTool
 	{
+		public string Name { get; set; }
+		public bool Active { get; set; }
+		public IRectangle Geometry { get; set; } = new Geometries.Rectangle();
+		public bool CanUseFill { get; set; } = true;
+
+		IGeometryVisual ITool.Geometry
+		{
+			get
+			{
+				return Geometry;
+			}
+
+			set
+			{
+				throw new NotImplementedException();
+			}
+		}
+
 		public RectangleTool()
 		{
 			Name = "Rectangle";
 		}
 
-		public bool Active { get; set; }
-		public IGeometryVisual Geometry { get; set; } = new Geometries.Rectangle();
-
-		public string Name { get; set; } 
-		private IRectangle Rectangle => (IRectangle)Geometry;
-
 		public void TouchEnd(Point p)
 		{
-			Rectangle.End = p;
-			Geometry = new Geometries.Rectangle(Rectangle);
+			Geometry.End = p;
+			Geometry = new Geometries.Rectangle(Geometry);
 		}
 
 		public void TouchMove(Point p)
 		{
-			Rectangle.End = p;
+			Geometry.End = p;
 		}
 
 		public void TouchStart(Point p)
 		{
-			Rectangle.Start = p;
+			Geometry.Start = p;
 		}
 	}
 }
