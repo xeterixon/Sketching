@@ -21,11 +21,11 @@ namespace Sketching.Common.Render
 				paint.StrokeCap = SKStrokeCap.Round;
 				paint.StrokeWidth = (float)(stroke.Size * scale);
 				paint.IsAntialias = true;
-				paint.IsStroke = true;
 				paint.Color = stroke.Color.ToSkiaColor();
 				var points = stroke.Points.Select(arg => Helper.Converter.ToSKPoint(arg, scale)).ToArray();
 				canvas.DrawPoints(SKPointMode.Polygon, points, paint);
 				// Fill Stroke
+				//TODO: Fill the shape with FillColor. How?
 				//if (!stroke.IsFilled) return;
 				//paint.Color = stroke.Color.ToFillColor().ToSkiaColor();
 				//paint.IsStroke = false;

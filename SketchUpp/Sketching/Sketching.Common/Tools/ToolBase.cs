@@ -21,7 +21,7 @@ namespace Sketching.Common.Tools
 		public string Name { get; set; }
 
 		public IStroke Geometry { get; set; } = new Stroke(Color.Blue, 10, false);
-		public bool CanUseFill { get; set; } = true;
+		public bool CanUseFill { get; set; } = false;
 
 		IGeometryVisual ITool.Geometry
 		{
