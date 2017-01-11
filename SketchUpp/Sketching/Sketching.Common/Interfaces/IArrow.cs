@@ -2,8 +2,7 @@
 
 namespace Sketching.Common.Interfaces
 {
-	public interface IFilledRectangle : IGeometryVisual, ITwoPoint
+	public interface IArrow : IGeometryVisual, ITwoPoint
 	{
-
 	}
 }

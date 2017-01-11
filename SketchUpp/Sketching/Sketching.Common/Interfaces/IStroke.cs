@@ -7,5 +7,5 @@ namespace Sketching.Common.Interfaces
 	{
 		List<Point> Points { get; set; }
 	}
-	public interface ILine : IStroke { };
+	public interface ILine : IStroke { }
 }
