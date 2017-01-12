@@ -21,6 +21,7 @@ namespace Sketching.Common.Geometries
 		public Color Color { get; set; }
 		public bool IsFilled { get; set; }
 		public List<Point> Points { get; set; } = new List<Point>();
+		public bool HighLight { get; set; } = false;
 		public bool IsValid => Points.Count > 0;
 		public double MinSize { get; set; }
 		public double MaxSize { get; set; }
