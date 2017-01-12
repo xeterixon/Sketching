@@ -11,6 +11,7 @@ namespace Sketching.Common.Views
 	{
 		public Command<ITool> ActivateToolCommand { get; set; }
 		public ICommand UndoCommand { get; set; }
+		public ICommand UndoAllCommand { get; set; }
 
 		public static readonly BindableProperty ToolCollectionProperty = BindableProperty.Create(nameof(ToolCollection), typeof(IToolCollection), typeof(SketchView), null,
   propertyChanged: ToolCollectionPropertyChanged);
@@ -45,6 +46,7 @@ namespace Sketching.Common.Views
 			ToolCollection = new ToolCollection();
 			ActivateToolCommand = new Command<ITool>(ActivateTool);
 			UndoCommand = new Command(() => { ToolCollection.Undo(); });
+			UndoAllCommand = new Command(() => { ToolCollection.UndoAll(); });
 
 			AddDefaultToolbarItems();
 
@@ -66,6 +68,7 @@ namespace Sketching.Common.Views
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Point.png"), new PointTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Text.png"), new TextTool(Navigation), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Undo.png"), null, UndoCommand);
+			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Trash.png"), null, UndoAllCommand);
 		}
 
 		private void ActivateTool(ITool tool)
