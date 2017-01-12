@@ -39,6 +39,7 @@
     <Compile Include="Render\ArrowRenderer.cs" />
     <Compile Include="Render\OvalRenderer.cs" />
     <Compile Include="Tools\ArrowTool.cs" />
+    <Compile Include="Tools\HighlightTool.cs" />
     <Compile Include="Tools\LineTool.cs" />
     <Compile Include="Tools\OvalTool.cs" />
     <Compile Include="Tools\ToolBase.cs" />
