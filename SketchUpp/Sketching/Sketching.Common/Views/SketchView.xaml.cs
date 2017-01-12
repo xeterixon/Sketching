@@ -62,7 +62,7 @@ namespace Sketching.Common.Views
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Circle.png"), new CircleTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Oval.png"), new OvalTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Rectangle.png"), new RectangleTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.FilledRectangle.png"), new FilledRectangleTool(), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Arrow.png"), new ArrowTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Point.png"), new PointTool(), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Text.png"), new TextTool(Navigation), ActivateToolCommand);
 			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Undo.png"), null, UndoCommand);
