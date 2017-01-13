@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Sketching.Common.Geometries;
 using Sketching.Common.Helper;
 using Sketching.Common.Interfaces;
-using Sketching.Common.Views;
 using Xamarin.Forms;
 
 namespace Sketching.Common.Tools
@@ -68,7 +67,7 @@ namespace Sketching.Common.Tools
 			Geometry.Point = p;
 			if (string.IsNullOrEmpty(Text))
 			{
-				var textInputView = Helper.Factory.CreateTextInput(_navigation);
+				var textInputView = Factory.CreateTextInput(_navigation);
 				textInputView.Begin();
 				textInputView.TextEntered += (sender, text) =>
 				{
