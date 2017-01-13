@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sketching.Common.Geometries;
+using Sketching.Common.Helper;
 using Sketching.Common.Interfaces;
 using Sketching.Common.Views;
 using Xamarin.Forms;
@@ -32,22 +34,22 @@ namespace Sketching.Common.Tools
 		}
 
 		private INavigation _navigation;
-		public TextTool(INavigation navigation)
+		public TextTool(INavigation navigation) : this(navigation, ToolNames.TextTool, 20, 200, 75, null) { }
+
+		public TextTool(INavigation navigation, string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
 		{
 			_navigation = navigation;
-			Name = "Text";
-			Init();
-		}
-
-		private void Init()
-		{
-			Geometry = new Text(Geometry);
+			Name = name;
+			Geometry.MinSize = minSize;
+			Geometry.MaxSize = maxSize;
+			Geometry.Size = startSize;
+			CustomColors = customColors;
 		}
 
 		public void TouchEnd(Point p)
 		{
 			Geometry.Point = p;
-			Init();
+			Geometry = new Text(Geometry);
 		}
 
 		public void TouchMove(Point p)
@@ -71,5 +73,7 @@ namespace Sketching.Common.Tools
 				Geometry.Point = p;
 			}
 		}
+
+		public IEnumerable<Color> CustomColors { get; set; }
 	}
 }

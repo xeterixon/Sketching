@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security;
 using System.Windows.Input;
 using Sketching.Common.Interfaces;
@@ -73,8 +74,8 @@ namespace Sketching.Common.Views
 
 		private void ActivateTool(ITool tool)
 		{
-			if(SelectedTool?.Name == tool?.Name)
-			{ 
+			if (SelectedTool?.Name == tool?.Name)
+			{
 				OpenToolSettings(SelectedTool);
 				return;
 			}
@@ -95,13 +96,13 @@ namespace Sketching.Common.Views
 			{
 				var selectedItem = toolbarStack.Children.FirstOrDefault(n => (n as SketchToolbarItem)?.IsSelected == true);
 
-				return ((SketchToolbarItem) selectedItem)?.Tool;
+				return ((SketchToolbarItem)selectedItem)?.Tool;
 			}
 		}
 
 		private void OpenToolSettings(ITool tool)
 		{
-			Navigation.PushAsync(new ContentPage {Content = new ToolSettingsView(tool)});
+			Navigation.PushAsync(new ContentPage { Content = new ToolSettingsView(tool) });
 		}
 
 		public void AddToolbarItem(ImageSource imageSource, ITool tool, ICommand command)
@@ -127,15 +128,40 @@ namespace Sketching.Common.Views
 			}
 		}
 
+		public void AddAllToolbarItems()
+		{
+			RemoveAllToolbarItems();
+			AddDefaultToolbarItems();
+		}
+
 		public void RemoveAllToolbarItems()
 		{
 			while (toolbarStack.Children.Any())
 			{
-				RemoveToolbarItem(0);
+				RemoveToolbarItemByIndex(0);
 			}
 		}
 
-		public void RemoveToolbarItem(int index)
+		public void RemoveToolbarItemByName(string name)
+		{
+			var toolsToRemove = new List<SketchToolbarItem>();
+			foreach (var child in toolbarStack.Children)
+			{
+				var toolbarItem = child as SketchToolbarItem;
+				if (toolbarItem?.Tool == null) continue;
+				if (!toolbarItem.Tool.Name.Equals(name)) continue;
+				toolsToRemove.Add(toolbarItem);
+			}
+			foreach (var toolbarItem in toolsToRemove)
+			{
+				if (ToolCollection.Tools.Contains(toolbarItem.Tool))
+					ToolCollection.Tools.Remove(toolbarItem.Tool);
+				if (toolbarStack.Children.Contains(toolbarItem))
+					toolbarStack.Children.Remove(toolbarItem);
+			}
+		}
+
+		public void RemoveToolbarItemByIndex(int index)
 		{
 			var toolbarItem = (SketchToolbarItem)toolbarStack.Children[index];
 			if (toolbarItem == null) return;

@@ -1,15 +1,24 @@
-﻿using Xamarin.Forms;
+﻿using System.Collections.Generic;
+using Sketching.Common.Helper;
+using Xamarin.Forms;
 
 namespace Sketching.Common.Tools
 {
 	public class LineTool : StrokeToolBase
 	{
 		private int GridSize => Config.GridSize;
-		public LineTool()
+
+		public LineTool() : this(ToolNames.LineTool, 1, 20, 8, null) { }
+
+		public LineTool(string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
 		{
-			Name = "Line";
-			Geometry = new Geometries.Stroke();
 			CanUseFill = false;
+			Name = name;
+			Geometry.MinSize = minSize;
+			Geometry.MaxSize = maxSize;
+			Geometry.Size = startSize;
+			Geometry.HighLight = false;
+			CustomColors = customColors;
 		}
 
 		private void Snap(ref Point p)
@@ -41,7 +50,7 @@ namespace Sketching.Common.Tools
 		public override void TouchEnd(Point p)
 		{
 			base.TouchEnd(p);
-			Init();
+			CreateNewGeometry();
 		}
 
 		private void AddPoint(Point p)
