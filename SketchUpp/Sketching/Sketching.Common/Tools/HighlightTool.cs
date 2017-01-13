@@ -42,8 +42,7 @@ namespace Sketching.Common.Tools
 
 		protected override void CreateNewGeometry()
 		{
-			Geometry = new Stroke
-			{
+			Geometry = new Stroke {
 				MinSize = Geometry.MinSize,
 				MaxSize = Geometry.MaxSize,
 				Size = Geometry.Size,

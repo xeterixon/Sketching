@@ -9,6 +9,7 @@ using Sketching.Common.Interfaces;
 using Sketching.Common.Tools;
 using Sketching.Common.Views;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace SketchUpp
 {
@@ -81,7 +82,7 @@ namespace SketchUpp
 		{
 			var data = _sketchView.SketchArea.LargeImageData();
 			var page = new SnapShotPage();
-			await page.SetImage(data);
+			page.SetImage(data);
 			await Navigation.PushAsync(page);
 		}
 	}

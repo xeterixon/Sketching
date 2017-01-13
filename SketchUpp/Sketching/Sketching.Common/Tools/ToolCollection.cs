@@ -16,6 +16,7 @@ namespace Sketching.Common.Tools
 		List<IGeometryVisual> Geometries { get; set; }
 		ITool ActiveTool { get; }
 		void Undo();
+		void Refresh();
 		void UndoAll();
 
 	}
@@ -28,7 +29,11 @@ namespace Sketching.Common.Tools
 				return Tools.FirstOrDefault((arg) => arg.Active);
 			}
 		}
-		public ITool ToolForGeometry(IGeometryVisual geometry)
+		public ToolCollection() 
+		{
+			MessagingCenter.Subscribe<object>(this,"Repaint",(obj) => Refresh());
+		}
+		public ITool ToolForGeometry(IGeometryVisual geometry) 
 		{
 			var tools = Tools.Where((arg) => arg.Geometry.GetType() == geometry.GetType());
 			return tools.FirstOrDefault();
@@ -68,13 +73,19 @@ namespace Sketching.Common.Tools
 				Geometries.Add(tool.Geometry);
 			}
 		}
+		public void Refresh() 
+		{
+			View?.CallbackToNative?.Invoke(CallbackType.Repaint);
+			
+		}
 		public void Undo()
 		{
 			var last = Geometries.LastOrDefault();
 			if (last == null) return;
 			Geometries.Remove(last);
-			View?.CallbackToNative?.Invoke(CallbackType.Repaint);
+			Refresh();
 		}
+
 
 		public void UndoAll()
 		{

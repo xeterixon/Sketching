@@ -1,5 +1,6 @@
 ﻿using System;
 using Sketching.Common.Extensions;
+using Sketching.Common.Helper;
 using Sketching.Common.Interfaces;
 using SkiaSharp;
 using Xamarin.Forms;
@@ -33,9 +34,7 @@ namespace Sketching.Common.Render
 				if (text.IsFilled)
 				{
 					// Set the right text color
-					var textColor = Color.Black;
-					if (text.Color == Color.Black)
-						textColor = Color.White;
+					var textColor = Converter.ContrastColor(text.Color);
 
 					var calibratedTextPath = paint.GetTextPath(text.Value, calibratedX, calibratedY);
 					// Get the path of the calibrated text area and add some padding to the rect

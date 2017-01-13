@@ -18,7 +18,8 @@ namespace Sketching.Common.Tools
 		public virtual void TouchMove(Point p) { }
 		public virtual void TouchEnd(Point p) { }
 		public string Name { get; set; }
-		public IStroke Geometry { get; set; } = new Stroke();
+
+		public IStroke Geometry { get; set; } = new Stroke(Color.Blue, 10, false);
 		public bool CanUseFill { get; set; } = true;
 
 		IGeometryVisual ITool.Geometry
