@@ -29,12 +29,10 @@ namespace SketchUpp
 			_sketchView.SketchArea.CanDrawOutsideImageBounds = false;
 
 			// How to remove tools
-			//_sketchView.RemoveToolbarItem(3); // Circle
 			_sketchView.RemoveToolbarItem(2); // Highlight
 
 			// How to add custom tools
-			//_sketchView.AddToolbarItem(null, new OvalTool(), null);
-			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Highlight.png", typeof(CurveTool).GetTypeInfo().Assembly), new CurveTool("Fuktpunkter", 50, 100, 0.3, new List<Color> { Color.Red, Color.Orange, Color.Yellow }), null);
+			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Highlight.png", typeof(HighlightTool).GetTypeInfo().Assembly), new HighlightTool("Fuktpunkter", 50, 100, new List<Color> { Color.Red, Color.Orange, Color.Yellow }), null);
 
 //			var t = _sketchView.SketchArea.ToolCollection.Tools.FirstOrDefault((arg) => arg.Name == ;;
 

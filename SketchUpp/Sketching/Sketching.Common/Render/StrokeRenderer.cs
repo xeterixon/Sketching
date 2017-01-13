@@ -22,14 +22,22 @@ namespace Sketching.Common.Render
 				paint.StrokeWidth = (float)(stroke.Size * scale);
 				paint.IsAntialias = true;
 				paint.Color = stroke.Color.ToSkiaColor();
+				if (stroke.HighLight) paint.BlendMode = SKBlendMode.Darken; //TODO: Maybe use filters, paint.ColorFilter = SKColorFilter.CreateLighting()
 				var points = stroke.Points.Select(arg => Helper.Converter.ToSKPoint(arg, scale)).ToArray();
 				canvas.DrawPoints(SKPointMode.Polygon, points, paint);
 				// Fill Stroke
-				//TODO: Fill the shape with FillColor. How?
-				//if (!stroke.IsFilled) return;
-				//paint.Color = stroke.Color.ToFillColor().ToSkiaColor();
-				//paint.IsStroke = false;
-				//canvas.DrawPoints(SKPointMode.Polygon, points, paint);
+				if (!stroke.IsFilled) return;
+				if (!points.Any()) return;
+				paint.Color = stroke.Color.ToFillColor().ToSkiaColor();
+				paint.IsStroke = false;
+				var path = new SKPath();
+				foreach (var skPoint in points)
+				{
+					if (!path.Points.Any())
+						path.MoveTo(skPoint);
+					path.LineTo(skPoint);
+				}
+				canvas.DrawPath(path, paint);
 			}
 		}
 	}

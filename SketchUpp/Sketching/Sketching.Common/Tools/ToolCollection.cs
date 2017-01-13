@@ -17,11 +17,14 @@ namespace Sketching.Common.Tools
 		ITool ActiveTool { get; }
 		void Undo();
 		void Refresh();
+		void UndoAll();
+
 	}
 	public class ToolCollection : IToolCollection
 	{
-		public ITool ActiveTool {
-			get 
+		public ITool ActiveTool
+		{
+			get
 			{
 				return Tools.FirstOrDefault((arg) => arg.Active);
 			}
@@ -39,32 +42,32 @@ namespace Sketching.Common.Tools
 		public List<ITool> Tools { get; set; } = new List<ITool>();
 		public List<IGeometryVisual> Geometries { get; set; } = new List<IGeometryVisual>();
 		//NOTE Only allow one active tool at a time for now.
-		public void ActivateTool(ITool tool) 
+		public void ActivateTool(ITool tool)
 		{
-			if (tool == null) 
+			if (tool == null)
 			{
 				throw new NullReferenceException("Tool is null");
 			}
 			var activeTools = Tools.Where(t => t.Active);
-			foreach (var activeTool in activeTools) 
+			foreach (var activeTool in activeTools)
 			{
 				activeTool.Active = false;
 			}
 			var tl = Tools.FirstOrDefault(t => ReferenceEquals(t, tool));
-			if (tl == null) 
+			if (tl == null)
 			{
 				throw new InvalidOperationException("Don't activate a tool that's not registered");
 			}
 			tl.Active = true;
 		}
-		public void ActivateTool(string toolName) 
+		public void ActivateTool(string toolName)
 		{
 			ActivateTool(Tools.FirstOrDefault(t => t.Name == toolName));
 		}
 		public void TouchStart(Point p)
 		{
 			var activeTools = Tools.Where(t => t.Active);
-			foreach (var tool in activeTools) 
+			foreach (var tool in activeTools)
 			{
 				tool.TouchStart(p);
 				Geometries.Add(tool.Geometry);
@@ -83,10 +86,18 @@ namespace Sketching.Common.Tools
 			Refresh();
 		}
 
+		public void UndoAll()
+		{
+			if (Geometries != null && Geometries.Any())
+				Geometries.Clear();
+
+			View?.CallbackToNative?.Invoke(CallbackType.Repaint);
+		}
+
 		public void TouchEnd(Point p)
 		{
 			var activeTools = Tools.Where(t => t.Active);
-			foreach (var tool in activeTools) 
+			foreach (var tool in activeTools)
 			{
 				tool.TouchEnd(p);
 			}
@@ -95,7 +106,7 @@ namespace Sketching.Common.Tools
 		public void TouchMove(Point p)
 		{
 			var activeTools = Tools.Where(t => t.Active);
-			foreach (var tool in activeTools) 
+			foreach (var tool in activeTools)
 			{
 				tool.TouchMove(p);
 			}
