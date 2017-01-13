@@ -15,7 +15,7 @@ namespace Sketching.Common.Views
 			Tool = tool;
 			ColorSelectedCommand = new Command<Color>(color =>
 			{
-				Tool.Geometry.Color = color.MultiplyAlpha(Tool.Geometry.Color.A);
+				Tool.Geometry.Color = color;
 				_navigation.PopAsync();
 			});
 		}

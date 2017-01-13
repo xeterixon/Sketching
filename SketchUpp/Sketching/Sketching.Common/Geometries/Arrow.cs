@@ -9,6 +9,8 @@ namespace Sketching.Common.Geometries
 		public Arrow(IGeometryVisual src) : this(src.Color, src.Size, src.IsFilled) { }
 		public Arrow(Color color, double size, bool isFilled)
 		{
+			Start = new Point(-1, -1);
+			End = new Point(-1, -1);
 			Color = color;
 			IsFilled = isFilled;
 			Size = size;

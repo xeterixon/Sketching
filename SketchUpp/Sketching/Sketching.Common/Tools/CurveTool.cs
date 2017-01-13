@@ -10,6 +10,7 @@ namespace Sketching.Common.Tools
 
 		public CurveTool(string name, double size, double maxSize, IEnumerable<Color> customColors)
 		{
+			CanUseFill = true;
 			Name = name;
 			CanUseFill = true;
 			Geometry = new Stroke
@@ -37,18 +38,7 @@ namespace Sketching.Common.Tools
 		{
 			base.TouchEnd(p);
 			AddPoint(p);
-			Init();
-		}
-
-		protected override void Init()
-		{
-			Geometry = new Stroke
-			{
-				Size = Geometry.Size,
-				MaxSize = Geometry.MaxSize,
-				Color = Geometry.Color,
-				IsFilled = Geometry.IsFilled
-			};
+			CreateNewGeometry();
 		}
 
 		private void AddPoint(Point p)

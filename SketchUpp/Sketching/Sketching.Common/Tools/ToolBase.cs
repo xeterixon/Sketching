@@ -7,9 +7,9 @@ using Xamarin.Forms;
 namespace Sketching.Common.Tools
 {
 
-	public abstract class StrokeToolBase : IStrokeTool, ICustomColorSetup
+	public abstract class StrokeToolBase : IStrokeTool
 	{
-		protected virtual void Init()
+		protected virtual void CreateNewGeometry()
 		{
 			Geometry = new Stroke(Geometry);
 		}
@@ -17,7 +17,6 @@ namespace Sketching.Common.Tools
 		public virtual void TouchStart(Point p) { }
 		public virtual void TouchMove(Point p) { }
 		public virtual void TouchEnd(Point p) { }
-
 		public string Name { get; set; }
 
 		public IStroke Geometry { get; set; } = new Stroke(Color.Blue, 10, false);
@@ -41,7 +40,7 @@ namespace Sketching.Common.Tools
 
 	public abstract class PointToolBase : IPointTool
 	{
-		protected virtual void Init()
+		protected virtual void CreateNewGeometry()
 		{
 			Geometry = new Mark(Geometry);
 		}
@@ -49,9 +48,7 @@ namespace Sketching.Common.Tools
 		public virtual void TouchStart(Point p) { }
 		public virtual void TouchMove(Point p) { }
 		public virtual void TouchEnd(Point p) { }
-
 		public string Name { get; set; }
-
 		public IMark Geometry { get; set; } = new Mark();
 		public bool CanUseFill { get; set; } = false;
 
@@ -66,5 +63,7 @@ namespace Sketching.Common.Tools
 				throw new NotImplementedException();
 			}
 		}
+
+		public IEnumerable<Color> CustomColors { get; set; }
 	}
 }

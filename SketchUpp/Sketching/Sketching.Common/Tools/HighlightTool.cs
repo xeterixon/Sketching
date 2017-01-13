@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
 using Sketching.Common.Geometries;
+using Sketching.Common.Helper;
 using Xamarin.Forms;
 
 namespace Sketching.Common.Tools
 {
 	public class HighlightTool : StrokeToolBase
 	{
-		public HighlightTool() : this("Highlight", 50, 100, null) { }
+		public HighlightTool() : this(ToolNames.HighlightTool, 1, 100, 50, null) { }
 
-		public HighlightTool(string name, double size, double maxSize, IEnumerable<Color> customColors)
+		public HighlightTool(string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
 		{
-			Name = name;
 			CanUseFill = false;
-			Geometry = new Stroke
-			{
-				MaxSize = maxSize,
-				Size = size,
-				HighLight = true
-			};
+			Name = name;
+			Geometry.MinSize = minSize;
+			Geometry.MaxSize = maxSize;
+			Geometry.Size = startSize;
+			Geometry.HighLight = true;
+			Geometry.Color = Color.Yellow;
 			CustomColors = customColors;
 		}
 
@@ -37,17 +37,17 @@ namespace Sketching.Common.Tools
 		{
 			base.TouchEnd(p);
 			AddPoint(p);
-			Init();
+			CreateNewGeometry();
 		}
 
-		protected override void Init()
+		protected override void CreateNewGeometry()
 		{
-			Geometry = new Stroke
-			{
-				Size = Geometry.Size,
+			Geometry = new Stroke {
+				MinSize = Geometry.MinSize,
 				MaxSize = Geometry.MaxSize,
-				Color = Geometry.Color,
-				HighLight = Geometry.HighLight
+				Size = Geometry.Size,
+				HighLight = Geometry.HighLight,
+				Color = Geometry.Color
 			};
 		}
 

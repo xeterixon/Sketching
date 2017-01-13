@@ -86,6 +86,7 @@ namespace Sketching.Common.Tools
 			Refresh();
 		}
 
+
 		public void UndoAll()
 		{
 			if (Geometries != null && Geometries.Any())

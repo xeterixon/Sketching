@@ -37,9 +37,9 @@ namespace Sketching.Common.Views
 
 		private void CreateColorPalette(ITool tool)
 		{
-			if ((tool as ICustomColorSetup)?.CustomColors != null)
+			if (tool?.CustomColors != null && tool.CustomColors.Any())
 			{
-				_colorPalette = (tool as ICustomColorSetup).CustomColors.ToList();
+				_colorPalette = tool.CustomColors.ToList();
 			}
 			else
 			{

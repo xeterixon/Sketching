@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Sketching.Common.Helper;
 using Sketching.Common.Interfaces;
 using Xamarin.Forms;
 
@@ -24,9 +26,15 @@ namespace Sketching.Common.Tools
 			}
 		}
 
-		public RectangleTool()
+		public RectangleTool() : this(ToolNames.RectangleTool, 1, 20, 8, null) { }
+
+		public RectangleTool(string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
 		{
-			Name = "Rectangle";
+			Name = name;
+			Geometry.MinSize = minSize;
+			Geometry.MaxSize = maxSize;
+			Geometry.Size = startSize;
+			CustomColors = customColors;
 		}
 
 		public void TouchEnd(Point p)
@@ -44,5 +52,7 @@ namespace Sketching.Common.Tools
 		{
 			Geometry.Start = p;
 		}
+
+		public IEnumerable<Color> CustomColors { get; set; }
 	}
 }

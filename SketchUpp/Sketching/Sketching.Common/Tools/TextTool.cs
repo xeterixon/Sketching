@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sketching.Common.Geometries;
+using Sketching.Common.Helper;
 using Sketching.Common.Interfaces;
 using Sketching.Common.Views;
 using Xamarin.Forms;
@@ -12,6 +14,8 @@ namespace Sketching.Common.Tools
 		public bool Active { get; set; }
 		public IText Geometry { get; set; } = new Text();
 		public bool CanUseFill { get; set; } = true;
+		public IEnumerable<Color> CustomColors { get; set; }
+
 		public string Text
 		{
 			get { return Geometry.Value; }
@@ -31,12 +35,18 @@ namespace Sketching.Common.Tools
 		}
 
 		private INavigation _navigation;
-		public TextTool(INavigation navigation)
+		public TextTool(INavigation navigation) : this(navigation, ToolNames.TextTool, 20, 200, 75, null) { }
+
+		public TextTool(INavigation navigation, string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
 		{
 			_navigation = navigation;
-			Name = "Text";
-			Init();
+			Name = name;
+			Geometry.MinSize = minSize;
+			Geometry.MaxSize = maxSize;
+			Geometry.Size = startSize;
+			CustomColors = customColors;
 		}
+
 
 		private void Init()
 		{
@@ -66,6 +76,7 @@ namespace Sketching.Common.Tools
 					((ITextInput)sender).End();
 					Init();
 					MessagingCenter.Send((object)this, "Repaint");
+
 				};
 			}
 		}
