@@ -46,12 +46,6 @@ namespace Sketching.Common.Tools
 			CustomColors = customColors;
 		}
 
-
-		private void Init()
-		{
-			Geometry = new Text(Geometry);
-		}
-
 		public void TouchEnd(Point p)
 		{
 			Geometry.Point = p;
@@ -73,11 +67,16 @@ namespace Sketching.Common.Tools
 				{
 					Text = text;
 					((ITextInput)sender).End();
-					Init();
+					CreateNewGeometry();
 					MessagingCenter.Send((object)this, "Repaint");
 
 				};
 			}
+		}
+
+		private void CreateNewGeometry()
+		{
+			Geometry = new Text(Geometry);
 		}
 	}
 }
