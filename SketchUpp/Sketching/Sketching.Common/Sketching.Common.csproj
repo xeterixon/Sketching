@@ -31,6 +31,7 @@
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Geometries\Arrow.cs" />
     <Compile Include="Geometries\Oval.cs" />
+    <Compile Include="Helper\ToolNames.cs" />
     <Compile Include="Interfaces\ICustomColorSetup.cs" />
     <Compile Include="Interfaces\IArrow.cs" />
     <Compile Include="Interfaces\IOval.cs" />

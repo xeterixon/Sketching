@@ -5,7 +5,7 @@
 	{
 		new T Geometry { get; set; }
 	}
-	public interface ITool : ITouchDelegate
+	public interface ITool : ITouchDelegate, ICustomColorSetup
 	{
 		string Name { get; set; }
 		bool Active { get; set; }
@@ -13,8 +13,7 @@
 		bool CanUseFill { get; set; }
 	}
 
-	public interface IStrokeTool : ITool<IStroke> { }
-	public interface ILineTool : ITool<ILine> { }
+	public interface IStrokeTool : ITool<IStroke> { } // This interface is used by all stroke tools, line, curve, highlight etc
 	public interface IArrowTool : ITool<IArrow> { }
 	public interface ICircleTool : ITool<ICircle> { }
 	public interface IOvalTool : ITool<IOval> { }

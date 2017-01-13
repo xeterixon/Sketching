@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sketching.Common.Interfaces;
 using Xamarin.Forms;
 
@@ -9,17 +10,20 @@ namespace SketchUpp.CustomTool
 
 		public bool Active { get; set; }
 
-		public IOval Geometry { get; set; } = new Oval { Size = 8, Color = Color.Maroon};
+		public IOval Geometry { get; set; } = new Oval { Size = 8, Color = Color.Maroon };
 		public bool CanUseFill { get; set; }
 
 		public string Name { get; set; } = "Oval";
 
-		IGeometryVisual ITool.Geometry {
-			get {
+		IGeometryVisual ITool.Geometry
+		{
+			get
+			{
 				return Geometry;
 			}
 
-			set {
+			set
+			{
 				throw new NotImplementedException();
 			}
 		}
@@ -39,6 +43,8 @@ namespace SketchUpp.CustomTool
 		{
 			Geometry.Start = p;
 		}
+
+		public IEnumerable<Color> CustomColors { get; set; }
 	}
 
 }
