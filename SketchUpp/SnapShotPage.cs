@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
-using Rg.Plugins.Popup.Services;
 using Sketching.Common.Interfaces;
 using Sketching.Common.Pages;
 using Xamarin.Forms;
