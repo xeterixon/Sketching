@@ -16,7 +16,7 @@ namespace Sketching.Common.Tools
 		List<IGeometryVisual> Geometries { get; set; }
 		ITool ActiveTool { get; }
 		void Undo();
-
+		void Refresh();
 	}
 	public class ToolCollection : IToolCollection
 	{
@@ -25,6 +25,10 @@ namespace Sketching.Common.Tools
 			{
 				return Tools.FirstOrDefault((arg) => arg.Active);
 			}
+		}
+		public ToolCollection() 
+		{
+			MessagingCenter.Subscribe<object>(this,"Repaint",(obj) => Refresh());
 		}
 		public ITool ToolForGeometry(IGeometryVisual geometry) 
 		{
@@ -66,12 +70,17 @@ namespace Sketching.Common.Tools
 				Geometries.Add(tool.Geometry);
 			}
 		}
+		public void Refresh() 
+		{
+			View?.CallbackToNative?.Invoke(CallbackType.Repaint);
+			
+		}
 		public void Undo()
 		{
 			var last = Geometries.LastOrDefault();
 			if (last == null) return;
 			Geometries.Remove(last);
-			View?.CallbackToNative?.Invoke(CallbackType.Repaint);
+			Refresh();
 		}
 
 		public void TouchEnd(Point p)

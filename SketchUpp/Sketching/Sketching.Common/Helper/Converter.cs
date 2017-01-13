@@ -14,5 +14,15 @@ namespace Sketching.Common.Helper
 		{
 			return p.ToSkiaPoint(scale);
 		}
+		public static Color ContrastColor(Color color) 
+		{
+			// Color components on a Xamarin.Forms.Color are doubles ranging from 0 to 1 not 0 to 255 as one is used to.
+			double a = 1 - (0.299 * color.R + 0.587 * color.G + 0.114 * color.B);
+			if (a < 0.49) 
+				return Color.Black;
+			else
+				return Color.White;
+
+		}
 	}
 }

@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Sketching.Common.Interfaces;
 using Xamarin.Forms;
 
 namespace Sketching.Common.Views
 {
-	public partial class TextInputView : ContentView
+	public partial class TextInputView : ContentView, ITextInput
 	{
-		public event EventHandler<string> TextEntryCompleted;
+		public event EventHandler<string> TextEntered;
 		public string Text { get; set; }
-
+		~TextInputView() 
+		{
+			System.Diagnostics.Debug.WriteLine("TextInput going down");
+		}
+		public INavigation NavigationProxy { get; set; }
+		public View View{get{return this;}}
 		private bool canPop = true; 
 		public TextInputView()
 		{
@@ -28,9 +33,8 @@ namespace Sketching.Common.Views
 			if (string.IsNullOrEmpty(Text))
 				return;
 
-			TextEntryCompleted?.Invoke(this, Text);
-
-			Navigation.PopAsync();
+			TextEntered?.Invoke(this, Text);
+			//Navigation.PopAsync();
 		}
 
 
@@ -45,6 +49,16 @@ namespace Sketching.Common.Views
 
 				textInput.Focus();
 			}
+		}
+
+		public async Task Begin()
+		{
+			await NavigationProxy.PushAsync(new ContentPage { Content = this });
+		}
+
+		public async Task End()
+		{
+			await NavigationProxy.PopAsync();
 		}
 	}
 }

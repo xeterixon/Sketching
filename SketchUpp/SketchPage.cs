@@ -9,6 +9,7 @@ using Sketching.Common.Tools;
 using Sketching.Common.Views;
 using SketchUpp.CustomTool;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace SketchUpp
 {
@@ -34,6 +35,8 @@ namespace SketchUpp
 			// How to add custom tools
 			//_sketchView.AddToolbarItem(null, new OvalTool(), null);
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Highlight.png", typeof(CurveTool).GetTypeInfo().Assembly), new CurveTool("Fuktpunkter", 50, 100, 0.3, new List<Color> { Color.Red, Color.Orange, Color.Yellow }), null);
+
+//			var t = _sketchView.SketchArea.ToolCollection.Tools.FirstOrDefault((arg) => arg.Name == ;;
 
 			ToolbarItems.Add(new ToolbarItem { Text = "Save", Command = SaveCommand });
 			ToolbarItems.Add(new ToolbarItem { Text = "Photo", Command = new Command(async () => { await TakePhoto(); }) });
@@ -75,7 +78,7 @@ namespace SketchUpp
 		{
 			var data = _sketchView.SketchArea.LargeImageData();
 			var page = new SnapShotPage();
-			await page.SetImage(data);
+			page.SetImage(data);
 			await Navigation.PushAsync(page);
 		}
 	}

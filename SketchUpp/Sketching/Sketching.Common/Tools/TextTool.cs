@@ -12,7 +12,6 @@ namespace Sketching.Common.Tools
 		public bool Active { get; set; }
 		public IText Geometry { get; set; } = new Text();
 		public bool CanUseFill { get; set; } = true;
-
 		public string Text
 		{
 			get { return Geometry.Value; }
@@ -47,7 +46,6 @@ namespace Sketching.Common.Tools
 		public void TouchEnd(Point p)
 		{
 			Geometry.Point = p;
-			Init();
 		}
 
 		public void TouchMove(Point p)
@@ -57,18 +55,18 @@ namespace Sketching.Common.Tools
 
 		public void TouchStart(Point p)
 		{
+			Geometry.Point = p;
 			if (string.IsNullOrEmpty(Text))
 			{
-				var textInputView = new TextInputView();
-				textInputView.TextEntryCompleted += (sender, text) =>
+				var textInputView = Helper.Factory.CreateTextInput(_navigation);
+				textInputView.Begin();
+				textInputView.TextEntered += (sender, text) =>
 				{
 					Text = text;
+					((ITextInput)sender).End();
+					Init();
+					MessagingCenter.Send((object)this, "Repaint");
 				};
-				_navigation.PushAsync(new ContentPage { Content = textInputView });
-			}
-			else
-			{
-				Geometry.Point = p;
 			}
 		}
 	}

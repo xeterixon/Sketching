@@ -1,4 +1,5 @@
 ﻿
+using Sketching.Common;
 using Sketching.iOS;
 using Sketching.iOS.Helper;
 
@@ -9,8 +10,11 @@ namespace Sketching
 	{
 		public static void Init()
 		{
+			Bootstrap.Init();
+#pragma warning disable 219
 			var ignore1 = new SketchViewRenderer();
-			Sketching.Common.Helper.Image.ImageMetaDataImplementation = new ImageMetaData();
+			Common.Helper.Image.ImageMetaDataImplementation = new ImageMetaData();
+#pragma warning restore 219
 		}
 	}
 }

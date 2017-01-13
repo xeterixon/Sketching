@@ -93,6 +93,9 @@
     <Compile Include="Pages\FixedRotationPage.cs" />
     <Compile Include="Helper\Image.cs" />
     <Compile Include="Interfaces\IImageMetaData.cs" />
+    <Compile Include="Interfaces\ITextInput.cs" />
+    <Compile Include="Helper\Factory.cs" />
+    <Compile Include="Bootstrap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp">
