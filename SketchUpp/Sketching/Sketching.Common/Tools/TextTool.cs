@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Sketching.Common.Geometries;
 using Sketching.Common.Helper;
 using Sketching.Common.Interfaces;
-using Sketching.Common.Views;
 using Xamarin.Forms;
 
 namespace Sketching.Common.Tools
@@ -14,6 +13,7 @@ namespace Sketching.Common.Tools
 		public bool Active { get; set; }
 		public IText Geometry { get; set; } = new Text();
 		public bool CanUseFill { get; set; } = true;
+		public IEnumerable<Color> CustomColors { get; set; }
 
 		public string Text
 		{
@@ -46,10 +46,15 @@ namespace Sketching.Common.Tools
 			CustomColors = customColors;
 		}
 
+
+		private void Init()
+		{
+			Geometry = new Text(Geometry);
+		}
+
 		public void TouchEnd(Point p)
 		{
 			Geometry.Point = p;
-			Geometry = new Text(Geometry);
 		}
 
 		public void TouchMove(Point p)
@@ -59,21 +64,20 @@ namespace Sketching.Common.Tools
 
 		public void TouchStart(Point p)
 		{
+			Geometry.Point = p;
 			if (string.IsNullOrEmpty(Text))
 			{
-				var textInputView = new TextInputView();
-				textInputView.TextEntryCompleted += (sender, text) =>
+				var textInputView = Factory.CreateTextInput(_navigation);
+				textInputView.Begin();
+				textInputView.TextEntered += (sender, text) =>
 				{
 					Text = text;
+					((ITextInput)sender).End();
+					Init();
+					MessagingCenter.Send((object)this, "Repaint");
+
 				};
-				_navigation.PushAsync(new ContentPage { Content = textInputView });
-			}
-			else
-			{
-				Geometry.Point = p;
 			}
 		}
-
-		public IEnumerable<Color> CustomColors { get; set; }
 	}
 }

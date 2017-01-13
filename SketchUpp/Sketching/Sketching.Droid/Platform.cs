@@ -1,4 +1,5 @@
-﻿using Sketching.Common.Helper;
+﻿using Sketching.Common;
+using Sketching.Common.Helper;
 using Sketching.Droid;
 using Sketching.Droid.Helper;
 
@@ -9,9 +10,15 @@ namespace Sketching
 	{
 		public static void Init() 
 		{
+			Bootstrap.Init();
 			Image.ImageMetaDataImplementation = new ImageMetaData();
+#pragma warning disable 219
+
 			var ignore1 = new SketchViewRenderer();
 			var ignore2 = new FixedRotationPageRenderer();
+
+#pragma warning restore 219
+
 
 		}
 	}

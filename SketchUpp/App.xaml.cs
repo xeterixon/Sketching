@@ -9,6 +9,7 @@ namespace SketchUpp
 		public App()
 		{
 			InitializeComponent();
+			Sketching.Common.Helper.Factory.RegisterTextInput(typeof(InputProxy));
 			//GeometryRenderer.AddRenderer(new OvalRenderer());
 			var sketchPage = new SketchPage();
 			MainPage = new NavigationPage(sketchPage);

@@ -1,21 +1,24 @@
 ﻿using System.Collections.Generic;
-using Sketching.Common.Helper;
+using Sketching.Common.Geometries;
 using Xamarin.Forms;
 
 namespace Sketching.Common.Tools
 {
 	public class CurveTool : StrokeToolBase
 	{
-		public CurveTool() : this(ToolNames.CurveTool, 1, 20, 8, null) { }
+		public CurveTool() : this("Curve", 8, 20, null) { }
 
-		public CurveTool(string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
+		public CurveTool(string name, double size, double maxSize, IEnumerable<Color> customColors)
 		{
 			CanUseFill = true;
 			Name = name;
-			Geometry.MinSize = minSize;
-			Geometry.MaxSize = maxSize;
-			Geometry.Size = startSize;
-			Geometry.HighLight = false;
+			CanUseFill = true;
+			Geometry = new Stroke
+			{
+				MaxSize = maxSize,
+				Size = size,
+				HighLight = false
+			};
 			CustomColors = customColors;
 		}
 

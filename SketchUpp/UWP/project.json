@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "Rg.Plugins.Popup": "1.0.4",
     "SkiaSharp": "1.55.1",
     "SkiaSharp.Views": "1.55.1",
     "SkiaSharp.Views.Forms": "1.55.1",
