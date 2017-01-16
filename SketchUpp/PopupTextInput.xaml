@@ -21,7 +21,7 @@
       EasingOut="SinIn"
       HasBackgroundAnimation="True"/>
   </pages:PopupPage.Animation>
-	<StackLayout Padding="30,30,30,30" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+	<StackLayout Padding="30,30,30,30" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="White" Margin="5,5,5,5">
 		<Label Text="Type something and press Enter"/>
 		<Entry Placeholder="Text" Completed="Handle_Completed" x:Name="InputView"/>
 	</StackLayout>
