@@ -11,7 +11,7 @@ using SKNativeView = SkiaSharp.Views.UWP.SKXamlCanvas;
 [assembly: ExportRenderer(typeof(SketchArea), typeof(SketchAreaRenderer))]
 namespace Sketching.UWP
 {
-	internal class SketchAreaRenderer : ViewRenderer<SketchArea, SKNativeView>
+	public class SketchAreaRenderer : ViewRenderer<SketchArea, SKNativeView>
 	{
 		protected override void OnElementChanged(ElementChangedEventArgs<SketchArea> e)
 		{

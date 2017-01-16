@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -46,7 +48,13 @@ namespace SketchUpp.UWP
 
 				rootFrame.NavigationFailed += OnNavigationFailed;
 
-				Xamarin.Forms.Forms.Init(e);
+				var assemblies = new List<Assembly>
+				{
+					typeof(Sketching.Common.Bootstrap).GetTypeInfo().Assembly,
+					typeof(Sketching.UWP.SketchAreaRenderer).GetTypeInfo().Assembly
+				};
+
+				Xamarin.Forms.Forms.Init(e,Rg.Plugins.Popup.Windows.Popup.GetExtraAssemblies(assemblies));
 				Sketching.Platform.Init();
 
 				if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
