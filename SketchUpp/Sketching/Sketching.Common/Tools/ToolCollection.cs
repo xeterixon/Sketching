@@ -12,7 +12,6 @@ namespace Sketching.Common.Tools
 		List<ITool> Tools { get; set; }
 		void ActivateTool(ITool tool);
 		void ActivateTool(string toolName);
-		ITool ToolForGeometry(IGeometryVisual geometry);
 		List<IGeometryVisual> Geometries { get; set; }
 		ITool ActiveTool { get; }
 		void Undo();
@@ -32,11 +31,6 @@ namespace Sketching.Common.Tools
 		public ToolCollection() 
 		{
 			MessagingCenter.Subscribe<object>(this,"Repaint",(obj) => Refresh());
-		}
-		public ITool ToolForGeometry(IGeometryVisual geometry) 
-		{
-			var tools = Tools.Where((arg) => arg.Geometry.GetType() == geometry.GetType());
-			return tools.FirstOrDefault();
 		}
 		public ISketchView View { get; set; }
 		public List<ITool> Tools { get; set; } = new List<ITool>();
@@ -78,8 +72,17 @@ namespace Sketching.Common.Tools
 			View?.CallbackToNative?.Invoke(CallbackType.Repaint);
 			
 		}
+		public void RemoveInvalidGeometries() 
+		{
+			var invalidGeometries = Geometries.Where(g => !g.IsValid).ToList();
+			foreach (var g in invalidGeometries) {
+				Geometries.Remove(g);
+			}
+			
+		}
 		public void Undo()
 		{
+			RemoveInvalidGeometries();
 			var last = Geometries.LastOrDefault();
 			if (last == null) return;
 			Geometries.Remove(last);
