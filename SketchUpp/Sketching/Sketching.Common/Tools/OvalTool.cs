@@ -27,15 +27,27 @@ namespace Sketching.Common.Tools
 			}
 		}
 
-		public OvalTool() : this(ToolNames.OvalTool, 1, 20, 8, null) { }
+		/// <summary>
+		/// OvalTool with default values
+		/// </summary>
+		public OvalTool() : this(ToolNames.OvalTool, 1, 20, 8, string.Empty, null) { }
 
-		public OvalTool(string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
+		/// <summary>
+		/// Customized OvalTool with default sizes
+		/// </summary>
+		public OvalTool(string name, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors) : this(name, 1, 20, 8, customToolbarName, customToolbarColors) { }
+
+		/// <summary>
+		/// Custom made OvalTool
+		/// </summary>
+		public OvalTool(string name, double minSize, double maxSize, double startSize, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors)
 		{
 			Name = name;
 			Geometry.MinSize = minSize;
 			Geometry.MaxSize = maxSize;
 			Geometry.Size = startSize;
-			CustomColors = customColors;
+			CustomToolbarName = customToolbarName;
+			CustomToolbarColors = customToolbarColors;
 		}
 
 		public void TouchEnd(Point p)
@@ -54,6 +66,7 @@ namespace Sketching.Common.Tools
 			Geometry.Start = p;
 		}
 
-		public IEnumerable<Color> CustomColors { get; set; }
+		public string CustomToolbarName { get; set; }
+		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
 	}
 }

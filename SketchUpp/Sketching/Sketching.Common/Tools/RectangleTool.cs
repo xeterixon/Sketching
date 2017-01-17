@@ -26,15 +26,27 @@ namespace Sketching.Common.Tools
 			}
 		}
 
-		public RectangleTool() : this(ToolNames.RectangleTool, 1, 20, 8, null) { }
+		/// <summary>
+		/// RectangleTool with default values
+		/// </summary>
+		public RectangleTool() : this(ToolNames.RectangleTool, 1, 20, 8, string.Empty, null) { }
 
-		public RectangleTool(string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
+		/// <summary>
+		/// Customized RectangleTool with default sizes
+		/// </summary>
+		public RectangleTool(string name, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors) : this(name, 1, 20, 8, customToolbarName, customToolbarColors) { }
+
+		/// <summary>
+		/// Custom made RectangleTool
+		/// </summary>
+		public RectangleTool(string name, double minSize, double maxSize, double startSize, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors)
 		{
 			Name = name;
 			Geometry.MinSize = minSize;
 			Geometry.MaxSize = maxSize;
 			Geometry.Size = startSize;
-			CustomColors = customColors;
+			CustomToolbarName = customToolbarName;
+			CustomToolbarColors = customToolbarColors;
 		}
 
 		public void TouchEnd(Point p)
@@ -53,6 +65,7 @@ namespace Sketching.Common.Tools
 			Geometry.Start = p;
 		}
 
-		public IEnumerable<Color> CustomColors { get; set; }
+		public string CustomToolbarName { get; set; }
+		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
 	}
 }

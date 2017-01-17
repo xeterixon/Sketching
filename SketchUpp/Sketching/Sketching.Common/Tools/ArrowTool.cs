@@ -27,15 +27,27 @@ namespace Sketching.Common.Tools
 			}
 		}
 
-		public ArrowTool() : this(ToolNames.ArrowTool, 1, 20, 8, null) { }
+		/// <summary>
+		/// ArrowTool with default values
+		/// </summary>
+		public ArrowTool() : this(ToolNames.ArrowTool, 1, 20, 8, string.Empty, null) { }
 
-		public ArrowTool(string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
+		/// <summary>
+		/// Customized ArrowTool with default sizes
+		/// </summary>
+		public ArrowTool(string name, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors) : this(name, 1, 20, 8, customToolbarName, customToolbarColors) { }
+
+		/// <summary>
+		/// Custom made ArrowTool
+		/// </summary>
+		public ArrowTool(string name, double minSize, double maxSize, double startSize, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors)
 		{
 			Name = name;
 			Geometry.MinSize = minSize;
 			Geometry.MaxSize = maxSize;
 			Geometry.Size = startSize;
-			CustomColors = customColors;
+			CustomToolbarName = customToolbarName;
+			CustomToolbarColors = customToolbarColors;
 		}
 
 		public void TouchEnd(Point p)
@@ -54,6 +66,7 @@ namespace Sketching.Common.Tools
 			Geometry.Start = p;
 		}
 
-		public IEnumerable<Color> CustomColors { get; set; }
+		public string CustomToolbarName { get; set; }
+		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
 	}
 }

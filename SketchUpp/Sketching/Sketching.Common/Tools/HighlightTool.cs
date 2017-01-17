@@ -7,9 +7,20 @@ namespace Sketching.Common.Tools
 {
 	public class HighlightTool : StrokeToolBase
 	{
-		public HighlightTool() : this(ToolNames.HighlightTool, 1, 100, 50, null) { }
+		/// <summary>
+		/// HighlightTool with default values
+		/// </summary>
+		public HighlightTool() : this(ToolNames.HighlightTool, 1, 100, 50, string.Empty, null) { }
 
-		public HighlightTool(string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
+		/// <summary>
+		/// Customized HighlightTool with default sizes
+		/// </summary>
+		public HighlightTool(string name, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors) : this(name, 1, 100, 50, customToolbarName, customToolbarColors) { }
+
+		/// <summary>
+		/// Custom made HighlightTool
+		/// </summary>
+		public HighlightTool(string name, double minSize, double maxSize, double startSize, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors)
 		{
 			CanUseFill = false;
 			Name = name;
@@ -18,7 +29,8 @@ namespace Sketching.Common.Tools
 			Geometry.Size = startSize;
 			Geometry.HighLight = true;
 			Geometry.Color = Color.Yellow;
-			CustomColors = customColors;
+			CustomToolbarName = customToolbarName;
+			CustomToolbarColors = customToolbarColors;
 		}
 
 		public override void TouchStart(Point p)
@@ -42,7 +54,8 @@ namespace Sketching.Common.Tools
 
 		protected override void CreateNewGeometry()
 		{
-			Geometry = new Stroke {
+			Geometry = new Stroke
+			{
 				MinSize = Geometry.MinSize,
 				MaxSize = Geometry.MaxSize,
 				Size = Geometry.Size,

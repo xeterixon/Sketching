@@ -5,6 +5,7 @@ namespace Sketching.Common.Interfaces
 {
 	public interface ICustomColorSetup
 	{
-		IEnumerable<Color> CustomColors { get; set; }
+		string CustomToolbarName { get; set; }
+		IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
 	}
 }

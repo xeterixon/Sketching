@@ -6,9 +6,20 @@ namespace Sketching.Common.Tools
 {
 	public class CurveTool : StrokeToolBase
 	{
-		public CurveTool() : this(ToolNames.CurveTool, 1, 20, 8, null) { }
+		/// <summary>
+		/// CurveTool with default values
+		/// </summary>
+		public CurveTool() : this(ToolNames.CurveTool, 1, 20, 8, string.Empty, null) { }
 
-		public CurveTool(string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
+		/// <summary>
+		/// Customized CurveTool with default sizes
+		/// </summary>
+		public CurveTool(string name, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors) : this(name, 1, 20, 8, customToolbarName, customToolbarColors) { }
+
+		/// <summary>
+		/// Custom made CurveTool
+		/// </summary>
+		public CurveTool(string name, double minSize, double maxSize, double startSize, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors)
 		{
 			CanUseFill = true;
 			Name = name;
@@ -16,7 +27,8 @@ namespace Sketching.Common.Tools
 			Geometry.MaxSize = maxSize;
 			Geometry.Size = startSize;
 			Geometry.HighLight = false;
-			CustomColors = customColors;
+			CustomToolbarName = customToolbarName;
+			CustomToolbarColors = customToolbarColors;
 		}
 
 		public override void TouchStart(Point p)

@@ -27,15 +27,27 @@ namespace Sketching.Common.Tools
 			}
 		}
 
-		public CircleTool() : this(ToolNames.CircleTool, 1, 20, 8, null) { }
+		/// <summary>
+		/// CircleTool with default values
+		/// </summary>
+		public CircleTool() : this(ToolNames.CircleTool, 1, 20, 8, string.Empty, null) { }
 
-		public CircleTool(string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
+		/// <summary>
+		/// Customized CircleTool with default sizes
+		/// </summary>
+		public CircleTool(string name, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors) : this(name, 1, 20, 8, customToolbarName, customToolbarColors) { }
+
+		/// <summary>
+		/// Custom made CircleTool
+		/// </summary>
+		public CircleTool(string name, double minSize, double maxSize, double startSize, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors)
 		{
 			Name = name;
 			Geometry.MinSize = minSize;
 			Geometry.MaxSize = maxSize;
 			Geometry.Size = startSize;
-			CustomColors = customColors;
+			CustomToolbarName = customToolbarName;
+			CustomToolbarColors = customToolbarColors;
 		}
 
 		public void TouchStart(Point p)
@@ -59,6 +71,7 @@ namespace Sketching.Common.Tools
 			Geometry.End = p;
 		}
 
-		public IEnumerable<Color> CustomColors { get; set; }
+		public string CustomToolbarName { get; set; }
+		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
 	}
 }

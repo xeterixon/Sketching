@@ -102,7 +102,8 @@ namespace Sketching.Common.Views
 
 		private void OpenToolSettings(ITool tool)
 		{
-			Navigation.PushAsync(new ContentPage { Content = new ToolSettingsView(tool) });
+			var orientation = Width > Height ? StackOrientation.Horizontal : StackOrientation.Vertical;
+			Navigation.PushAsync(new ToolSettingsView(tool, orientation));
 		}
 
 		public void AddToolbarItem(ImageSource imageSource, ITool tool, ICommand command)
@@ -132,6 +133,12 @@ namespace Sketching.Common.Views
 		{
 			RemoveAllToolbarItems();
 			AddDefaultToolbarItems();
+		}
+
+		public void AddUndoTools()
+		{
+			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Undo.png"), null, UndoCommand);
+			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Trash.png"), null, UndoAllCommand);
 		}
 
 		public void RemoveAllToolbarItems()

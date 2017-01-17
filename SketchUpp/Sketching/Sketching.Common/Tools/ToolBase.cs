@@ -34,7 +34,8 @@ namespace Sketching.Common.Tools
 			}
 		}
 
-		public IEnumerable<Color> CustomColors { get; set; }
+		public string CustomToolbarName { get; set; }
+		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
 	}
 
 	public abstract class PointToolBase : IPointTool
@@ -63,6 +64,7 @@ namespace Sketching.Common.Tools
 			}
 		}
 
-		public IEnumerable<Color> CustomColors { get; set; }
+		public string CustomToolbarName { get; set; }
+		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
 	}
 }

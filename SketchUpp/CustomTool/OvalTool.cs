@@ -44,7 +44,8 @@ namespace SketchUpp.CustomTool
 			Geometry.Start = p;
 		}
 
-		public IEnumerable<Color> CustomColors { get; set; }
+		public string CustomToolbarName { get; set; }
+		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
 	}
 
 }
