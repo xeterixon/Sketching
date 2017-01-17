@@ -6,21 +6,24 @@ using Xamarin.Forms;
 
 namespace Sketching.Common.Views
 {
-	public partial class ToolSettingsView : ContentView
+	public partial class ToolSettingsView : ContentPage
 	{
-		private readonly StackOrientation _orientation;
-		private List<Color> _colorPalette;
+		private StackOrientation _orientation;
+		private List<KeyValuePair<string, Color>> _colorPalette;
+		private List<KeyValuePair<string, Color>> _customColorPalette;
+		private const double ColumnsInVertical = 3.0;
+		private const double ColumnsInHorisontal = 5.0;
 
-		public ToolSettingsView(ITool tool)
+		public ToolSettingsView(ITool tool, StackOrientation orientation)
 		{
+			_orientation = orientation;
 			BindingContext = new ToolSettingsViewModel(tool, Navigation);
 			InitializeComponent();
 			thinLineImage.Source = ImageSource.FromResource("Sketching.Common.Resources.ThinLine.png");
 			thickLineImage.Source = ImageSource.FromResource("Sketching.Common.Resources.ThickLine.png");
-			_orientation = Width > Height ? StackOrientation.Horizontal : StackOrientation.Vertical;
+			customColorsLayout.IsVisible = false;
 			CreateColorPalette(tool);
-			SetupColorGrid();
-			FillColorGrid();
+			SetupAndFillColorGrids();
 
 			// Xamarin.Forms bug still not fixed https://bugzilla.xamarin.com/show_bug.cgi?id=31970
 			// Andreas 2016-12-21
@@ -37,69 +40,115 @@ namespace Sketching.Common.Views
 
 		private void CreateColorPalette(ITool tool)
 		{
-			if (tool?.CustomColors != null && tool.CustomColors.Any())
+			if (tool?.CustomToolbarColors != null && tool.CustomToolbarColors.Any())
 			{
-				_colorPalette = tool.CustomColors.ToList();
+				customColorsLayout.IsVisible = true;
+				customColorsTitle.Text = tool.CustomToolbarName;
+				_customColorPalette = tool.CustomToolbarColors.ToList();
 			}
-			else
-			{
-				_colorPalette = new List<Color>
+			_colorPalette = new List<KeyValuePair<string, Color>>
 				{
-					Color.White,
-					Color.Silver,
-					Color.Gray,
-					Color.Black,
-					Color.Orange,
-					Color.Yellow,
-					Color.Aqua,
-					Color.Blue,
-					Color.Navy,
-					Color.Lime,
-					Color.Green,
-					Color.Teal,
-					Color.Fuchsia,
-					Color.Red,
-					Color.Purple,
+					new KeyValuePair<string, Color>(string.Empty, Color.White),
+					new KeyValuePair<string, Color>(string.Empty, Color.Silver),
+					new KeyValuePair<string, Color>(string.Empty, Color.Gray),
+					new KeyValuePair<string, Color>(string.Empty, Color.Black),
+					new KeyValuePair<string, Color>(string.Empty, Color.Orange),
+					new KeyValuePair<string, Color>(string.Empty, Color.Yellow),
+					new KeyValuePair<string, Color>(string.Empty, Color.Aqua),
+					new KeyValuePair<string, Color>(string.Empty, Color.Blue),
+					new KeyValuePair<string, Color>(string.Empty, Color.Navy),
+					new KeyValuePair<string, Color>(string.Empty, Color.Lime),
+					new KeyValuePair<string, Color>(string.Empty, Color.Green),
+					new KeyValuePair<string, Color>(string.Empty, Color.Teal),
+					new KeyValuePair<string, Color>(string.Empty, Color.Fuchsia),
+					new KeyValuePair<string, Color>(string.Empty, Color.Red),
+					new KeyValuePair<string, Color>(string.Empty, Color.Purple)
 				};
+		}
+
+		private void OnSizeChanged(object sender, EventArgs e)
+		{
+			_orientation = Width > Height ? StackOrientation.Horizontal : StackOrientation.Vertical;
+			if (Device.Idiom == TargetIdiom.Desktop) return;
+			SetupAndFillColorGrids();
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			SizeChanged += OnSizeChanged;
+		}
+
+		private void SetupAndFillColorGrids()
+		{
+			// Custom colors
+			var numberOfRowsInCustomColorGrid = SetupColorGridAndReturnNumberOfRows(_customColorPalette, customColorsGrid);
+			FillColorGrid(_customColorPalette, customColorsGrid);
+			// Default colors
+			var numberOfRowsInDefaultColorGrid = SetupColorGridAndReturnNumberOfRows(_colorPalette, colorGrid);
+			FillColorGrid(_colorPalette, colorGrid);
+			// Height ratio of the two color grids
+			if (_customColorPalette != null && _customColorPalette.Any() && numberOfRowsInCustomColorGrid > 0)
+			{
+				CalculatePaletteGridHeights(numberOfRowsInDefaultColorGrid, numberOfRowsInCustomColorGrid);
 			}
 		}
 
-
-		private void SetupColorGrid()
+		private int SetupColorGridAndReturnNumberOfRows(List<KeyValuePair<string, Color>> palette, Grid grid)
 		{
-			colorGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-			colorGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-			colorGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-
-			colorGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-			colorGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-			colorGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-
+			var numberOfRows = 0;
+			if (palette == null || !palette.Any()) return numberOfRows;
+			if (grid.ColumnDefinitions.Any()) grid.ColumnDefinitions.Clear();
+			if (grid.RowDefinitions.Any()) grid.RowDefinitions.Clear();
+			if (grid.Children.Any()) grid.Children.Clear();
+			var numberOfColors = palette.Count;
 			if (_orientation == StackOrientation.Vertical)
 			{
-				colorGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-				colorGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+				numberOfRows = (int)Math.Ceiling(numberOfColors / ColumnsInVertical);
+				for (var i = 0; i < numberOfRows; i++)
+				{
+					grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+				}
+				for (var i = 0; i < ColumnsInVertical; i++)
+				{
+					grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+				}
 			}
 			else
 			{
-				colorGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-				colorGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+				numberOfRows = (int)Math.Ceiling(numberOfColors / ColumnsInHorisontal);
+				for (var i = 0; i < numberOfRows; i++)
+				{
+					grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+				}
+				for (var i = 0; i < ColumnsInHorisontal; i++)
+				{
+					grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+				}
 			}
+			return numberOfRows;
 		}
 
-		private void FillColorGrid()
+		private void FillColorGrid(List<KeyValuePair<string, Color>> palette, Grid grid)
 		{
+			if (palette == null || !palette.Any()) return;
+			if (grid.ColumnDefinitions.Any()) grid.ColumnDefinitions.Clear();
+			if (grid.RowDefinitions.Any()) grid.RowDefinitions.Clear();
+			if (grid.Children.Any()) grid.Children.Clear();
 			var i = 1;
 			var left = -1;
 			var top = 0;
-			foreach (var label in _colorPalette.Select(color => new Label
+			var timeForNewRowInVertical = (int)ColumnsInVertical + 1;
+			var timeForNewRowInHorisontal = (int)ColumnsInHorisontal + 1;
+			foreach (var label in palette.Select(item => new Label
 			{
 				HorizontalTextAlignment = TextAlignment.Center,
 				VerticalTextAlignment = TextAlignment.Center,
-				FontSize = 10.0,
-				Text = string.Empty,
-				TextColor = GetTextColor(color),
-				BackgroundColor = color
+				FontSize = 12.0,
+				LineBreakMode = LineBreakMode.TailTruncation,
+				Text = item.Key,
+				TextColor = GetTextColor(item.Value),
+				BackgroundColor = item.Value
 			}))
 			{
 				var tapGestureRecognizer = new TapGestureRecognizer
@@ -113,23 +162,51 @@ namespace Sketching.Common.Views
 				left++;
 				if (_orientation == StackOrientation.Vertical)
 				{
-					if (i == 4 || i == 7 || i == 10 || i == 13) // New line
+					if (i == timeForNewRowInVertical) // New line
 					{
 						left = 0;
 						top++;
+						timeForNewRowInVertical += (int)ColumnsInVertical;
 					}
 				}
 				else
 				{
-					if (i == 6 || i == 11) // New line
+					if (i == timeForNewRowInHorisontal) // New line
 					{
 						left = 0;
 						top++;
+						timeForNewRowInHorisontal += (int)ColumnsInHorisontal;
 					}
 				}
-				colorGrid.Children.Add(label, left, top);
+				grid.Children.Add(label, left, top);
 				i++;
 			}
+		}
+
+		private void CalculatePaletteGridHeights(int numberOfRowsInDefaultColorGrid, int numberOfRowsInCustomColorGrid)
+		{
+			if (paletteGrid.ColumnDefinitions.Any()) paletteGrid.ColumnDefinitions.Clear();
+			if (paletteGrid.RowDefinitions.Any()) paletteGrid.RowDefinitions.Clear();
+			if (paletteGrid.Children.Any()) paletteGrid.Children.Clear();
+
+			// Calculate the height of each palette
+			var customColorGridHeight = 1.0;
+			var defaultColorGridHeight = 1.0;
+			if (numberOfRowsInDefaultColorGrid > numberOfRowsInCustomColorGrid)
+			{
+				var ratio = (double)numberOfRowsInCustomColorGrid / numberOfRowsInDefaultColorGrid;
+				customColorGridHeight = 1 - ratio;
+			}
+			if (numberOfRowsInDefaultColorGrid < numberOfRowsInCustomColorGrid)
+			{
+				var ratio = (double)numberOfRowsInDefaultColorGrid / numberOfRowsInCustomColorGrid;
+				defaultColorGridHeight = 1 - ratio;
+			}
+
+			paletteGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(customColorGridHeight, GridUnitType.Star) });
+			paletteGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(defaultColorGridHeight, GridUnitType.Star) });
+			paletteGrid.Children.Add(customColorsLayout, 0, 0);
+			paletteGrid.Children.Add(colorGrid, 0, 1);
 		}
 
 		private static Color GetTextColor(Color backgroundColor)

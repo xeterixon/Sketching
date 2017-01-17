@@ -8,9 +8,20 @@ namespace Sketching.Common.Tools
 	{
 		private int GridSize => Config.GridSize;
 
-		public LineTool() : this(ToolNames.LineTool, 1, 20, 8, null) { }
+		/// <summary>
+		/// LineTool with default values
+		/// </summary>
+		public LineTool() : this(ToolNames.LineTool, 1, 20, 8, string.Empty, null) { }
 
-		public LineTool(string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
+		/// <summary>
+		/// Customized LineTool with default sizes
+		/// </summary>
+		public LineTool(string name, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors) : this(name, 1, 20, 8, customToolbarName, customToolbarColors) { }
+
+		/// <summary>
+		/// Custom made LineTool
+		/// </summary>
+		public LineTool(string name, double minSize, double maxSize, double startSize, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors)
 		{
 			CanUseFill = false;
 			Name = name;
@@ -18,7 +29,8 @@ namespace Sketching.Common.Tools
 			Geometry.MaxSize = maxSize;
 			Geometry.Size = startSize;
 			Geometry.HighLight = false;
-			CustomColors = customColors;
+			CustomToolbarName = customToolbarName;
+			CustomToolbarColors = customToolbarColors;
 		}
 
 		private void Snap(ref Point p)

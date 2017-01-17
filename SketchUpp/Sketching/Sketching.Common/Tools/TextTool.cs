@@ -13,7 +13,8 @@ namespace Sketching.Common.Tools
 		public bool Active { get; set; }
 		public IText Geometry { get; set; } = new Text();
 		public bool CanUseFill { get; set; } = true;
-		public IEnumerable<Color> CustomColors { get; set; }
+		public string CustomToolbarName { get; set; }
+		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
 
 		public string Text
 		{
@@ -34,16 +35,28 @@ namespace Sketching.Common.Tools
 		}
 
 		private INavigation _navigation;
-		public TextTool(INavigation navigation) : this(navigation, ToolNames.TextTool, 20, 200, 75, null) { }
+		/// <summary>
+		/// TextTool with default values
+		/// </summary>
+		public TextTool(INavigation navigation) : this(navigation, ToolNames.TextTool, 20, 200, 75, string.Empty, null) { }
 
-		public TextTool(INavigation navigation, string name, double minSize, double maxSize, double startSize, IEnumerable<Color> customColors)
+		/// <summary>
+		/// Customized TextTool with default sizes
+		/// </summary>
+		public TextTool(INavigation navigation, string name, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors) : this(navigation, name, 20, 200, 75, customToolbarName, customToolbarColors) { }
+
+		/// <summary>
+		/// Custom made TextTool
+		/// </summary>
+		public TextTool(INavigation navigation, string name, double minSize, double maxSize, double startSize, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors)
 		{
 			_navigation = navigation;
 			Name = name;
 			Geometry.MinSize = minSize;
 			Geometry.MaxSize = maxSize;
 			Geometry.Size = startSize;
-			CustomColors = customColors;
+			CustomToolbarName = customToolbarName;
+			CustomToolbarColors = customToolbarColors;
 		}
 
 		public void TouchEnd(Point p)
