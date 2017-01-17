@@ -1,7 +1,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Cab.Mobile.Sketching</id>
-		<version>1.0.4</version>
+		<version>1.0.5</version>
 		<title>Sketching for Xamarin Forms</title>
 		<authors>TorbjornEriksson</authors>
 		<owners>CAB Group AB</owners>
@@ -20,6 +20,7 @@
 			[1.0.1] - Added image meta data helper
 			[1.0.2 - 1.0.3] - Filled geometries and misc fixes.
 			[1.0.4] - Misc updates
+			[1.0.5] - Custom colors, misc UWP.
 		</releaseNotes>
 		<dependencies>
 		<dependency id="Xamarin.Forms" version="2.3.3.175" />
