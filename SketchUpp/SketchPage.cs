@@ -17,6 +17,10 @@ namespace SketchUpp
 		private readonly SketchView _sketchView;
 		public Command SaveCommand { get; set; }
 		public bool TextToolIsActive { get; set; } = false;
+		~SketchPage() 
+		{
+			System.Diagnostics.Debug.WriteLine("~SketchPage");
+		}
 		public SketchPage()
 		{
 			Title = "Sketching";

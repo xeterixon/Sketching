@@ -11,6 +11,10 @@ namespace Sketching.Common.Views
 {
 	public partial class SketchView : ContentView
 	{
+		~SketchView() 
+		{
+			System.Diagnostics.Debug.WriteLine("~SketchView");
+		}
 		public Command<ITool> ActivateToolCommand { get; set; }
 		public ICommand UndoCommand { get; set; }
 		public ICommand UndoAllCommand { get; set; }
@@ -22,7 +26,6 @@ namespace Sketching.Common.Views
 			get { return (IToolCollection)GetValue(ToolCollectionProperty); }
 			set { SetValue(ToolCollectionProperty, value); }
 		}
-
 		private static void ToolCollectionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
 		{
 		}
