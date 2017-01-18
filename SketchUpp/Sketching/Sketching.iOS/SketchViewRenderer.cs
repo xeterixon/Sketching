@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Sketching.Common.Views;
 using Sketching.iOS;
 using UIKit;
@@ -72,15 +73,26 @@ namespace Sketching.iOS
 	{
 		protected override void OnElementChanged(ElementChangedEventArgs<SketchArea> e)
 		{
-			if (e.OldElement != null) {
+			if (e.OldElement != null)
+			{
+				e.OldElement.CallbackToNative = null;
+				if (Control != null)
+				{
+					var gestureRecognizers = Control.GestureRecognizers.Where(g => g.GetType() == typeof (TouchGestureRecognizer)).ToList();
+					foreach (var gestureRecognizer in gestureRecognizers)
+					{
+						Control.RemoveGestureRecognizer(gestureRecognizer);
+					}
+					Control.PaintSurface -= Skia_PaintSurface;
+				}
 			}
 			if (e.NewElement != null) {
 				e.NewElement.CallbackToNative = HandleCallback;
 				var view = new SKNativeView();
 				view.PaintSurface += Skia_PaintSurface;
+				view.AddGestureRecognizer(new TouchGestureRecognizer(e.NewElement, view));
 				SetNativeControl(view);
-				Control.AddGestureRecognizer(new TouchGestureRecognizer(e.NewElement, view));
-				Control.SetNeedsDisplay(); // INITIAL Paint.
+				view.SetNeedsDisplay(); // INITIAL Paint.
 			}
 			base.OnElementChanged(e);			
 		}
