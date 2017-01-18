@@ -37,10 +37,14 @@ namespace SketchUpp
 			InitializeComponent();
 		}
 
-
 		void Handle_Completed(object sender, System.EventArgs e)
 		{
 			_proxy.SetText(InputView.Text);
+		}
+
+		async void Handle_Clicked(object sender, System.EventArgs e)
+		{
+			await _proxy.End();
 		}
 
 		// Method for animation child in PopupPage
@@ -49,6 +53,7 @@ namespace SketchUpp
 		{
 			InputView.Focus();
 			return Task.FromResult(0);
+
 		}
 
 		protected override bool OnBackButtonPressed()
@@ -61,9 +66,7 @@ namespace SketchUpp
 		// Invoced when background is clicked
 		protected override bool OnBackgroundClicked()
 		{
-			// Return default value - CloseWhenBackgroundIsClicked
 			return base.OnBackgroundClicked();
 		}
-
 	}
 }

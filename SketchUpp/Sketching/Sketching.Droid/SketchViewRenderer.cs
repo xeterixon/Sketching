@@ -59,6 +59,15 @@ namespace Sketching.Droid
 				SetNativeScreenSizeToElement();
 				Control.Invalidate();
 			}
+			if (e.OldElement != null)
+			{
+				e.OldElement.CallbackToNative = null;
+				if (Control != null)
+				{
+					Control.SetOnTouchListener(null);
+					Control.PaintSurface -= Skia_PaintSurface;
+				}
+			}
 			base.OnElementChanged(e);
 		}
 		private void SetNativeScreenSizeToElement() 

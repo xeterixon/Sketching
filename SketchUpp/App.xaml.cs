@@ -11,8 +11,7 @@ namespace SketchUpp
 			InitializeComponent();
 			Sketching.Common.Helper.Factory.RegisterTextInput(typeof(InputProxy));
 			//GeometryRenderer.AddRenderer(new OvalRenderer());
-			var sketchPage = new SketchPage();
-			MainPage = new NavigationPage(sketchPage);
+			MainPage = new NavigationPage(new LandingPage());
 		}
 
 		protected override void OnStart()
