@@ -43,9 +43,8 @@ namespace Sketching.Droid
 			return retval;
 		}
 	}
-	public class SketchViewRenderer : ViewRenderer<SketchArea, SKNativeView>, Android.Views.View.IOnTouchListener
+	public class SketchViewRenderer : ViewRenderer<SketchArea, SKNativeView>
 	{
-
 		protected override void OnElementChanged(ElementChangedEventArgs<SketchArea> e)
 		{
 			if (e.NewElement != null) 
@@ -82,7 +81,8 @@ namespace Sketching.Droid
 		void CallbackToNative(Common.Interfaces.CallbackType obj)
 		{
 			if (obj == Common.Interfaces.CallbackType.Repaint) {
-				Control.Invalidate();
+				//HACK Droid is not releaseing stuff as it should. This takes care of the crash in #25 but it leaks memory.
+				Control?.Invalidate();
 			}
 		}
 
