@@ -43,7 +43,7 @@ namespace Sketching.Droid
 			return retval;
 		}
 	}
-	public class SketchViewRenderer : ViewRenderer<SketchArea, SKNativeView>, Android.Views.View.IOnTouchListener
+	public class SketchViewRenderer : ViewRenderer<SketchArea, SKNativeView>
 	{
 		protected override void OnElementChanged(ElementChangedEventArgs<SketchArea> e)
 		{
