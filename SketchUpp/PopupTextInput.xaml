@@ -6,7 +6,7 @@
         xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
         x:Class="SketchUpp.PopupTextInput"
 		InputTransparent="false"
-		CloseWhenBackgroundIsClicked="true"
+		CloseWhenBackgroundIsClicked="false"
 		>
   <!--Animations use example-->
   <pages:PopupPage.Animation>
@@ -21,8 +21,19 @@
       EasingOut="SinIn"
       HasBackgroundAnimation="True"/>
   </pages:PopupPage.Animation>
-  <StackLayout Padding="8,14,8,8" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="White" Margin="8,8,8,8">
-    <Entry Placeholder="Text" Completed="Handle_Completed" x:Name="InputView"/>
-    <Button Text="Ok" Clicked="Handle_Completed" />
-  </StackLayout>
+    <AbsoluteLayout BackgroundColor="Black" VerticalOptions="Center" HorizontalOptions="Center" Padding="2,2,2,2">
+		<Grid Padding="10,10,10,10" AbsoluteLayout.LayoutBounds=".5,.5,300,100" AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="White">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Entry Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Placeholder="Text" Completed="Handle_Completed" x:Name="InputView" HorizontalOptions="FillAndExpand"/>
+			<Button Grid.Row="1" Grid.Column="1" Text="OK" Clicked="Handle_Completed"/>
+			<Button Grid.Row="1" Grid.Column="0" Text="Cancel" Clicked="Handle_Clicked"/>
+		</Grid>
+    </AbsoluteLayout>		
 </pages:PopupPage>
