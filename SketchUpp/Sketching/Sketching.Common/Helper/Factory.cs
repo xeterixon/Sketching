@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
-using Sketching.Common.Interfaces;
+using Sketching.Interfaces;
 using Xamarin.Forms;
 
-namespace Sketching.Common.Helper
+namespace Sketching.Helper
 {
 	//TODO Look into having some kind of "real" DI/ServiceLocator thingy. This is (to?) quick-n-dirty
 	public static class Factory

@@ -81,13 +81,13 @@
     <Compile Include="Helper\ImageMetaData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sketching.Common\Sketching.Common.csproj">
-      <Project>{071C0537-FF8C-45FA-9818-A9AC003AB39A}</Project>
-      <Name>Sketching.Common</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Sketching.Common\Sketching.csproj">
+      <Project>{071C0537-FF8C-45FA-9818-A9AC003AB39A}</Project>
+      <Name>Sketching</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

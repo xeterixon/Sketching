@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sketching.Common.Extensions;
-using Sketching.Common.Helper;
-using Sketching.Common.Interfaces;
-using Sketching.Common.Render;
-using Sketching.Common.Renderer;
-using Sketching.Common.Tools;
+using Sketching.Extensions;
+using Sketching.Interfaces;
+using Sketching.Renderer;
+using Sketching.Tool;
 using SkiaSharp;
 using Xamarin.Forms;
-namespace Sketching.Common.Views
+namespace Sketching.Views
 {
 	public class SketchArea : View, ITouchDelegate, ISketchView
 	{

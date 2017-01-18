@@ -1,7 +1,7 @@
-﻿using Windows.Graphics.Display;
+using Windows.Graphics.Display;
 using Windows.System.Profile;
 using Windows.UI.ViewManagement;
-using Sketching.Common.Pages;
+using Sketching.Pages;
 using Sketching.UWP;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;

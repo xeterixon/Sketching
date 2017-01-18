@@ -4,11 +4,17 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
-using Sketching.Common.Helper;
-using Sketching.Common.Interfaces;
-using Sketching.Common.Tools;
-using Sketching.Common.Views;
+using Sketching.Helper;
+using Sketching.Interfaces;
+using Sketching.Views;
 using Xamarin.Forms;
+using Sketching.Tool.Arrow;
+using Sketching.Tool.Circle;
+using Sketching.Tool.Mark;
+using Sketching.Tool.Oval;
+using Sketching.Tool.Rectangle;
+using Sketching.Tool.Stroke;
+using Sketching.Tool.Text;
 
 namespace SketchUpp
 {
@@ -49,15 +55,15 @@ namespace SketchUpp
 				new KeyValuePair<string, Color>("Rot", Color.FromHex("#4BD47B"))
 			};
 			// How to add custom tools
-			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Line.png", typeof(LineTool).GetTypeInfo().Assembly), new LineTool(ToolNames.LineTool, customToolbarName, customToolbarColors), null);
-			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Curve.png", typeof(CurveTool).GetTypeInfo().Assembly), new CurveTool(ToolNames.CurveTool, customToolbarName, customToolbarColors), null);
-			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Highlight.png", typeof(HighlightTool).GetTypeInfo().Assembly), new HighlightTool(ToolNames.HighlightTool, customToolbarName, customToolbarColors), null);
-			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Circle.png", typeof(CircleTool).GetTypeInfo().Assembly), new CircleTool(ToolNames.CircleTool, customToolbarName, customToolbarColors), null);
-			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Oval.png", typeof(OvalTool).GetTypeInfo().Assembly), new OvalTool(ToolNames.OvalTool, customToolbarName, customToolbarColors), null);
-			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Rectangle.png", typeof(RectangleTool).GetTypeInfo().Assembly), new RectangleTool(ToolNames.RectangleTool, customToolbarName, customToolbarColors), null);
-			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Arrow.png", typeof(ArrowTool).GetTypeInfo().Assembly), new ArrowTool(ToolNames.ArrowTool, customToolbarName, customToolbarColors), null);
-			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Point.png", typeof(PointTool).GetTypeInfo().Assembly), new PointTool(ToolNames.PointTool, customToolbarName, customToolbarColors), null);
-			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Text.png", typeof(TextTool).GetTypeInfo().Assembly), new TextTool(Navigation, ToolNames.TextTool, customToolbarName, customToolbarColors), null);
+			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Line.png", typeof(LineTool).GetTypeInfo().Assembly), new LineTool(ToolNames.LineTool, customToolbarName, customToolbarColors), null);
+			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Curve.png", typeof(CurveTool).GetTypeInfo().Assembly), new CurveTool(ToolNames.CurveTool, customToolbarName, customToolbarColors), null);
+			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Highlight.png", typeof(HighlightTool).GetTypeInfo().Assembly), new HighlightTool(ToolNames.HighlightTool, customToolbarName, customToolbarColors), null);
+			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Circle.png", typeof(CircleTool).GetTypeInfo().Assembly), new CircleTool(ToolNames.CircleTool, customToolbarName, customToolbarColors), null);
+			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Oval.png", typeof(OvalTool).GetTypeInfo().Assembly), new OvalTool(ToolNames.OvalTool, customToolbarName, customToolbarColors), null);
+			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Rectangle.png", typeof(RectangleTool).GetTypeInfo().Assembly), new RectangleTool(ToolNames.RectangleTool, customToolbarName, customToolbarColors), null);
+			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Arrow.png", typeof(ArrowTool).GetTypeInfo().Assembly), new ArrowTool(ToolNames.ArrowTool, customToolbarName, customToolbarColors), null);
+			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Point.png", typeof(PointTool).GetTypeInfo().Assembly), new PointTool(ToolNames.PointTool, customToolbarName, customToolbarColors), null);
+			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Text.png", typeof(TextTool).GetTypeInfo().Assembly), new TextTool(Navigation, ToolNames.TextTool, customToolbarName, customToolbarColors), null);
 
 			// How to add the undo buttons
 			_sketchView.AddUndoTools();

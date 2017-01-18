@@ -1,8 +1,8 @@
 ﻿using System;
-using Sketching.Common.Extensions;
+using Sketching.Extensions;
 using Xamarin.Forms;
 
-namespace Sketching.Common.Helper
+namespace Sketching.Helper
 {
 	public static class Converter
 	{

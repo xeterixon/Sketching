@@ -1,4 +1,3 @@
-﻿using Sketching.Common;
 using Sketching.UWP;
 using Sketching.UWP.Helper;
 
@@ -11,7 +10,7 @@ namespace Sketching
 		{
 			Bootstrap.Init();
 			
-			Sketching.Common.Helper.Image.ImageMetaDataImplementation = new ImageMetaData();
+			Sketching.Helper.Image.ImageMetaDataImplementation = new ImageMetaData();
 #pragma warning disable 219
 
 			var ignore1 = new SketchAreaRenderer();

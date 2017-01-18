@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Foundation;
-using Sketching.Common.Interfaces;
+using Sketching.Interfaces;
 using UIKit;
 using Xamarin.Forms;
 

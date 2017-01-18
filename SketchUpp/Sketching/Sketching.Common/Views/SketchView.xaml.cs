@@ -1,13 +1,20 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Security;
 using System.Windows.Input;
-using Sketching.Common.Interfaces;
-using Sketching.Common.Tools;
+using Sketching.Tool;
+using Sketching.Views;
 using Xamarin.Forms;
+using Sketching.Tool.Arrow;
+using Sketching.Tool.Circle;
+using Sketching.Tool.Mark;
+using Sketching.Tool.Oval;
+using Sketching.Tool.Rectangle;
+using Sketching.Tool.Stroke;
+using Sketching.Tool.Text;
 
-namespace Sketching.Common.Views
+namespace Sketching.Views
 {
 	public partial class SketchView : ContentView
 	{
@@ -65,17 +72,17 @@ namespace Sketching.Common.Views
 		{
 			var assembly = typeof(SketchView).GetTypeInfo().Assembly;
 
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Line.png",assembly), new LineTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Curve.png", assembly), new CurveTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Highlight.png", assembly), new HighlightTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Circle.png", assembly), new CircleTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Oval.png", assembly), new OvalTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Rectangle.png", assembly), new RectangleTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Arrow.png", assembly), new ArrowTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Point.png", assembly), new PointTool(), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Text.png", assembly), new TextTool(Navigation), ActivateToolCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Undo.png", assembly), null, UndoCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Trash.png", assembly), null, UndoAllCommand);
+			AddToolbarItem(ImageSource.FromResource("SketchingResources.Line.png",assembly), new LineTool(), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("SketchingResources.Curve.png", assembly), new CurveTool(), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("SketchingResources.Highlight.png", assembly), new HighlightTool(), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("SketchingResources.Circle.png", assembly), new CircleTool(), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("SketchingResources.Oval.png", assembly), new OvalTool(), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("SketchingResources.Rectangle.png", assembly), new RectangleTool(), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("SketchingResources.Arrow.png", assembly), new ArrowTool(), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("SketchingResources.Point.png", assembly), new PointTool(), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("SketchingResources.Text.png", assembly), new TextTool(Navigation), ActivateToolCommand);
+			AddToolbarItem(ImageSource.FromResource("SketchingResources.Undo.png", assembly), null, UndoCommand);
+			AddToolbarItem(ImageSource.FromResource("SketchingResources.Trash.png", assembly), null, UndoAllCommand);
 		}
 
 		private void ActivateTool(ITool tool)
@@ -143,8 +150,8 @@ namespace Sketching.Common.Views
 
 		public void AddUndoTools()
 		{
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Undo.png"), null, UndoCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Common.Resources.Trash.png"), null, UndoAllCommand);
+			AddToolbarItem(ImageSource.FromResource("SketchingResources.Undo.png"), null, UndoCommand);
+			AddToolbarItem(ImageSource.FromResource("SketchingResources.Trash.png"), null, UndoAllCommand);
 		}
 
 		public void RemoveAllToolbarItems()

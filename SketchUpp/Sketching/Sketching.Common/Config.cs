@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Sketching.Common
+namespace Sketching
 {
 	public static class Config
 	{

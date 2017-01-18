@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.IO;
-using Sketching.Common.Interfaces;
-using Sketching.Common.Pages;
+using Sketching.Interfaces;
+using Sketching.Pages;
 using Xamarin.Forms;
 
 namespace SketchUpp

@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Sketching.Common.Interfaces
+namespace Sketching.Interfaces
 {
 	public interface IPoint 
 	{

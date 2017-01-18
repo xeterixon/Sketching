@@ -115,9 +115,9 @@
     <EmbeddedResource Include="Properties\Sketching.UWP.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sketching.Common\Sketching.Common.csproj">
+    <ProjectReference Include="..\Sketching.Common\Sketching.csproj">
       <Project>{071C0537-FF8C-45FA-9818-A9AC003AB39A}</Project>
-      <Name>Sketching.Common</Name>
+      <Name>Sketching</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

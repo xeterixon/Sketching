@@ -1,6 +1,6 @@
-﻿using System;
-using Sketching.Common.Extensions;
-using Sketching.Common.Interfaces;
+using System;
+using Sketching.Extensions;
+using Sketching.Interfaces;
 using SkiaSharp;
 
 namespace SketchUpp.CustomTool

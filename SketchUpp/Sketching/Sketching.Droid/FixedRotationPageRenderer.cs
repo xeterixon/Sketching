@@ -1,6 +1,6 @@
-﻿using Android.App;
+using Android.App;
 using Android.Content.PM;
-using Sketching.Common.Pages;
+using Sketching.Pages;
 using Sketching.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;

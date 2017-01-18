@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sketching.iOS", "Sketching\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sketching.Droid", "Sketching\Sketching.Droid\Sketching.Droid.csproj", "{03CF6240-2E6B-4AA4-BBBE-3A6B8C5880E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sketching.Common", "Sketching\Sketching.Common\Sketching.Common.csproj", "{071C0537-FF8C-45FA-9818-A9AC003AB39A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sketching", "Sketching\Sketching.Common\Sketching.csproj", "{071C0537-FF8C-45FA-9818-A9AC003AB39A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{3180750A-BB56-4864-9E91-8A69014E36BA}"
 	ProjectSection(SolutionItems) = preProject
