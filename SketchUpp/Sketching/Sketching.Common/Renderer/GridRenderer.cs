@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sketching.Common;
 using Sketching.Interfaces;
 using Sketching.Tool.Stroke;
 using SkiaSharp;

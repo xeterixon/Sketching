@@ -1,7 +1,7 @@
 ﻿using System;
 using Sketching.Views;
 
-namespace Sketching.Common
+namespace Sketching
 {
 	public static class Bootstrap
 	{
