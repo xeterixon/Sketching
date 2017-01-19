@@ -1,4 +1,3 @@
-using System;
 using Sketching.Interfaces;
 using Xamarin.Forms;
 

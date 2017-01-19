@@ -1,5 +1,4 @@
-﻿using System;
-using Sketching.Extensions;
+﻿using Sketching.Extensions;
 using Xamarin.Forms;
 
 namespace Sketching.Helper

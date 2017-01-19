@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Sketching.Interfaces;
 using Xamarin.Forms;
-
+using Sketching.Views;
 namespace Sketching.Tool
 {
 	public interface IToolCollection : ITouchDelegate
 	{
-		ISketchView View { get; set; }
+		ISketchArea View { get; set; }
 		List<ITool> Tools { get; set; }
 		void ActivateTool(ITool tool);
 		void ActivateTool(string toolName);
@@ -32,7 +32,7 @@ namespace Sketching.Tool
 		{
 			MessagingCenter.Subscribe<object>(this,"Repaint",(obj) => Refresh());
 		}
-		public ISketchView View { get; set; }
+		public ISketchArea View { get; set; }
 		public List<ITool> Tools { get; set; } = new List<ITool>();
 		public List<IGeometryVisual> Geometries { get; set; } = new List<IGeometryVisual>();
 		//NOTE Only allow one active tool at a time for now.

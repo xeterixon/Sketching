@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Sketching.Interfaces
 {
 	public interface IImage
@@ -9,11 +8,5 @@ namespace Sketching.Interfaces
 		double Height { get; set; }
 	}
 
-	//TODO Move/Remove this...
-	public class BackgroundImage : IImage
-	{
-		public byte[] Data { get; set;}
-		public double Width { get; set; }
-		public double Height { get; set; }
-	}
+
 }

@@ -1,4 +1,3 @@
-using Sketching;
 using Sketching.Helper;
 using Sketching.Droid;
 using Sketching.Droid.Helper;

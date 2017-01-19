@@ -34,7 +34,6 @@
     <Compile Include="Views\SketchArea.cs" />
     <Compile Include="Interfaces\ITouchDelegate.cs" />
     <Compile Include="Extensions\SkiaExtensions.cs" />
-    <Compile Include="Interfaces\ISketchView.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Interfaces\IGeometryVisual.cs" />
     <Compile Include="Interfaces\IPoint.cs" />
@@ -46,16 +45,13 @@
     <Compile Include="Views\SketchToolbarItem.xaml.cs">
       <DependentUpon>SketchToolbarItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IGeometryRenderer.cs" />
     <Compile Include="Views\TextInputView.xaml.cs">
       <DependentUpon>TextInputView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ToolSettingsView.xaml.cs">
       <DependentUpon>ToolSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ToolSettingsViewModel.cs" />
     <Compile Include="Interfaces\IImage.cs" />
-    <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Renderer\BackgroundImageRenderer.cs" />
     <Compile Include="Helper\Converter.cs" />
     <Compile Include="Pages\FixedRotationPage.cs" />
@@ -74,7 +70,7 @@
     <Compile Include="Tool\Rectangle\RectangleTool.cs" />
     <Compile Include="Tool\Arrow\Arrow.cs" />
     <Compile Include="Tool\Circle\Circle.cs" />
-    <Compile Include="Tool\Mark\PointTool.cs" />
+    <Compile Include="Tool\Mark\MarkTool.cs" />
     <Compile Include="Tool\Mark\Mark.cs" />
     <Compile Include="Tool\Oval\Oval.cs" />
     <Compile Include="Tool\Rectangle\Rectangle.cs" />
@@ -96,8 +92,12 @@
     <Compile Include="Tool\Rectangle\IRectangle.cs" />
     <Compile Include="Tool\ToolCollection.cs" />
     <Compile Include="Tool\Stroke\StrokeToolBase.cs" />
-    <Compile Include="Tool\Mark\PointToolBase.cs" />
+    <Compile Include="Tool\Mark\MarkToolBase.cs" />
     <Compile Include="Tool\Stroke\IStroke.cs" />
+    <Compile Include="Helper\BackgroundImage.cs" />
+    <Compile Include="Views\ISketchView.cs" />
+    <Compile Include="Renderer\IGeometryRenderer.cs" />
+    <Compile Include="Renderer\IRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp">
