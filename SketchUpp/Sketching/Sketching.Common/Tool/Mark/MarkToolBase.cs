@@ -6,7 +6,7 @@ using Xamarin.Forms;
 namespace Sketching.Tool.Mark
 {
 
-	public abstract class PointToolBase : IPointTool
+	public abstract class MarkToolBase : IMarkTool
 	{
 		protected virtual void CreateNewGeometry()
 		{

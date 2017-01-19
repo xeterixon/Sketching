@@ -4,11 +4,12 @@ using Sketching.Extensions;
 using Sketching.Interfaces;
 using Sketching.Renderer;
 using Sketching.Tool;
+using Sketching.Helper;
 using SkiaSharp;
 using Xamarin.Forms;
 namespace Sketching.Views
 {
-	public class SketchArea : View, ITouchDelegate, ISketchView
+	public class SketchArea : View, ITouchDelegate, ISketchArea
 	{
 		//TODO Is this a bit overly designed? We only got one delegate and thats the ToolCollection object....
 		public List<ITouchDelegate> Delegates { get; set; } = new List<ITouchDelegate>();

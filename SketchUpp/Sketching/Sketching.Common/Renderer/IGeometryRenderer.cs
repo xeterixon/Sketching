@@ -1,5 +1,7 @@
 ﻿using System;
-namespace Sketching.Interfaces
+using Sketching.Interfaces;
+
+namespace Sketching.Renderer
 {
 	public interface IGeometryRenderer 
 	{

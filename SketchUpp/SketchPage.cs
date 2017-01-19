@@ -62,7 +62,7 @@ namespace SketchUpp
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Oval.png", typeof(OvalTool).GetTypeInfo().Assembly), new OvalTool(ToolNames.OvalTool, customToolbarName, customToolbarColors), null);
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Rectangle.png", typeof(RectangleTool).GetTypeInfo().Assembly), new RectangleTool(ToolNames.RectangleTool, customToolbarName, customToolbarColors), null);
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Arrow.png", typeof(ArrowTool).GetTypeInfo().Assembly), new ArrowTool(ToolNames.ArrowTool, customToolbarName, customToolbarColors), null);
-			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Point.png", typeof(PointTool).GetTypeInfo().Assembly), new PointTool(ToolNames.PointTool, customToolbarName, customToolbarColors), null);
+			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Point.png", typeof(MarkTool).GetTypeInfo().Assembly), new MarkTool(ToolNames.PointTool, customToolbarName, customToolbarColors), null);
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Text.png", typeof(TextTool).GetTypeInfo().Assembly), new TextTool(Navigation, ToolNames.TextTool, customToolbarName, customToolbarColors), null);
 
 			// How to add the undo buttons

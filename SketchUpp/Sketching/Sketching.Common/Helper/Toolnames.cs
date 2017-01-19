@@ -2,14 +2,14 @@
 {
 	public static class ToolNames
 	{
-		public const string ArrowTool = "Arrow";
-		public const string CircleTool = "Circle";
-		public const string CurveTool = "Curve";
-		public const string HighlightTool = "Highlight";
-		public const string LineTool = "Line";
-		public const string OvalTool = "Oval";
-		public const string PointTool = "Point";
-		public const string RectangleTool = "Rectangle";
-		public const string TextTool = "Text";
+		public static string ArrowTool { get; set; } = "Arrow";
+		public static string CircleTool { get; set; }= "Circle";
+		public static string CurveTool { get; set; }= "Curve";
+		public static string HighlightTool { get; set; }= "Highlight";
+		public static string LineTool { get; set; }= "Line";
+		public static string OvalTool { get; set; } = "Oval";
+		public static string PointTool { get; set; }= "Point";
+		public static string RectangleTool { get; set; }= "Rectangle";
+		public static string TextTool { get; set; } = "Text";
 	}
 }

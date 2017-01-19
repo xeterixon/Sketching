@@ -1,6 +1,7 @@
 ﻿using System;
 using Sketching.Extensions;
 using Sketching.Interfaces;
+using Sketching.Renderer;
 using SkiaSharp;
 
 namespace Sketching.Tool.Rectangle

@@ -1,5 +1,4 @@
-﻿
-using Sketching.Interfaces;
+﻿using Sketching.Interfaces;
 
 namespace Sketching.Tool.Mark
 {

@@ -1,6 +1,6 @@
 ﻿using SkiaSharp;
 
-namespace Sketching.Interfaces
+namespace Sketching.Renderer
 {
 	public interface IRenderer
 	{

@@ -14,7 +14,7 @@ namespace SketchUpp.CustomTool
 		public IOval Geometry { get; set; } = new Oval { Size = 8, Color = Color.Maroon };
 		public bool CanUseFill { get; set; }
 
-		public string Name { get; set; } = "Oval";
+		public string Name { get; set; } = "OvalTest";
 
 		IGeometryVisual ITool.Geometry
 		{

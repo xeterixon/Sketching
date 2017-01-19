@@ -26,7 +26,7 @@ namespace Sketching.Tool
 	public interface IArrowTool : ITool<IArrow> { }
 	public interface ICircleTool : ITool<ICircle> { }
 	public interface IOvalTool : ITool<IOval> { }
-	public interface IPointTool : ITool<IMark> { }
+	public interface IMarkTool : ITool<IMark> { }
 	public interface IRectangleTool : ITool<IRectangle> { }
 	public interface ITextTool : ITool<IText> { }
 }

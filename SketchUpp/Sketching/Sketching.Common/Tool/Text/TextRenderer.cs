@@ -2,8 +2,8 @@ using System;
 using Sketching.Extensions;
 using Sketching.Helper;
 using Sketching.Interfaces;
+using Sketching.Renderer;
 using SkiaSharp;
-using Xamarin.Forms;
 
 namespace Sketching.Tool.Text
 {

@@ -98,9 +98,9 @@ namespace Sketching.iOS
 		}
 
 
-		void HandleCallback(Interfaces.CallbackType obj)
+		void HandleCallback(CallbackType obj)
 		{
-			if (obj == Interfaces.CallbackType.Repaint) 
+			if (obj == CallbackType.Repaint) 
 			{
 				Control?.SetNeedsDisplay();
 			}

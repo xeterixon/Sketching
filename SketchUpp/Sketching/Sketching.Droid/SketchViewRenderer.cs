@@ -78,9 +78,9 @@ namespace Sketching.Droid
 
 		}
 
-		void CallbackToNative(Interfaces.CallbackType obj)
+		void CallbackToNative(CallbackType obj)
 		{
-			if (obj == Interfaces.CallbackType.Repaint) {
+			if (obj == CallbackType.Repaint) {
 				//HACK Droid is not releaseing stuff as it should. This takes care of the crash in #25 but it leaks memory.
 				Control?.Invalidate();
 			}
