@@ -8,7 +8,7 @@ namespace Sketching
 	{
 		public static void Init()
 		{
-			Bootstrap.Init();
+			Sketching.Bootstrap.Init();
 			
 			Sketching.Helper.Image.ImageMetaDataImplementation = new ImageMetaData();
 #pragma warning disable 219

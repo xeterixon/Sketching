@@ -127,9 +127,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sketching\Sketching.Common\Sketching.Common.csproj">
+    <ProjectReference Include="..\Sketching\Sketching.Common\Sketching.csproj">
       <Project>{071c0537-ff8c-45fa-9818-a9ac003ab39a}</Project>
-      <Name>Sketching.Common</Name>
+      <Name>Sketching</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sketching\Sketching.UWP\Sketching.UWP.csproj">
       <Project>{eefce846-7441-4c17-b312-515da930cd65}</Project>

@@ -56,7 +56,7 @@ namespace Sketching.UWP
 		{
 			if (callbackType == CallbackType.Repaint)
 			{
-				Control.Invalidate();
+				Control?.Invalidate();
 			}
 		}
 

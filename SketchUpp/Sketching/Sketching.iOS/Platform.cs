@@ -1,6 +1,4 @@
-﻿
-using Sketching.Common;
-using Sketching.iOS;
+﻿using Sketching.iOS;
 using Sketching.iOS.Helper;
 
 // ReSharper disable once CheckNamespace

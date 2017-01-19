@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Security;
 using System.Windows.Input;
 using Sketching.Tool;
-using Sketching.Views;
 using Xamarin.Forms;
 using Sketching.Tool.Arrow;
 using Sketching.Tool.Circle;
@@ -150,8 +149,8 @@ namespace Sketching.Views
 
 		public void AddUndoTools()
 		{
-			AddToolbarItem(ImageSource.FromResource("SketchingResources.Undo.png"), null, UndoCommand);
-			AddToolbarItem(ImageSource.FromResource("SketchingResources.Trash.png"), null, UndoAllCommand);
+			AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Undo.png"), null, UndoCommand);
+			AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Trash.png"), null, UndoAllCommand);
 		}
 
 		public void RemoveAllToolbarItems()
