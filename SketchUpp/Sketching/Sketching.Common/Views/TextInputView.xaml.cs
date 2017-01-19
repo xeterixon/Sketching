@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Sketching.Common.Interfaces;
+using Sketching.Interfaces;
 using Xamarin.Forms;
 
-namespace Sketching.Common.Views
+namespace Sketching.Views
 {
 	public partial class TextInputView : ContentView, ITextInput
 	{

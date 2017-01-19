@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using Sketching.Common.Interfaces;
+using Sketching.Interfaces;
+using Sketching.Tool;
 using Xamarin.Forms;
 
 namespace SketchUpp.CustomTool

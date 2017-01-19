@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace Sketching.Common.Interfaces
+namespace Sketching.Interfaces
 {
 	public interface ICustomColorSetup
 	{

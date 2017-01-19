@@ -1,7 +1,7 @@
-﻿using Android.Runtime;
+using Android.Runtime;
 using Android.Util;
 using Android.Views;
-using Sketching.Common.Views;
+using Sketching.Views;
 using Sketching.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -78,9 +78,9 @@ namespace Sketching.Droid
 
 		}
 
-		void CallbackToNative(Common.Interfaces.CallbackType obj)
+		void CallbackToNative(Interfaces.CallbackType obj)
 		{
-			if (obj == Common.Interfaces.CallbackType.Repaint) {
+			if (obj == Interfaces.CallbackType.Repaint) {
 				//HACK Droid is not releaseing stuff as it should. This takes care of the crash in #25 but it leaks memory.
 				Control?.Invalidate();
 			}

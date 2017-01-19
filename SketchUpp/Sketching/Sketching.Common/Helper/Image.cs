@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Sketching.Common.Interfaces;
+using Sketching.Interfaces;
 using Xamarin.Forms;
 
-namespace Sketching.Common.Helper
+namespace Sketching.Helper
 {
 	public static class Image
 	{

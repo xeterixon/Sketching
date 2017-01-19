@@ -1,4 +1,4 @@
-﻿using Sketching.Common.Render;
+using Sketching.Renderer;
 using SketchUpp.CustomTool;
 using Xamarin.Forms;
 
@@ -9,7 +9,7 @@ namespace SketchUpp
 		public App()
 		{
 			InitializeComponent();
-			Sketching.Common.Helper.Factory.RegisterTextInput(typeof(InputProxy));
+			Sketching.Helper.Factory.RegisterTextInput(typeof(InputProxy));
 			//GeometryRenderer.AddRenderer(new OvalRenderer());
 			MainPage = new NavigationPage(new LandingPage());
 		}

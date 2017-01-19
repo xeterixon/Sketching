@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Sketching.Common.Extensions
+namespace Sketching.Extensions
 {
 	public static class ColorExtensions
 	{

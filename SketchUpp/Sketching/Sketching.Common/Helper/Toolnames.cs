@@ -1,4 +1,4 @@
-﻿namespace Sketching.Common.Helper
+﻿namespace Sketching.Helper
 {
 	public static class ToolNames
 	{

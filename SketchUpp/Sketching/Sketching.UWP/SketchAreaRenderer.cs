@@ -1,8 +1,8 @@
-﻿using Windows.Graphics.Display;
+using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
-using Sketching.Common.Interfaces;
-using Sketching.Common.Views;
+using Sketching.Interfaces;
+using Sketching.Views;
 using Sketching.UWP;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;

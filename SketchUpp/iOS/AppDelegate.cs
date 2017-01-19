@@ -1,5 +1,5 @@
-﻿using Foundation;
-using Sketching.Common.Pages;
+using Foundation;
+using Sketching.Pages;
 using UIKit;
 using Xamarin.Forms;
 

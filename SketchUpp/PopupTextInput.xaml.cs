@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Pages;
-using Sketching.Common.Interfaces;
+using Sketching.Interfaces;
 using Xamarin.Forms;
 
 namespace SketchUpp

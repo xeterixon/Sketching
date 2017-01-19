@@ -13,7 +13,7 @@ namespace Sketching
 			Bootstrap.Init();
 #pragma warning disable 219
 			var ignore1 = new SketchViewRenderer();
-			Common.Helper.Image.ImageMetaDataImplementation = new ImageMetaData();
+			Helper.Image.ImageMetaDataImplementation = new ImageMetaData();
 #pragma warning restore 219
 		}
 	}

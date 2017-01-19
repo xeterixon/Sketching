@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Windows.ApplicationModel;
@@ -50,7 +50,7 @@ namespace SketchUpp.UWP
 
 				var assemblies = new List<Assembly>
 				{
-					typeof(Sketching.Common.Bootstrap).GetTypeInfo().Assembly,
+					typeof(Sketching.Bootstrap).GetTypeInfo().Assembly,
 					typeof(Sketching.UWP.SketchAreaRenderer).GetTypeInfo().Assembly
 				};
 
