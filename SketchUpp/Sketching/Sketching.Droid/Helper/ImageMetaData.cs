@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Android.Graphics;
-using Sketching.Common.Interfaces;
+using Sketching.Interfaces;
 using Xamarin.Forms;
 
 namespace Sketching.Droid.Helper

@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sketching.Common.Interfaces;
+using System.Windows.Input;
+using Sketching.Tool;
 using Xamarin.Forms;
 
-namespace Sketching.Common.Views
+namespace Sketching.Views
 {
 	public partial class ToolSettingsView : ContentPage
 	{
@@ -13,14 +14,24 @@ namespace Sketching.Common.Views
 		private List<KeyValuePair<string, Color>> _customColorPalette;
 		private const double ColumnsInVertical = 3.0;
 		private const double ColumnsInHorisontal = 5.0;
+		public ICommand ColorSelectedCommand { get; set; }
+		public ITool Tool { get; set; }
 
 		public ToolSettingsView(ITool tool, StackOrientation orientation)
 		{
+			Tool = tool;
+			ColorSelectedCommand = new Command<Color>(color =>
+			{
+				Tool.Geometry.Color = color;
+				Navigation.PopAsync();
+			});
+
 			_orientation = orientation;
-			BindingContext = new ToolSettingsViewModel(tool, Navigation);
 			InitializeComponent();
-			thinLineImage.Source = ImageSource.FromResource("Sketching.Common.Resources.ThinLine.png");
-			thickLineImage.Source = ImageSource.FromResource("Sketching.Common.Resources.ThickLine.png");
+			BindingContext = this;
+
+			thinLineImage.Source = ImageSource.FromResource("Sketching.Resources.ThinLine.png");
+			thickLineImage.Source = ImageSource.FromResource("Sketching.Resources.ThickLine.png");
 			customColorsLayout.IsVisible = false;
 			CreateColorPalette(tool);
 			SetupAndFillColorGrids();
@@ -153,7 +164,7 @@ namespace Sketching.Common.Views
 			{
 				var tapGestureRecognizer = new TapGestureRecognizer
 				{
-					Command = ((ToolSettingsViewModel)BindingContext).ColorSelectedCommand,
+					Command = ColorSelectedCommand,
 					CommandParameter = label.BackgroundColor
 				};
 

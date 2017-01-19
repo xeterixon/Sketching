@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.Linq;
-using Sketching.Common.Views;
+using Sketching.Views;
 using Sketching.iOS;
 using UIKit;
 using Xamarin.Forms;
@@ -98,9 +98,9 @@ namespace Sketching.iOS
 		}
 
 
-		void HandleCallback(Common.Interfaces.CallbackType obj)
+		void HandleCallback(Interfaces.CallbackType obj)
 		{
-			if (obj == Common.Interfaces.CallbackType.Repaint) 
+			if (obj == Interfaces.CallbackType.Repaint) 
 			{
 				Control?.SetNeedsDisplay();
 			}

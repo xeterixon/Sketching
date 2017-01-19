@@ -135,9 +135,9 @@
       <Project>{EE835719-F327-4560-A76B-CD2F91749E0A}</Project>
       <Name>Sketching.iOS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sketching\Sketching.Common\Sketching.Common.csproj">
+    <ProjectReference Include="..\Sketching\Sketching.Common\Sketching.csproj">
       <Project>{071C0537-FF8C-45FA-9818-A9AC003AB39A}</Project>
-      <Name>Sketching.Common</Name>
+      <Name>Sketching</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

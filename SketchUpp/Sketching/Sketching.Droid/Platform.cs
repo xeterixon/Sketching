@@ -1,5 +1,5 @@
-﻿using Sketching.Common;
-using Sketching.Common.Helper;
+using Sketching.Common;
+using Sketching.Helper;
 using Sketching.Droid;
 using Sketching.Droid.Helper;
 

@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
-using Sketching.Common.Interfaces;
+using Sketching.Tool;
 using Xamarin.Forms;
 
-namespace Sketching.Common.Views
+namespace Sketching.Views
 {
 	public class ToolSettingsViewModel
 	{

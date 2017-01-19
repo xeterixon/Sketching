@@ -1,5 +1,5 @@
 ﻿using System;
-using Sketching.Common.Views;
+using Sketching.Views;
 
 namespace Sketching.Common
 {

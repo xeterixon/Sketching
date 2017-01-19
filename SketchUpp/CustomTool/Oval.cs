@@ -1,5 +1,5 @@
-﻿using System;
-using Sketching.Common.Interfaces;
+using System;
+using Sketching.Interfaces;
 using Xamarin.Forms;
 
 namespace SketchUpp.CustomTool

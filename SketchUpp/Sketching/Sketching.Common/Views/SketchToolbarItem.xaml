@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Sketching.Common.Views.SketchToolbarItem">
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Sketching.Views.SketchToolbarItem">
 	<ContentView.Content>
 		<StackLayout Orientation="Vertical">
 			<Image x:Name="toolImage" HeightRequest="50" HorizontalOptions="FillAndExpand" Aspect="AspectFit"/>

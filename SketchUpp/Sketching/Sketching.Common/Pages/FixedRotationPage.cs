@@ -2,7 +2,7 @@
 
 using Xamarin.Forms;
 
-namespace Sketching.Common.Pages
+namespace Sketching.Pages
 {
 	public enum PageOrientation 
 	{

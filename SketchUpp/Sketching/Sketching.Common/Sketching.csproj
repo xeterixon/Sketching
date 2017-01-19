@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{071C0537-FF8C-45FA-9818-A9AC003AB39A}</ProjectGuid>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Sketching</RootNamespace>
+    <AssemblyName>Sketching.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Helper\ToolNames.cs" />
+    <Compile Include="Interfaces\ICustomColorSetup.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\SketchArea.cs" />
+    <Compile Include="Interfaces\ITouchDelegate.cs" />
+    <Compile Include="Extensions\SkiaExtensions.cs" />
+    <Compile Include="Interfaces\ISketchView.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Interfaces\IGeometryVisual.cs" />
+    <Compile Include="Interfaces\IPoint.cs" />
+    <Compile Include="Renderer\GeometryRenderer.cs" />
+    <Compile Include="Renderer\GridRenderer.cs" />
+    <Compile Include="Views\SketchView.xaml.cs">
+      <DependentUpon>SketchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SketchToolbarItem.xaml.cs">
+      <DependentUpon>SketchToolbarItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\IGeometryRenderer.cs" />
+    <Compile Include="Views\TextInputView.xaml.cs">
+      <DependentUpon>TextInputView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ToolSettingsView.xaml.cs">
+      <DependentUpon>ToolSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ToolSettingsViewModel.cs" />
+    <Compile Include="Interfaces\IImage.cs" />
+    <Compile Include="Interfaces\IRenderer.cs" />
+    <Compile Include="Renderer\BackgroundImageRenderer.cs" />
+    <Compile Include="Helper\Converter.cs" />
+    <Compile Include="Pages\FixedRotationPage.cs" />
+    <Compile Include="Helper\Image.cs" />
+    <Compile Include="Interfaces\IImageMetaData.cs" />
+    <Compile Include="Interfaces\ITextInput.cs" />
+    <Compile Include="Helper\Factory.cs" />
+    <Compile Include="Bootstrap.cs" />
+    <Compile Include="Tool\Arrow\ArrowTool.cs" />
+    <Compile Include="Tool\Stroke\CurveTool.cs" />
+    <Compile Include="Tool\Stroke\LineTool.cs" />
+    <Compile Include="Tool\Text\TextTool.cs" />
+    <Compile Include="Tool\Oval\OvalTool.cs" />
+    <Compile Include="Tool\Stroke\HighlightTool.cs" />
+    <Compile Include="Tool\Circle\CircleTool.cs" />
+    <Compile Include="Tool\Rectangle\RectangleTool.cs" />
+    <Compile Include="Tool\Arrow\Arrow.cs" />
+    <Compile Include="Tool\Circle\Circle.cs" />
+    <Compile Include="Tool\Mark\PointTool.cs" />
+    <Compile Include="Tool\Mark\Mark.cs" />
+    <Compile Include="Tool\Oval\Oval.cs" />
+    <Compile Include="Tool\Rectangle\Rectangle.cs" />
+    <Compile Include="Tool\Stroke\Stroke.cs" />
+    <Compile Include="Tool\Text\Text.cs" />
+    <Compile Include="Tool\Arrow\ArrowRenderer.cs" />
+    <Compile Include="Tool\Circle\CircleRenderer.cs" />
+    <Compile Include="Tool\Mark\MarkRenderer.cs" />
+    <Compile Include="Tool\Stroke\StrokeRenderer.cs" />
+    <Compile Include="Tool\Oval\OvalRenderer.cs" />
+    <Compile Include="Tool\Rectangle\RectangleRenderer.cs" />
+    <Compile Include="Tool\Text\TextRenderer.cs" />
+    <Compile Include="Tool\Arrow\IArrow.cs" />
+    <Compile Include="Tool\Circle\ICircle.cs" />
+    <Compile Include="Tool\Mark\IMark.cs" />
+    <Compile Include="Tool\Oval\IOval.cs" />
+    <Compile Include="Tool\Text\IText.cs" />
+    <Compile Include="Tool\ITool.cs" />
+    <Compile Include="Tool\Rectangle\IRectangle.cs" />
+    <Compile Include="Tool\ToolCollection.cs" />
+    <Compile Include="Tool\Stroke\StrokeToolBase.cs" />
+    <Compile Include="Tool\Mark\PointToolBase.cs" />
+    <Compile Include="Tool\Stroke\IStroke.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SkiaSharp">
+      <HintPath>..\..\packages\SkiaSharp.1.56.0\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.Forms">
+      <HintPath>..\..\packages\SkiaSharp.Views.Forms.1.56.0\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.Views.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.180\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform">
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.180\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.180\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\SketchView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Line.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Curve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\SketchToolbarItem.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Rectangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Point.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ToolSettingsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ThickLine.png" />
+    <EmbeddedResource Include="Resources\ThinLine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Highlight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\TextInputView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\FilledRectangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Oval.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tool\" />
+    <Folder Include="Tool\Arrow\" />
+    <Folder Include="Tool\Stroke\" />
+    <Folder Include="Tool\Oval\" />
+    <Folder Include="Tool\Text\" />
+    <Folder Include="Tool\Rectangle\" />
+    <Folder Include="Tool\Circle\" />
+    <Folder Include="Tool\Mark\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+  <Import Project="..\..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+</Project>
