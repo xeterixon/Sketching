@@ -28,6 +28,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Extensions\DrawPathExtensions.cs" />
     <Compile Include="Helper\ToolNames.cs" />
     <Compile Include="Interfaces\ICustomColorSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,16 +184,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Trash.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tool\" />
-    <Folder Include="Tool\Arrow\" />
-    <Folder Include="Tool\Stroke\" />
-    <Folder Include="Tool\Oval\" />
-    <Folder Include="Tool\Text\" />
-    <Folder Include="Tool\Rectangle\" />
-    <Folder Include="Tool\Circle\" />
-    <Folder Include="Tool\Mark\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
