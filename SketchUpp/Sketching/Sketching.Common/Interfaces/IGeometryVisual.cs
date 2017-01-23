@@ -1,4 +1,4 @@
-﻿using Xamarin.Forms;
+﻿using Sketching.Views;
 
 namespace Sketching.Interfaces
 {
@@ -10,7 +10,7 @@ namespace Sketching.Interfaces
 		/// </summary>
 		/// <value>The size.</value>
 		double Size { get; set; }
-		Color Color { get; set; }
+		ToolPaletteItem SelectedItem { get; set; }
 		bool IsFilled { get; set; }
 		bool IsValid { get; }
 		double MinSize { get; set; }

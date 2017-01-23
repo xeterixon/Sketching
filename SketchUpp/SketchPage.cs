@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Sketching.Helper;
-using Sketching.Interfaces;
+using Sketching.Renderer;
 using Sketching.Views;
 using Xamarin.Forms;
 using Sketching.Tool.Arrow;
@@ -15,6 +15,7 @@ using Sketching.Tool.Oval;
 using Sketching.Tool.Rectangle;
 using Sketching.Tool.Stroke;
 using Sketching.Tool.Text;
+using SketchUpp.CustomTool;
 
 namespace SketchUpp
 {
@@ -23,7 +24,7 @@ namespace SketchUpp
 		private readonly SketchView _sketchView;
 		public Command SaveCommand { get; set; }
 		public bool TextToolIsActive { get; set; } = false;
-		~SketchPage() 
+		~SketchPage()
 		{
 			System.Diagnostics.Debug.WriteLine("~SketchPage");
 		}
@@ -64,7 +65,20 @@ namespace SketchUpp
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Arrow.png", typeof(ArrowTool).GetTypeInfo().Assembly), new ArrowTool(ToolNames.ArrowTool, customToolbarName, customToolbarColors), null);
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Point.png", typeof(MarkTool).GetTypeInfo().Assembly), new MarkTool(ToolNames.PointTool, customToolbarName, customToolbarColors), null);
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Text.png", typeof(TextTool).GetTypeInfo().Assembly), new TextTool(Navigation, ToolNames.TextTool, customToolbarName, customToolbarColors), null);
-
+			// Text with rounded corners if fill is active
+			//_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Text.png", typeof(TextTool).GetTypeInfo().Assembly), new TextTool(Navigation, "RoundedFill", customToolbarName, customToolbarColors, true), null);
+			// Create a custom MoistMeasure tool
+			var moistColors = new List<KeyValuePair<string, Color>>
+			{
+				new KeyValuePair<string, Color>("MP1", Color.FromHex("#FBD447")),
+				new KeyValuePair<string, Color>("MP2", Color.FromHex("#FFB678")),
+				new KeyValuePair<string, Color>("MP3", Color.FromHex("#FFB678")),
+				new KeyValuePair<string, Color>("MP4", Color.FromHex("#FF5149"))
+			};
+			var moistTool = new MoistTool("Moisture", "Mätpunkter", moistColors) { ShowDefaultToolbar = false };
+			var assembly = typeof(SketchPage).GetTypeInfo().Assembly;
+			_sketchView.AddToolbarItem(ImageSource.FromResource("SketchUpp.Resources.Moist.png", assembly), moistTool, null);
+			GeometryRenderer.AddRenderer(new MoistRenderer());
 			// How to add the undo buttons
 			_sketchView.AddUndoTools();
 
@@ -84,7 +98,6 @@ namespace SketchUpp
 					Name = "Background image"
 				});
 				DecodeAndDrawMediaFile(img);
-
 			}
 		}
 		private void DecodeAndDrawMediaFile(MediaFile mf)

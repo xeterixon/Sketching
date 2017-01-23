@@ -49,6 +49,7 @@
     <Compile Include="Views\TextInputView.xaml.cs">
       <DependentUpon>TextInputView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ToolPaletteItem.cs" />
     <Compile Include="Views\ToolSettingsView.xaml.cs">
       <DependentUpon>ToolSettingsView.xaml</DependentUpon>
     </Compile>

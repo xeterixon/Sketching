@@ -72,5 +72,6 @@ namespace Sketching.Tool.Circle
 
 		public string CustomToolbarName { get; set; }
 		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
+		public bool ShowDefaultToolbar { get; set; } = true;
 	}
 }

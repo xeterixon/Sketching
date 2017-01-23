@@ -17,14 +17,14 @@ namespace Sketching.Tool.Circle
 			using (var paint = new SKPaint())
 			{
 				// Draw Circle
-				paint.Color = circle.Color.ToSkiaColor();
+				paint.Color = circle.SelectedItem.ItemColor.ToSkiaColor();
 				paint.IsAntialias = true;
 				paint.IsStroke = true;
 				paint.StrokeWidth = (float)(circle.Size * scale);
 				canvas.DrawCircle((float)(circle.Start.X * scale), (float)(circle.Start.Y * scale), (float)(circle.Radius * scale), paint);
 				// Fill Circle
 				if (!circle.IsFilled) return;
-				paint.Color = circle.Color.ToFillColor().ToSkiaColor();
+				paint.Color = circle.SelectedItem.ItemColor.ToFillColor().ToSkiaColor();
 				paint.IsStroke = false;
 				canvas.DrawCircle((float)(circle.Start.X * scale), (float)(circle.Start.Y * scale), (float)(circle.Radius * scale), paint);
 			}
