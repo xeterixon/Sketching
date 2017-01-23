@@ -37,14 +37,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomTool\IMoist.cs" />
+    <Compile Include="CustomTool\Moist.cs" />
+    <Compile Include="CustomTool\MoistRenderer.cs" />
+    <Compile Include="CustomTool\MoistTool.cs" />
     <Compile Include="LandingPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SketchPage.cs" />
     <Compile Include="SnapShotPage.cs" />
-    <Compile Include="CustomTool\IOval.cs" />
-    <Compile Include="CustomTool\Oval.cs" />
-    <Compile Include="CustomTool\OvalRenderer.cs" />
-    <Compile Include="CustomTool\OvalTool.cs" />
     <Compile Include="PopupTextInput.xaml.cs">
       <DependentUpon>PopupTextInput.xaml</DependentUpon>
     </Compile>
@@ -82,9 +82,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <EmbeddedResource Include="Resources\Moist.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="Sketching\Sketching.Common\Sketching.csproj">
       <Project>{071C0537-FF8C-45FA-9818-A9AC003AB39A}</Project>

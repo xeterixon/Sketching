@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sketching.Helper;
 using Sketching.Interfaces;
 using Xamarin.Forms;
-using Sketching.Tool;
+
 namespace Sketching.Tool.Text
 {
 	public class TextTool : ITextTool
@@ -14,6 +14,7 @@ namespace Sketching.Tool.Text
 		public bool CanUseFill { get; set; } = true;
 		public string CustomToolbarName { get; set; }
 		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
+		public bool ShowDefaultToolbar { get; set; } = true;
 
 		public string Text
 		{
@@ -42,18 +43,19 @@ namespace Sketching.Tool.Text
 		/// <summary>
 		/// Customized TextTool with default sizes
 		/// </summary>
-		public TextTool(INavigation navigation, string name, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors) : this(navigation, name, 20, 200, 75, customToolbarName, customToolbarColors) { }
+		public TextTool(INavigation navigation, string name, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors, bool roundedFill = false) : this(navigation, name, 20, 200, 75, customToolbarName, customToolbarColors, roundedFill) { }
 
 		/// <summary>
 		/// Custom made TextTool
 		/// </summary>
-		public TextTool(INavigation navigation, string name, double minSize, double maxSize, double startSize, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors)
+		public TextTool(INavigation navigation, string name, double minSize, double maxSize, double startSize, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors, bool roundedFill = false)
 		{
 			_navigation = navigation;
 			Name = name;
 			Geometry.MinSize = minSize;
 			Geometry.MaxSize = maxSize;
 			Geometry.Size = startSize;
+			Geometry.RoundedFill = roundedFill;
 			CustomToolbarName = customToolbarName;
 			CustomToolbarColors = customToolbarColors;
 		}
@@ -81,14 +83,14 @@ namespace Sketching.Tool.Text
 					((ITextInput)sender).End();
 					CreateNewGeometry();
 					MessagingCenter.Send((object)this, "Repaint");
-
 				};
 			}
 		}
 
 		private void CreateNewGeometry()
 		{
-			Geometry = new Text(Geometry);
+			var roundedFill = Geometry.RoundedFill;
+			Geometry = new Text(Geometry) { RoundedFill = roundedFill };
 		}
 	}
 }

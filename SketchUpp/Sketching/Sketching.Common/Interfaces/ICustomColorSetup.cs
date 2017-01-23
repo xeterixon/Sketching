@@ -7,5 +7,6 @@ namespace Sketching.Interfaces
 	{
 		string CustomToolbarName { get; set; }
 		IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
+		bool ShowDefaultToolbar { get; set; }
 	}
 }

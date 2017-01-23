@@ -10,7 +10,7 @@ namespace Sketching.Tool.Text
 	public class TextRenderer : IGeometryRenderer
 	{
 		public Type GeometryType => typeof(IText);
-		private const int Padding = 10;
+		private const int DefaultPadding = 10;
 
 		public void Render(SKCanvas canvas, IGeometryVisual gemoetry, double scale)
 		{
@@ -23,7 +23,7 @@ namespace Sketching.Tool.Text
 				paint.IsAntialias = true;
 				paint.IsStroke = false;
 				paint.TextSize = (float)(text.Size * scale);
-				paint.Color = text.Color.ToSkiaColor();
+				paint.Color = text.SelectedItem.ItemColor.ToSkiaColor();
 
 				// Get the path of the text to calibrate the touch point to the middle of the text area
 				var originalTextPath = paint.GetTextPath(text.Value, (float)(text.Point.X * scale), (float)(text.Point.Y * scale));
@@ -34,23 +34,40 @@ namespace Sketching.Tool.Text
 				if (text.IsFilled)
 				{
 					// Set the right text color
-					var textColor = Converter.ContrastColor(text.Color);
-
-					var calibratedTextPath = paint.GetTextPath(text.Value, calibratedX, calibratedY);
+					var textColor = Converter.ContrastColor(text.SelectedItem.ItemColor);
 					// Get the path of the calibrated text area and add some padding to the rect
-					var left = calibratedTextPath.Bounds.Left - Padding;
-					var top = calibratedTextPath.Bounds.Top - Padding;
-					var right = calibratedTextPath.Bounds.Right + Padding;
-					var bottom = calibratedTextPath.Bounds.Bottom + Padding;
+					var calibratedTextPath = paint.GetTextPath(text.Value, calibratedX, calibratedY);
+					// Rect parameters
+					float left;
+					float top;
+					float right;
+					float bottom;
+					float cornerRadius = 0;
+					if (text.RoundedFill)
+					{
+						var textSizeDependentPadding = paint.TextSize / 4;
+						left = calibratedTextPath.Bounds.Left - textSizeDependentPadding;
+						top = calibratedTextPath.Bounds.Top - textSizeDependentPadding;
+						right = calibratedTextPath.Bounds.Right + textSizeDependentPadding;
+						bottom = calibratedTextPath.Bounds.Bottom + textSizeDependentPadding;
+						cornerRadius = paint.TextSize / 2;
+					}
+					else
+					{
+						left = calibratedTextPath.Bounds.Left - DefaultPadding;
+						top = calibratedTextPath.Bounds.Top - DefaultPadding;
+						right = calibratedTextPath.Bounds.Right + DefaultPadding;
+						bottom = calibratedTextPath.Bounds.Bottom + DefaultPadding;
+					}
 					var rect = new SKRect(left, top, right, bottom);
 					// Draw background rect
-					canvas.DrawRect(rect, paint);
+					canvas.DrawRoundRect(rect, cornerRadius, cornerRadius, paint);
 					// Draw text
 					paint.Color = textColor.ToSkiaColor();
 					canvas.DrawText(text.Value, calibratedX, calibratedY, paint);
 					// Draw the background border in same color as text
 					paint.IsStroke = true;
-					canvas.DrawRect(rect, paint);
+					canvas.DrawRoundRect(rect, cornerRadius, cornerRadius, paint);
 				}
 				else
 				{

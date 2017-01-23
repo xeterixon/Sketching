@@ -67,5 +67,6 @@ namespace Sketching.Tool.Rectangle
 
 		public string CustomToolbarName { get; set; }
 		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
+		public bool ShowDefaultToolbar { get; set; } = true;
 	}
 }
