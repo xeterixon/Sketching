@@ -48,6 +48,10 @@
     <Compile Include="PopupTextInput.xaml.cs">
       <DependentUpon>PopupTextInput.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RulerTool\RulerTool.cs" />
+    <Compile Include="RulerTool\IRuler.cs" />
+    <Compile Include="RulerTool\Ruler.cs" />
+    <Compile Include="RulerTool\RulerRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Rg.Plugins.Popup">
@@ -83,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="RulerTool\" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
