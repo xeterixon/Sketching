@@ -70,7 +70,6 @@ namespace SketchUpp.RulerTool
 		public void TouchMove(Point p)
 		{
 			Geometry.End = p;
-
 		}
 
 		public void TouchStart(Point p)
