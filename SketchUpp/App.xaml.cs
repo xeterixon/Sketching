@@ -10,7 +10,8 @@ namespace SketchUpp
 		{
 			InitializeComponent();
 			Sketching.Helper.Factory.RegisterTextInput(typeof(InputProxy));
-			//GeometryRenderer.AddRenderer(new OvalRenderer());
+			Sketching.Renderer.GeometryRenderer.AddRenderer(new RulerTool.RulerRenderer());
+
 			MainPage = new NavigationPage(new LandingPage());
 		}
 

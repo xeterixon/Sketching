@@ -38,7 +38,6 @@ namespace SketchUpp
 				HorizontalOptions = LayoutOptions.FillAndExpand,
 			};
 			_sketchView.SketchArea.CanDrawOutsideImageBounds = false;
-			_sketchView.RemoveAllToolbarItems();
 			//_sketchView.AddAllToolbarItems();
 
 			// How to remove tools
@@ -46,6 +45,9 @@ namespace SketchUpp
 			//_sketchView.RemoveToolbarItemByName(ToolNames.HighlightTool); // Highlight
 
 			// Setup custom toolbar with title, colors and color descriptions
+
+			_sketchView.AddToolbarItem(ImageSource.FromResource("SketchUpp.Resources.ruler.png", typeof(RulerTool.RulerTool).GetTypeInfo().Assembly), new RulerTool.RulerTool(Navigation), null);
+
 			var customToolbarName = "Fuktmarkering";
 			var customToolbarColors = new List<KeyValuePair<string, Color>>
 			{
@@ -56,6 +58,7 @@ namespace SketchUpp
 				new KeyValuePair<string, Color>("Rot", Color.FromHex("#4BD47B"))
 			};
 			// How to add custom tools
+/*
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Line.png", typeof(LineTool).GetTypeInfo().Assembly), new LineTool(ToolNames.LineTool, customToolbarName, customToolbarColors), null);
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Curve.png", typeof(CurveTool).GetTypeInfo().Assembly), new CurveTool(ToolNames.CurveTool, customToolbarName, customToolbarColors), null);
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Highlight.png", typeof(HighlightTool).GetTypeInfo().Assembly), new HighlightTool(ToolNames.HighlightTool, customToolbarName, customToolbarColors), null);
@@ -65,6 +68,9 @@ namespace SketchUpp
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Arrow.png", typeof(ArrowTool).GetTypeInfo().Assembly), new ArrowTool(ToolNames.ArrowTool, customToolbarName, customToolbarColors), null);
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Point.png", typeof(MarkTool).GetTypeInfo().Assembly), new MarkTool(ToolNames.PointTool, customToolbarName, customToolbarColors), null);
 			_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Text.png", typeof(TextTool).GetTypeInfo().Assembly), new TextTool(Navigation, ToolNames.TextTool, customToolbarName, customToolbarColors), null);
+*/
+
+
 			// Text with rounded corners if fill is active
 			//_sketchView.AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Text.png", typeof(TextTool).GetTypeInfo().Assembly), new TextTool(Navigation, "RoundedFill", customToolbarName, customToolbarColors, true), null);
 			// Create a custom MoistMeasure tool
@@ -75,12 +81,13 @@ namespace SketchUpp
 				new KeyValuePair<string, Color>("MP3", Color.FromHex("#FFB678")),
 				new KeyValuePair<string, Color>("MP4", Color.FromHex("#FF5149"))
 			};
-			var moistTool = new MoistTool("Moisture", "Mätpunkter", moistColors) { ShowDefaultToolbar = false };
+			var moistTool = new MoistTool("Moisture", "MÃ¤tpunkter", moistColors) { ShowDefaultToolbar = false };
 			var assembly = typeof(SketchPage).GetTypeInfo().Assembly;
 			_sketchView.AddToolbarItem(ImageSource.FromResource("SketchUpp.Resources.Moist.png", assembly), moistTool, null);
 			GeometryRenderer.AddRenderer(new MoistRenderer());
+			_sketchView.AddDefaultToolbarItems();
 			// How to add the undo buttons
-			_sketchView.AddUndoTools();
+//			_sketchView.AddUndoTools();
 
 			ToolbarItems.Add(new ToolbarItem { Text = "Save", Command = SaveCommand });
 			ToolbarItems.Add(new ToolbarItem { Text = "Photo", Command = new Command(async () => { await TakePhoto(); }) });

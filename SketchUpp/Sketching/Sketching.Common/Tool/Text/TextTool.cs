@@ -82,7 +82,7 @@ namespace Sketching.Tool.Text
 					Text = text;
 					((ITextInput)sender).End();
 					CreateNewGeometry();
-					MessagingCenter.Send((object)this, "Repaint");
+					MessagingCenter.Send(new RepaintMessage(), nameof(RepaintMessage));
 				};
 			}
 		}

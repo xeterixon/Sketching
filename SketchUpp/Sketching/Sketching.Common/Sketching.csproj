@@ -100,6 +100,7 @@
     <Compile Include="Views\ISketchView.cs" />
     <Compile Include="Renderer\IGeometryRenderer.cs" />
     <Compile Include="Renderer\IRenderer.cs" />
+    <Compile Include="Helper\Messages.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp">
