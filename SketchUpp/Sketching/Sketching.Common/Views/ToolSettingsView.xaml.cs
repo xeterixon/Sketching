@@ -162,7 +162,8 @@ namespace Sketching.Views
 				LineBreakMode = LineBreakMode.TailTruncation,
 				ItemText = item.Key,
 				TextColor = GetTextColor(item.Value),
-				ItemColor = item.Value
+				ItemColor = item.Value,
+
 			}))
 			{
 				var tapGestureRecognizer = new TapGestureRecognizer

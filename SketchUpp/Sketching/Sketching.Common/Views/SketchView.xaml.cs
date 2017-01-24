@@ -59,7 +59,6 @@ namespace Sketching.Views
 			UndoCommand = new Command(() => { ToolCollection.Undo(); });
 			UndoAllCommand = new Command(() => { ToolCollection.UndoAll(); });
 
-			AddDefaultToolbarItems();
 
 			SetToolbarHeight(toolbarStack, ToolbarHeight);
 
@@ -67,7 +66,7 @@ namespace Sketching.Views
 			sketchArea.ToolCollection = ToolCollection;
 		}
 
-		private void AddDefaultToolbarItems()
+		public void AddDefaultToolbarItems()
 		{
 			var assembly = typeof(SketchView).GetTypeInfo().Assembly;
 

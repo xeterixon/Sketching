@@ -4,6 +4,8 @@ using System.Linq;
 using Sketching.Interfaces;
 using Xamarin.Forms;
 using Sketching.Views;
+using Sketching.Helper;
+
 namespace Sketching.Tool
 {
 	public interface IToolCollection : ITouchDelegate
@@ -21,20 +23,24 @@ namespace Sketching.Tool
 	}
 	public class ToolCollection : IToolCollection
 	{
-		public ITool ActiveTool
-		{
-			get
-			{
+		public ITool ActiveTool {
+			get {
 				return Tools.FirstOrDefault((arg) => arg.Active);
 			}
 		}
-		public ToolCollection() 
+		public ToolCollection()
 		{
-			MessagingCenter.Subscribe<object>(this,"Repaint",(obj) => Refresh());
+			MessagingCenter.Subscribe<RepaintMessage>(this, nameof(RepaintMessage), (obj) => Refresh());
+			MessagingCenter.Subscribe<AddGeometryMessage>(this, nameof(AddGeometryMessage), (obj) => AddGeometry(obj)); ;
 		}
 		public ISketchArea View { get; set; }
 		public List<ITool> Tools { get; set; } = new List<ITool>();
 		public List<IGeometryVisual> Geometries { get; set; } = new List<IGeometryVisual>();
+		private void AddGeometry(AddGeometryMessage msg) 
+		{
+			Geometries.Add(msg.Geometry);
+			Refresh();
+		}
 		//NOTE Only allow one active tool at a time for now.
 		public void ActivateTool(ITool tool)
 		{
