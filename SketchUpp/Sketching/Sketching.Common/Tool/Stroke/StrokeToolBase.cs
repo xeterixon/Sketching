@@ -34,4 +34,6 @@ namespace Sketching.Tool.Stroke
 
 		public string CustomToolbarName { get; set; }
 		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
-	}}
+		public bool ShowDefaultToolbar { get; set; } = true;
+	}
+}

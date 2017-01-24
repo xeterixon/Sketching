@@ -24,7 +24,7 @@ namespace Sketching.Tool.Arrow
 				paint.StrokeCap = SKStrokeCap.Round;
 				paint.StrokeWidth = (float)(arrow.Size * scale);
 				paint.IsAntialias = true;
-				paint.Color = arrow.Color.ToSkiaColor();
+				paint.Color = arrow.SelectedItem.ItemColor.ToSkiaColor();
 				// Line points
 				var startPoint = arrow.Start.ToSkiaPoint();
 				var endPoint = arrow.End.ToSkiaPoint();

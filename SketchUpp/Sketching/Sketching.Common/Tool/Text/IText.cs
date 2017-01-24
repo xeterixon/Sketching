@@ -5,5 +5,6 @@ namespace Sketching.Tool.Text
 	public interface IText : IGeometryVisual, IPoint
 	{
 		string Value { get; set; }
+		bool RoundedFill { get; set; }
 	}
 }

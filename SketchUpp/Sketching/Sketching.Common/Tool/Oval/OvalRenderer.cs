@@ -17,14 +17,14 @@ namespace Sketching.Tool.Oval
 			using (var paint = new SKPaint())
 			{
 				// Draw Oval
-				paint.Color = oval.Color.ToSkiaColor();
+				paint.Color = oval.SelectedItem.ItemColor.ToSkiaColor();
 				paint.IsAntialias = true;
 				paint.IsStroke = true;
 				paint.StrokeWidth = (float)(oval.Size * scale);
 				canvas.DrawOval((float)(oval.Start.X * scale), (float)(oval.Start.Y * scale), (float)(oval.End.X - oval.Start.X) * (float)scale, (float)(oval.End.Y - oval.Start.Y) * (float)scale, paint);
 				// Fill Oval
 				if (!oval.IsFilled) return;
-				paint.Color = oval.Color.ToFillColor().ToSkiaColor();
+				paint.Color = oval.SelectedItem.ItemColor.ToFillColor().ToSkiaColor();
 				paint.IsStroke = false;
 				canvas.DrawOval((float)(oval.Start.X * scale), (float)(oval.Start.Y * scale), (float)(oval.End.X - oval.Start.X) * (float)scale, (float)(oval.End.Y - oval.Start.Y) * (float)scale, paint);
 			}

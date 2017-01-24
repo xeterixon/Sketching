@@ -20,9 +20,9 @@ namespace Sketching.Views
 		public ToolSettingsView(ITool tool, StackOrientation orientation)
 		{
 			Tool = tool;
-			ColorSelectedCommand = new Command<Color>(color =>
+			ColorSelectedCommand = new Command<ToolPaletteItem>(paletteItem =>
 			{
-				Tool.Geometry.Color = color;
+				Tool.Geometry.SelectedItem = paletteItem;
 				Navigation.PopAsync();
 			});
 
@@ -57,7 +57,9 @@ namespace Sketching.Views
 				customColorsTitle.Text = tool.CustomToolbarName;
 				_customColorPalette = tool.CustomToolbarColors.ToList();
 			}
-			_colorPalette = new List<KeyValuePair<string, Color>>
+			if (tool != null && tool.ShowDefaultToolbar)
+			{
+				_colorPalette = new List<KeyValuePair<string, Color>>
 				{
 					new KeyValuePair<string, Color>(string.Empty, Color.White),
 					new KeyValuePair<string, Color>(string.Empty, Color.Silver),
@@ -75,6 +77,7 @@ namespace Sketching.Views
 					new KeyValuePair<string, Color>(string.Empty, Color.Red),
 					new KeyValuePair<string, Color>(string.Empty, Color.Purple)
 				};
+			}
 		}
 
 		private void OnSizeChanged(object sender, EventArgs e)
@@ -151,24 +154,25 @@ namespace Sketching.Views
 			var top = 0;
 			var timeForNewRowInVertical = (int)ColumnsInVertical + 1;
 			var timeForNewRowInHorisontal = (int)ColumnsInHorisontal + 1;
-			foreach (var label in palette.Select(item => new Label
+			foreach (var paletteItem in palette.Select(item => new ToolPaletteItem
 			{
 				HorizontalTextAlignment = TextAlignment.Center,
 				VerticalTextAlignment = TextAlignment.Center,
 				FontSize = 12.0,
 				LineBreakMode = LineBreakMode.TailTruncation,
-				Text = item.Key,
+				ItemText = item.Key,
 				TextColor = GetTextColor(item.Value),
-				BackgroundColor = item.Value
+				ItemColor = item.Value,
+
 			}))
 			{
 				var tapGestureRecognizer = new TapGestureRecognizer
 				{
 					Command = ColorSelectedCommand,
-					CommandParameter = label.BackgroundColor
+					CommandParameter = paletteItem
 				};
 
-				label.GestureRecognizers.Add(tapGestureRecognizer);
+				paletteItem.GestureRecognizers.Add(tapGestureRecognizer);
 
 				left++;
 				if (_orientation == StackOrientation.Vertical)
@@ -189,7 +193,7 @@ namespace Sketching.Views
 						timeForNewRowInHorisontal += (int)ColumnsInHorisontal;
 					}
 				}
-				grid.Children.Add(label, left, top);
+				grid.Children.Add(paletteItem, left, top);
 				i++;
 			}
 		}

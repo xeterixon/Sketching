@@ -21,14 +21,14 @@ namespace Sketching.Tool.Stroke
 				paint.StrokeCap = SKStrokeCap.Round;
 				paint.StrokeWidth = (float)(stroke.Size * scale);
 				paint.IsAntialias = true;
-				paint.Color = stroke.Color.ToSkiaColor();
+				paint.Color = stroke.SelectedItem.ItemColor.ToSkiaColor();
 
 				var points = stroke.Points.Select(arg => Helper.Converter.ToSKPoint(arg, scale)).ToArray();
 				// Draw HighLight or Stroke
 				if (stroke.HighLight)
 				{
 					paint.StrokeCap = SKStrokeCap.Butt;
-					paint.Color = stroke.Color.ToFillColor().ToSkiaColor();
+					paint.Color = stroke.SelectedItem.ItemColor.ToFillColor().ToSkiaColor();
 					canvas.DrawPointsInPath(paint, points);
 				}
 				else
@@ -38,7 +38,7 @@ namespace Sketching.Tool.Stroke
 				// Fill Stroke
 				if (!stroke.IsFilled) return;
 				if (!points.Any()) return;
-				paint.Color = stroke.Color.ToFillColor().ToSkiaColor();
+				paint.Color = stroke.SelectedItem.ItemColor.ToFillColor().ToSkiaColor();
 				paint.IsStroke = false;
 				canvas.DrawPointsInPath(paint, points);
 			}

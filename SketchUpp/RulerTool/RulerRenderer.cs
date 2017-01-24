@@ -29,7 +29,7 @@ namespace SketchUpp.RulerTool
 				paint.IsAntialias = true;
 				var start = Converter.ToSKPoint(ruler.Start, scale);
 				var stop = Converter.ToSKPoint(ruler.End, scale);
-				paint.Color = ruler.Color.ToSkiaColor();
+				paint.Color = ruler.SelectedItem.ItemColor.ToSkiaColor();
 				var x1 = start.X;
 				var y1 = start.Y;
 				var x2 = stop.X;
@@ -52,6 +52,7 @@ namespace SketchUpp.RulerTool
 
 				canvas.DrawLine(x2, y2, x5, y5, paint);
 				canvas.DrawLine(x2, y2, x6, y6, paint);
+
 			}
 		}
 	}

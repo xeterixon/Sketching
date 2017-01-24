@@ -49,6 +49,7 @@
     <Compile Include="Views\TextInputView.xaml.cs">
       <DependentUpon>TextInputView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ToolPaletteItem.cs" />
     <Compile Include="Views\ToolSettingsView.xaml.cs">
       <DependentUpon>ToolSettingsView.xaml</DependentUpon>
     </Compile>
@@ -99,6 +100,7 @@
     <Compile Include="Views\ISketchView.cs" />
     <Compile Include="Renderer\IGeometryRenderer.cs" />
     <Compile Include="Renderer\IRenderer.cs" />
+    <Compile Include="Helper\Messages.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp">

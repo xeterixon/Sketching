@@ -16,7 +16,7 @@ namespace Sketching.Tool.Mark
 			if (mark == null || !mark.IsValid) return;
 			using (var paint = new SKPaint())
 			{
-				paint.Color = mark.Color.ToSkiaColor();
+				paint.Color = mark.SelectedItem.ItemColor.ToSkiaColor();
 				paint.IsAntialias = true;
 				paint.IsStroke = false;
 				paint.StrokeWidth = (float)(mark.Size * scale);
