@@ -14,7 +14,7 @@ namespace SketchUpp.RulerTool
 		// Temp points used to position the text
 		Point lastEnd = Point.Zero;
 		Point lastStart = Point.Zero;
-
+		bool isInputingText = false;
 		INavigation _navigation;
 		public RulerTool(INavigation navigation)
 		{
@@ -48,6 +48,9 @@ namespace SketchUpp.RulerTool
 
 		public void TouchEnd(Point p)
 		{
+			System.Diagnostics.Debug.WriteLine(lastStart.ToString());
+			if (isInputingText) return;
+			isInputingText = true;
 			Geometry.End = p;
 			lastEnd = p;
 			Geometry = new Ruler(Geometry);
@@ -60,6 +63,9 @@ namespace SketchUpp.RulerTool
 					Point = new Point((lastEnd.X + lastStart.X) / 2, (lastEnd.Y + lastStart.Y) / 2),
 					Value = text
 				};
+				isInputingText = false;
+				lastStart = Point.Zero;
+				lastEnd = Point.Zero;
 				((ITextInput)sender).End();
 				MessagingCenter.Send(new AddGeometryMessage(t), nameof(AddGeometryMessage));
 			};
@@ -74,6 +80,7 @@ namespace SketchUpp.RulerTool
 
 		public void TouchStart(Point p)
 		{
+			isInputingText = false;
 			lastStart = p;
 			Geometry.Start = p;	
 		}

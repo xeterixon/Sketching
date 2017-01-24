@@ -28,6 +28,11 @@ namespace Sketching.Views
 			get { return (bool)GetValue(CanDrawOutsideImageBoundsProperty); }
 			set { SetValue(CanDrawOutsideImageBoundsProperty, value); }
 		}
+		public static readonly BindableProperty CenterBackgroundImageProperty = BindableProperty.Create(nameof(CenterBackgroundImage), typeof(bool), typeof(SketchArea), false);
+		public bool CenterBackgroundImage {
+			get { return (bool)GetValue(CenterBackgroundImageProperty); }
+			set { SetValue(CenterBackgroundImageProperty, value); }
+		}
 
 		private bool RestictArea => CanDrawOutsideImageBounds == false && BackgroundImage != null;
 		private Size LastCanvasSize = new Size();
@@ -115,8 +120,9 @@ namespace Sketching.Views
 			var canvas = surface.Canvas;
 			surface.Canvas.Clear(CanvasBackgroundColor.ToSkiaColor());
 			_gridRenderer.Render(canvas, scale);
-			if (ToolCollection == null) return;
 			_backgroundImageRenderer.Render(canvas, scale);
+			_backgroundImageRenderer.Position = CenterBackgroundImage ? BackgroundImageRenderer.ImagePosition.Center : BackgroundImageRenderer.ImagePosition.Left;
+			if (ToolCollection == null) return;
 			foreach (var geom in ToolCollection.Geometries)
 			{
 				GeometryRenderer.Render(canvas, geom, scale);
@@ -166,9 +172,8 @@ namespace Sketching.Views
 		private bool IsTouchPointValid(Point p)
 		{
 			if (!RestictArea) return true;
-			if (p.X > _backgroundImageRenderer.ImageDisplayWidth) return false;
-			if (p.Y > _backgroundImageRenderer.ImageDisplayHeight) return false;
-			return true;
+			if (_backgroundImageRenderer.ScaledBounds.Contains(p)) return true;
+			return false;
 		}
 	}
 }
