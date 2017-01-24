@@ -7,11 +7,11 @@ namespace Sketching.Tool.Stroke
 {
 	public class Stroke : IStroke
 	{
-		public Stroke() : this(new ToolPaletteItem { ItemColor = Color.Black }, 8, false) { }
-		public Stroke(IGeometryVisual src) : this(src.SelectedItem, src.Size, src.IsFilled) { }
-		public Stroke(ToolPaletteItem selectedItem, double size, bool isFilled)
+		public Stroke() : this(new ToolSettings { SelectedColor = Color.Black }, 8, false) { }
+		public Stroke(IGeometryVisual src) : this(src.ToolSettings, src.Size, src.IsFilled) { }
+		public Stroke(ToolSettings toolSettings, double size, bool isFilled)
 		{
-			SelectedItem = selectedItem;
+			ToolSettings = toolSettings;
 			IsFilled = isFilled;
 			Size = size;
 			MinSize = 1;
@@ -19,7 +19,7 @@ namespace Sketching.Tool.Stroke
 		}
 
 		public double Size { get; set; }
-		public ToolPaletteItem SelectedItem { get; set; }
+		public ToolSettings ToolSettings { get; set; }
 		public bool IsFilled { get; set; }
 		public List<Point> Points { get; set; } = new List<Point>();
 		public bool HighLight { get; set; } = false;

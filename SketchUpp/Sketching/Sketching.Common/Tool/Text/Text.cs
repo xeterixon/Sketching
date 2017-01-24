@@ -6,12 +6,12 @@ namespace Sketching.Tool.Text
 {
 	public class Text : IText
 	{
-		public Text() : this(new ToolPaletteItem { ItemColor = Color.Black }, 75, false) { }
-		public Text(IGeometryVisual src) : this(src.SelectedItem, src.Size, src.IsFilled) { }
-		public Text(ToolPaletteItem selectedItem, double size, bool isFilled)
+		public Text() : this(new ToolSettings { SelectedColor = Color.Black }, 75, false) { }
+		public Text(IGeometryVisual src) : this(src.ToolSettings, src.Size, src.IsFilled) { }
+		public Text(ToolSettings toolSettings, double size, bool isFilled)
 		{
 			Value = string.Empty;
-			SelectedItem = selectedItem;
+			ToolSettings = toolSettings;
 			IsFilled = isFilled;
 			Size = size;
 			Point = new Point(-1, -1);
@@ -19,7 +19,7 @@ namespace Sketching.Tool.Text
 			MaxSize = 200;
 		}
 
-		public ToolPaletteItem SelectedItem { get; set; }
+		public ToolSettings ToolSettings { get; set; }
 		public bool IsFilled { get; set; }
 		public bool IsValid => !string.IsNullOrEmpty(Value) && Point.X > 0;
 		public double MinSize { get; set; }

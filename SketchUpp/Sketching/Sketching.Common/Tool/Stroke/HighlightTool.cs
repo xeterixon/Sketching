@@ -27,7 +27,7 @@ namespace Sketching.Tool.Stroke
 			Geometry.MaxSize = maxSize;
 			Geometry.Size = startSize;
 			Geometry.HighLight = true;
-			Geometry.SelectedItem.ItemColor = Color.Yellow;
+			Geometry.ToolSettings.SelectedColor = Color.Yellow;
 			CustomToolbarName = customToolbarName;
 			CustomToolbarColors = customToolbarColors;
 		}
@@ -59,7 +59,7 @@ namespace Sketching.Tool.Stroke
 				MaxSize = Geometry.MaxSize,
 				Size = Geometry.Size,
 				HighLight = Geometry.HighLight,
-				SelectedItem = Geometry.SelectedItem
+				ToolSettings = Geometry.ToolSettings
 			};
 		}
 

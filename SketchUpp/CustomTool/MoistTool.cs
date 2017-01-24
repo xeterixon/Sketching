@@ -49,8 +49,8 @@ namespace SketchUpp.CustomTool
 			Geometry.MinSize = minSize;
 			Geometry.MaxSize = maxSize;
 			Geometry.Size = startSize;
-			Geometry.SelectedItem.ItemColor = customToolbarColors != null && customToolbarColors.Any() ? customToolbarColors.First().Value : Color.Black;
-			Geometry.SelectedItem.ItemText = customToolbarColors != null && customToolbarColors.Any() ? customToolbarColors.First().Key : "";
+			Geometry.ToolSettings.SelectedColor = customToolbarColors != null && customToolbarColors.Any() ? customToolbarColors.First().Value : Color.Black;
+			Geometry.ToolSettings.SelectedText = customToolbarColors != null && customToolbarColors.Any() ? customToolbarColors.First().Key : "";
 			CustomToolbarName = customToolbarName;
 			CustomToolbarColors = customToolbarColors;
 		}

@@ -10,7 +10,7 @@ namespace Sketching.Interfaces
 		/// </summary>
 		/// <value>The size.</value>
 		double Size { get; set; }
-		ToolPaletteItem SelectedItem { get; set; }
+		ToolSettings ToolSettings { get; set; }
 		bool IsFilled { get; set; }
 		bool IsValid { get; }
 		double MinSize { get; set; }

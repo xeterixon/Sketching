@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Sketching.Interfaces;
+﻿using Sketching.Interfaces;
 using Sketching.Views;
 using Xamarin.Forms;
 
@@ -7,11 +6,11 @@ namespace SketchUpp.CustomTool
 {
 	public class Moist : IMoist
 	{
-		public Moist() : this(new ToolPaletteItem { ItemColor = Color.Black }, 60, false) { }
-		public Moist(IGeometryVisual src) : this(src.SelectedItem, src.Size, src.IsFilled) { }
-		public Moist(ToolPaletteItem selectedItem, double size, bool isFilled)
+		public Moist() : this(new ToolSettings { SelectedColor = Color.Black }, 60, false) { }
+		public Moist(IGeometryVisual src) : this(src.ToolSettings, src.Size, src.IsFilled) { }
+		public Moist(ToolSettings toolSettings, double size, bool isFilled)
 		{
-			SelectedItem = selectedItem;
+			ToolSettings = toolSettings;
 			IsFilled = isFilled;
 			Size = size;
 			Point = new Point(-1, -1);
@@ -19,7 +18,7 @@ namespace SketchUpp.CustomTool
 			MaxSize = 120;
 		}
 
-		public ToolPaletteItem SelectedItem { get; set; }
+		public ToolSettings ToolSettings { get; set; }
 		public bool IsFilled { get; set; }
 		public bool IsValid => Point.X > 0;
 		public double MinSize { get; set; }

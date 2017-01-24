@@ -40,7 +40,7 @@ namespace Sketching.Renderer
 				var theLength = Math.Min(canvas.ClipBounds.Width, canvas.ClipBounds.Height);
 				Config.GridSize = ((((int)theLength / 15) + 5) / 10) * 10;
 			}
-			var baseStroke = new Stroke { Size = LineWidth * scale, SelectedItem = new ToolPaletteItem { ItemColor = LineColor } };
+			var baseStroke = new Stroke { Size = LineWidth * scale, ToolSettings = new ToolSettings { SelectedColor = LineColor } };
 			int counter = 0;
 			do
 			{

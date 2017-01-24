@@ -18,10 +18,10 @@ namespace SketchUpp.CustomTool
 			using (var paint = new SKPaint())
 			{
 				// Setup common paint parameters
-				paint.Color = moist.SelectedItem.ItemColor.ToSkiaColor();
+				paint.Color = moist.ToolSettings.SelectedColor.ToSkiaColor();
 				paint.IsAntialias = true;
 				paint.IsStroke = false;
-				var text = moist.SelectedItem.ItemText;
+				var text = moist.ToolSettings.SelectedText;
 				if (string.IsNullOrEmpty(text))
 				{
 					paint.StrokeWidth = (float)(moist.Size * scale);
@@ -38,7 +38,7 @@ namespace SketchUpp.CustomTool
 					var calibratedY = originalTextPath.Bounds.Bottom + originalTextPath.Bounds.Height / 2;
 
 					// Set the right text color
-					var textColor = Converter.ContrastColor(moist.SelectedItem.ItemColor);
+					var textColor = Converter.ContrastColor(moist.ToolSettings.SelectedColor);
 					// Get the path of the calibrated text area and add some padding to the rect
 					var calibratedTextPath = paint.GetTextPath(text, calibratedX, calibratedY);
 					// Rect parameters

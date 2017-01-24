@@ -23,7 +23,7 @@ namespace Sketching.Tool.Text
 				paint.IsAntialias = true;
 				paint.IsStroke = false;
 				paint.TextSize = (float)(text.Size * scale);
-				paint.Color = text.SelectedItem.ItemColor.ToSkiaColor();
+				paint.Color = text.ToolSettings.SelectedColor.ToSkiaColor();
 
 				// Get the path of the text to calibrate the touch point to the middle of the text area
 				var originalTextPath = paint.GetTextPath(text.Value, (float)(text.Point.X * scale), (float)(text.Point.Y * scale));
@@ -34,7 +34,7 @@ namespace Sketching.Tool.Text
 				if (text.IsFilled)
 				{
 					// Set the right text color
-					var textColor = Converter.ContrastColor(text.SelectedItem.ItemColor);
+					var textColor = Converter.ContrastColor(text.ToolSettings.SelectedColor);
 					// Get the path of the calibrated text area and add some padding to the rect
 					var calibratedTextPath = paint.GetTextPath(text.Value, calibratedX, calibratedY);
 					// Rect parameters

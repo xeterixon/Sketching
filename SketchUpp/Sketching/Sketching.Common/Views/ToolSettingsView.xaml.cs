@@ -20,9 +20,9 @@ namespace Sketching.Views
 		public ToolSettingsView(ITool tool, StackOrientation orientation)
 		{
 			Tool = tool;
-			ColorSelectedCommand = new Command<ToolPaletteItem>(paletteItem =>
+			ColorSelectedCommand = new Command<ToolSettings>(paletteItem =>
 			{
-				Tool.Geometry.SelectedItem = paletteItem;
+				Tool.Geometry.ToolSettings = paletteItem;
 				Navigation.PopAsync();
 			});
 
@@ -154,23 +154,29 @@ namespace Sketching.Views
 			var top = 0;
 			var timeForNewRowInVertical = (int)ColumnsInVertical + 1;
 			var timeForNewRowInHorisontal = (int)ColumnsInHorisontal + 1;
-			foreach (var paletteItem in palette.Select(item => new ToolPaletteItem
+			foreach (var item in palette)
 			{
-				HorizontalTextAlignment = TextAlignment.Center,
-				VerticalTextAlignment = TextAlignment.Center,
-				FontSize = 12.0,
-				LineBreakMode = LineBreakMode.TailTruncation,
-				ItemText = item.Key,
-				TextColor = GetTextColor(item.Value),
-				ItemColor = item.Value
-			}))
-			{
+				var toolSettings = new ToolSettings
+				{
+					SelectedColor = item.Value,
+					SelectedText = item.Key
+				};
+				var paletteItem = new Label
+				{
+					HorizontalTextAlignment = TextAlignment.Center,
+					VerticalTextAlignment = TextAlignment.Center,
+					FontSize = 12.0,
+					LineBreakMode = LineBreakMode.TailTruncation,
+					TextColor = GetTextColor(item.Value),
+					BindingContext = toolSettings
+				};
+				paletteItem.SetBinding(Label.TextProperty, "SelectedText");
+				paletteItem.SetBinding(Label.BackgroundColorProperty, "SelectedColor");
 				var tapGestureRecognizer = new TapGestureRecognizer
 				{
 					Command = ColorSelectedCommand,
-					CommandParameter = paletteItem
+					CommandParameter = paletteItem.BindingContext
 				};
-
 				paletteItem.GestureRecognizers.Add(tapGestureRecognizer);
 
 				left++;
