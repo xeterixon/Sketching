@@ -12,8 +12,8 @@ namespace SketchUpp.RulerTool
 	public class RulerTool : ITool<IRuler>
 	{
 		// Temp points used to position the text
-		Point lastEnd = Point.Zero;
-		Point lastStart = Point.Zero;
+		Point _lastEnd = Point.Zero;
+		Point _lastStart = Point.Zero;
 
 		INavigation _navigation;
 		public RulerTool(INavigation navigation)
@@ -22,26 +22,29 @@ namespace SketchUpp.RulerTool
 			Geometry = new Ruler();
 		}
 
-		public bool Active { get; set;}
+		public bool Active { get; set; }
 
-		public bool CanUseFill {get; set; }
+		public bool CanUseFill { get; set; }
 
-		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors {get; set; }
+		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
 
-		public string CustomToolbarName {get; set; }
+		public string CustomToolbarName { get; set; }
 
-		public IRuler Geometry {get; set; }
+		public IRuler Geometry { get; set; }
 
-		public string Name {get; set; }
+		public string Name { get; set; }
 
 		public bool ShowDefaultToolbar { get; set; } = true;
 
-		IGeometryVisual ITool.Geometry {
-			get {
+		IGeometryVisual ITool.Geometry
+		{
+			get
+			{
 				return Geometry;
 			}
 
-			set {
+			set
+			{
 				throw new NotSupportedException();
 			}
 		}
@@ -49,22 +52,21 @@ namespace SketchUpp.RulerTool
 		public void TouchEnd(Point p)
 		{
 			Geometry.End = p;
-			lastEnd = p;
+			_lastEnd = p;
 			Geometry = new Ruler(Geometry);
 			// Hook up a text input
 			var textInputView = Factory.CreateTextInput(_navigation);
 			textInputView.Begin();
-			textInputView.TextEntered += (sender, text) => {
-				var t = new Text(new ToolPaletteItem { ItemColor = Color.White }, 45, true) 
+			textInputView.TextEntered += (sender, text) =>
+			{
+				var t = new Text(new ToolSettings { SelectedColor = Color.White }, 45, true)
 				{
-					Point = new Point((lastEnd.X + lastStart.X) / 2, (lastEnd.Y + lastStart.Y) / 2),
+					Point = new Point((_lastEnd.X + _lastStart.X) / 2, (_lastEnd.Y + _lastStart.Y) / 2),
 					Value = text
 				};
 				((ITextInput)sender).End();
 				MessagingCenter.Send(new AddGeometryMessage(t), nameof(AddGeometryMessage));
 			};
-
-
 		}
 
 		public void TouchMove(Point p)
@@ -74,8 +76,8 @@ namespace SketchUpp.RulerTool
 
 		public void TouchStart(Point p)
 		{
-			lastStart = p;
-			Geometry.Start = p;	
+			_lastStart = p;
+			Geometry.Start = p;
 		}
 	}
 }

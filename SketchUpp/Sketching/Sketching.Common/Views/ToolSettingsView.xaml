@@ -15,6 +15,7 @@
         <StackLayout x:Name="customColorsLayout" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
           <Label x:Name="customColorsTitle" />
           <Grid x:Name="customColorsGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+          <Label x:Name="singleObjectLabel" IsVisible="False"/>
           <BoxView HeightRequest="2" BackgroundColor="Gray" />
         </StackLayout>
         <Grid x:Name="colorGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />

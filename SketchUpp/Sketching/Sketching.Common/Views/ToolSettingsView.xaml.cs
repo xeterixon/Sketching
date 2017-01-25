@@ -96,8 +96,23 @@ namespace Sketching.Views
 		private void SetupAndFillColorGrids()
 		{
 			// Custom colors
-			var numberOfRowsInCustomColorGrid = SetupColorGridAndReturnNumberOfRows(_customColorPalette, customColorsGrid);
-			FillColorGrid(_customColorPalette, customColorsGrid);
+			var numberOfRowsInCustomColorGrid = 0;
+			if (_customColorPalette != null && _customColorPalette.Any() && _customColorPalette.Count == 1)
+			{
+				customColorsGrid.IsVisible = false;
+				singleObjectLabel.IsVisible = true;
+				var item = _customColorPalette.First();
+				CreatePaletteItem(item, singleObjectLabel);
+				singleObjectLabel.WidthRequest = 360;
+				singleObjectLabel.HeightRequest = 200;
+				singleObjectLabel.VerticalOptions = LayoutOptions.StartAndExpand;
+				singleObjectLabel.HorizontalOptions = LayoutOptions.StartAndExpand;
+			}
+			else
+			{
+				numberOfRowsInCustomColorGrid = SetupColorGridAndReturnNumberOfRows(_customColorPalette, customColorsGrid);
+				FillColorGrid(_customColorPalette, customColorsGrid);
+			}
 			// Default colors
 			var numberOfRowsInDefaultColorGrid = SetupColorGridAndReturnNumberOfRows(_colorPalette, colorGrid);
 			FillColorGrid(_colorPalette, colorGrid);
@@ -156,29 +171,8 @@ namespace Sketching.Views
 			var timeForNewRowInHorisontal = (int)ColumnsInHorisontal + 1;
 			foreach (var item in palette)
 			{
-				var toolSettings = new ToolSettings
-				{
-					SelectedColor = item.Value,
-					SelectedText = item.Key
-				};
-				var paletteItem = new Label
-				{
-					HorizontalTextAlignment = TextAlignment.Center,
-					VerticalTextAlignment = TextAlignment.Center,
-					FontSize = 12.0,
-					LineBreakMode = LineBreakMode.TailTruncation,
-					TextColor = GetTextColor(item.Value),
-					BindingContext = toolSettings
-				};
-				paletteItem.SetBinding(Label.TextProperty, "SelectedText");
-				paletteItem.SetBinding(Label.BackgroundColorProperty, "SelectedColor");
-				var tapGestureRecognizer = new TapGestureRecognizer
-				{
-					Command = ColorSelectedCommand,
-					CommandParameter = paletteItem.BindingContext
-				};
-				paletteItem.GestureRecognizers.Add(tapGestureRecognizer);
-
+				var paletteItem = new Label();
+				CreatePaletteItem(item, paletteItem);
 				left++;
 				if (_orientation == StackOrientation.Vertical)
 				{
@@ -203,6 +197,29 @@ namespace Sketching.Views
 			}
 		}
 
+		private void CreatePaletteItem(KeyValuePair<string, Color> item, Label paletteItem)
+		{
+			var toolSettings = new ToolSettings
+			{
+				SelectedColor = item.Value,
+				SelectedText = item.Key
+			};
+			paletteItem.HorizontalTextAlignment = TextAlignment.Center;
+			paletteItem.VerticalTextAlignment = TextAlignment.Center;
+			paletteItem.FontSize = 12.0;
+			paletteItem.LineBreakMode = LineBreakMode.TailTruncation;
+			paletteItem.TextColor = GetTextColor(item.Value);
+			paletteItem.BindingContext = toolSettings;
+			paletteItem.SetBinding(Label.TextProperty, "SelectedText");
+			paletteItem.SetBinding(Label.BackgroundColorProperty, "SelectedColor");
+			var tapGestureRecognizer = new TapGestureRecognizer
+			{
+				Command = ColorSelectedCommand,
+				CommandParameter = paletteItem.BindingContext
+			};
+			paletteItem.GestureRecognizers.Add(tapGestureRecognizer);
+		}
+
 		private void CalculatePaletteGridHeights(int numberOfRowsInDefaultColorGrid, int numberOfRowsInCustomColorGrid)
 		{
 			if (paletteGrid.ColumnDefinitions.Any()) paletteGrid.ColumnDefinitions.Clear();
@@ -219,8 +236,15 @@ namespace Sketching.Views
 			}
 			if (numberOfRowsInDefaultColorGrid < numberOfRowsInCustomColorGrid)
 			{
-				var ratio = (double)numberOfRowsInDefaultColorGrid / numberOfRowsInCustomColorGrid;
-				defaultColorGridHeight = 1 - ratio;
+				if (numberOfRowsInDefaultColorGrid == 0 && numberOfRowsInCustomColorGrid == 1)
+				{
+					customColorGridHeight = 0.4;
+				}
+				else
+				{
+					var ratio = (double)numberOfRowsInDefaultColorGrid / numberOfRowsInCustomColorGrid;
+					defaultColorGridHeight = 1 - ratio;
+				}
 			}
 
 			paletteGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(customColorGridHeight, GridUnitType.Star) });

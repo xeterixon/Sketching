@@ -11,7 +11,7 @@ namespace SketchUpp.RulerTool
 	{
 		private const float TickLength = 10; // Length of the arrow lines
 
-		public Type GeometryType =>typeof(IRuler);
+		public Type GeometryType => typeof(IRuler);
 		private double DegreeToRadian(double angle)
 		{
 			return Math.PI * angle / 180.0;
@@ -21,7 +21,7 @@ namespace SketchUpp.RulerTool
 		{
 			var ruler = geometry as IRuler;
 			if (ruler == null || !ruler.IsValid) return;
-			using (var paint = new SKPaint()) 
+			using (var paint = new SKPaint())
 			{
 				paint.IsStroke = true;
 				paint.StrokeCap = SKStrokeCap.Round;
@@ -29,7 +29,7 @@ namespace SketchUpp.RulerTool
 				paint.IsAntialias = true;
 				var start = Converter.ToSKPoint(ruler.Start, scale);
 				var stop = Converter.ToSKPoint(ruler.End, scale);
-				paint.Color = ruler.SelectedItem.ItemColor.ToSkiaColor();
+				paint.Color = ruler.ToolSettings.SelectedColor.ToSkiaColor();
 				var x1 = start.X;
 				var y1 = start.Y;
 				var x2 = stop.X;
@@ -41,7 +41,7 @@ namespace SketchUpp.RulerTool
 				var y3 = (float)(y1 - TickLength * Math.Sin(angle - Math.PI / 2));
 				var x4 = (float)(x1 - TickLength * Math.Cos(angle + Math.PI / 2));
 				var y4 = (float)(y1 - TickLength * Math.Sin(angle + Math.PI / 2));
-					
+
 				var x5 = (float)(x2 - TickLength * Math.Cos(angle - Math.PI / 2));
 				var y5 = (float)(y2 - TickLength * Math.Sin(angle - Math.PI / 2));
 				var x6 = (float)(x2 - TickLength * Math.Cos(angle + Math.PI / 2));
@@ -52,7 +52,6 @@ namespace SketchUpp.RulerTool
 
 				canvas.DrawLine(x2, y2, x5, y5, paint);
 				canvas.DrawLine(x2, y2, x6, y6, paint);
-
 			}
 		}
 	}
