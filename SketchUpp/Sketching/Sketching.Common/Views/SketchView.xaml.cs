@@ -148,8 +148,9 @@ namespace Sketching.Views
 
 		public void AddUndoTools()
 		{
-			AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Undo.png"), null, UndoCommand);
-			AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Trash.png"), null, UndoAllCommand);
+			var assembly = typeof(SketchView).GetTypeInfo().Assembly;
+			AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Undo.png",assembly), null, UndoCommand);
+			AddToolbarItem(ImageSource.FromResource("Sketching.Resources.Trash.png",assembly), null, UndoAllCommand);
 		}
 
 		public void RemoveAllToolbarItems()
