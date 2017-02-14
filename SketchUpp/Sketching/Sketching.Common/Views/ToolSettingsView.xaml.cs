@@ -99,6 +99,7 @@ namespace Sketching.Views
 			var numberOfRowsInCustomColorGrid = 0;
 			if (_customColorPalette != null && _customColorPalette.Any() && _customColorPalette.Count == 1)
 			{
+				singleObjectLabel.GestureRecognizers.Clear();
 				customColorsGrid.IsVisible = false;
 				singleObjectLabel.IsVisible = true;
 				var item = _customColorPalette.First();
@@ -107,15 +108,14 @@ namespace Sketching.Views
 				singleObjectLabel.HeightRequest = 200;
 				singleObjectLabel.VerticalOptions = LayoutOptions.StartAndExpand;
 				singleObjectLabel.HorizontalOptions = LayoutOptions.StartAndExpand;
+				if (_colorPalette != null && _colorPalette.Any()) numberOfRowsInCustomColorGrid = 1;
 			}
 			else
 			{
-				numberOfRowsInCustomColorGrid = SetupColorGridAndReturnNumberOfRows(_customColorPalette, customColorsGrid);
-				FillColorGrid(_customColorPalette, customColorsGrid);
+				numberOfRowsInCustomColorGrid = CreateColorGridAndReturnNumberOfRows(_customColorPalette, customColorsGrid);
 			}
 			// Default colors
-			var numberOfRowsInDefaultColorGrid = SetupColorGridAndReturnNumberOfRows(_colorPalette, colorGrid);
-			FillColorGrid(_colorPalette, colorGrid);
+			var numberOfRowsInDefaultColorGrid = CreateColorGridAndReturnNumberOfRows(_colorPalette, colorGrid);
 			// Height ratio of the two color grids
 			if (_customColorPalette != null && _customColorPalette.Any() && numberOfRowsInCustomColorGrid > 0)
 			{
@@ -123,78 +123,85 @@ namespace Sketching.Views
 			}
 		}
 
-		private int SetupColorGridAndReturnNumberOfRows(List<KeyValuePair<string, Color>> palette, Grid grid)
+		private int CreateColorGridAndReturnNumberOfRows(List<KeyValuePair<string, Color>> palette, Grid grid)
 		{
-			var numberOfRows = 0;
-			if (palette == null || !palette.Any()) return numberOfRows;
+			// Clear previous definitions
+			if (palette == null || !palette.Any()) return 0;
 			if (grid.ColumnDefinitions.Any()) grid.ColumnDefinitions.Clear();
 			if (grid.RowDefinitions.Any()) grid.RowDefinitions.Clear();
 			if (grid.Children.Any()) grid.Children.Clear();
+
+			return _orientation == StackOrientation.Vertical ? CreateVerticalPalette(palette, grid) : CreateHorisontalPalette(palette, grid);
+		}
+
+		private int CreateVerticalPalette(List<KeyValuePair<string, Color>> palette, Grid grid)
+		{
+			// Create the definitions
 			var numberOfColors = palette.Count;
-			if (_orientation == StackOrientation.Vertical)
+			var numberOfRows = (int)Math.Ceiling(numberOfColors / ColumnsInVertical);
+			for (var i = 0; i < numberOfRows; i++)
 			{
-				numberOfRows = (int)Math.Ceiling(numberOfColors / ColumnsInVertical);
-				for (var i = 0; i < numberOfRows; i++)
-				{
-					grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-				}
-				for (var i = 0; i < ColumnsInVertical; i++)
-				{
-					grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-				}
+				grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 			}
-			else
+			for (var i = 0; i < ColumnsInVertical; i++)
 			{
-				numberOfRows = (int)Math.Ceiling(numberOfColors / ColumnsInHorisontal);
-				for (var i = 0; i < numberOfRows; i++)
+				grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+			}
+			// Populate the grid
+			var j = 1;
+			var left = -1;
+			var top = 0;
+			var timeForNewRowInVertical = (int)ColumnsInVertical + 1;
+			foreach (var item in palette)
+			{
+				var paletteItem = new Label();
+				CreatePaletteItem(item, paletteItem);
+				left++;
+				if (j == timeForNewRowInVertical) // New line
 				{
-					grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+					left = 0;
+					top++;
+					timeForNewRowInVertical += (int)ColumnsInVertical;
 				}
-				for (var i = 0; i < ColumnsInHorisontal; i++)
-				{
-					grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-				}
+				grid.Children.Add(paletteItem, left, top);
+				j++;
 			}
 			return numberOfRows;
 		}
 
-		private void FillColorGrid(List<KeyValuePair<string, Color>> palette, Grid grid)
+		private int CreateHorisontalPalette(List<KeyValuePair<string, Color>> palette, Grid grid)
 		{
-			if (palette == null || !palette.Any()) return;
-			if (grid.ColumnDefinitions.Any()) grid.ColumnDefinitions.Clear();
-			if (grid.RowDefinitions.Any()) grid.RowDefinitions.Clear();
-			if (grid.Children.Any()) grid.Children.Clear();
-			var i = 1;
+			// Create the definitions
+			var numberOfColors = palette.Count;
+			var numberOfRows = (int)Math.Ceiling(numberOfColors / ColumnsInHorisontal);
+			for (var i = 0; i < numberOfRows; i++)
+			{
+				grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+			}
+			for (var i = 0; i < ColumnsInHorisontal; i++)
+			{
+				grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+			}
+			// Populate the grid
+			var j = 1;
 			var left = -1;
 			var top = 0;
-			var timeForNewRowInVertical = (int)ColumnsInVertical + 1;
 			var timeForNewRowInHorisontal = (int)ColumnsInHorisontal + 1;
 			foreach (var item in palette)
 			{
 				var paletteItem = new Label();
 				CreatePaletteItem(item, paletteItem);
 				left++;
-				if (_orientation == StackOrientation.Vertical)
+				if (j == timeForNewRowInHorisontal) // New line
 				{
-					if (i == timeForNewRowInVertical) // New line
-					{
-						left = 0;
-						top++;
-						timeForNewRowInVertical += (int)ColumnsInVertical;
-					}
-				}
-				else
-				{
-					if (i == timeForNewRowInHorisontal) // New line
-					{
-						left = 0;
-						top++;
-						timeForNewRowInHorisontal += (int)ColumnsInHorisontal;
-					}
+					left = 0;
+					top++;
+					timeForNewRowInHorisontal += (int)ColumnsInHorisontal;
 				}
 				grid.Children.Add(paletteItem, left, top);
-				i++;
+				j++;
 			}
+			return numberOfRows;
 		}
 
 		private void CreatePaletteItem(KeyValuePair<string, Color> item, Label paletteItem)
