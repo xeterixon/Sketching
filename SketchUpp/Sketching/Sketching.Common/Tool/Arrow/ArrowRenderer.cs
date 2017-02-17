@@ -26,8 +26,8 @@ namespace Sketching.Tool.Arrow
 				paint.IsAntialias = true;
 				paint.Color = arrow.ToolSettings.SelectedColor.ToSkiaColor();
 				// Line points
-				var startPoint = arrow.Start.ToSkiaPoint();
-				var endPoint = arrow.End.ToSkiaPoint();
+				var startPoint = arrow.Start.ToSkiaPoint(scale);
+				var endPoint = arrow.End.ToSkiaPoint(scale);
 				var x1 = startPoint.X;
 				var y1 = startPoint.Y;
 				var x2 = endPoint.X;
