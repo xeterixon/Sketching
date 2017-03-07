@@ -23,10 +23,21 @@ namespace Sketching.Tool.Circle
 				paint.StrokeWidth = (float)(circle.Size * scale);
 				canvas.DrawCircle((float)(circle.Start.X * scale), (float)(circle.Start.Y * scale), (float)(circle.Radius * scale), paint);
 				// Fill Circle
-				if (!circle.IsFilled) return;
 				paint.Color = circle.ToolSettings.SelectedColor.ToFillColor().ToSkiaColor();
 				paint.IsStroke = false;
-				canvas.DrawCircle((float)(circle.Start.X * scale), (float)(circle.Start.Y * scale), (float)(circle.Radius * scale), paint);
+				if (circle.IsFilled) 
+				{
+					canvas.DrawCircle((float)(circle.Start.X * scale), (float)(circle.Start.Y * scale), (float)(circle.Radius * scale), paint);
+				}
+				if (circle.IsStenciled)
+				{
+					using (var shader = ShaderFactory.Line(circle.ToolSettings.SelectedColor.ToSkiaColor()))
+					{
+						paint.Shader = shader;
+					}
+					canvas.DrawCircle((float)(circle.Start.X * scale), (float)(circle.Start.Y * scale), (float)(circle.Radius * scale), paint);
+				}
+
 			}
 		}
 	}

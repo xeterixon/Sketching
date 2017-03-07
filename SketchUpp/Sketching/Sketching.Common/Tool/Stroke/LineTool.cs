@@ -24,6 +24,7 @@ namespace Sketching.Tool.Stroke
 		public LineTool(string name, double minSize, double maxSize, double startSize, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors)
 		{
 			CanUseFill = false;
+			CanUseStencil = false;
 			Name = name;
 			Geometry.MinSize = minSize;
 			Geometry.MaxSize = maxSize;

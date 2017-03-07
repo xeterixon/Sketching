@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sketching.Extensions;
 using Sketching.Helper;
 using Xamarin.Forms;
 
@@ -22,6 +23,7 @@ namespace Sketching.Tool.Stroke
 		public HighlightTool(string name, double minSize, double maxSize, double startSize, string customToolbarName, IEnumerable<KeyValuePair<string, Color>> customToolbarColors)
 		{
 			CanUseFill = false;
+			CanUseStencil = true;
 			Name = name;
 			Geometry.MinSize = minSize;
 			Geometry.MaxSize = maxSize;
@@ -53,14 +55,10 @@ namespace Sketching.Tool.Stroke
 
 		protected override void CreateNewGeometry()
 		{
-			Geometry = new Stroke
-			{
-				MinSize = Geometry.MinSize,
-				MaxSize = Geometry.MaxSize,
-				Size = Geometry.Size,
-				HighLight = Geometry.HighLight,
-				ToolSettings = Geometry.ToolSettings
-			};
+			
+			var stroke = new Stroke(Geometry);
+			stroke.HighLight = Geometry.HighLight;
+			Geometry = stroke;
 		}
 
 		private void AddPoint(Point p)

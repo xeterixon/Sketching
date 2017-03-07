@@ -1,4 +1,5 @@
-﻿using Sketching.Interfaces;
+﻿using Sketching.Extensions;
+using Sketching.Interfaces;
 using Sketching.Views;
 using Xamarin.Forms;
 
@@ -7,7 +8,10 @@ namespace Sketching.Tool.Circle
 	public class Circle : ICircle
 	{
 		public Circle() : this(new ToolSettings { SelectedColor = Color.Black }, 8, false) { }
-		public Circle(IGeometryVisual src) : this(src.ToolSettings, src.Size, src.IsFilled) { }
+		public Circle(IGeometryVisual src) : this() 
+		{
+			src.CopyTo(this);
+		}
 		public Circle(ToolSettings toolSettings, double size, bool isFilled)
 		{
 			Start = new Point(-1, -1);
@@ -21,6 +25,7 @@ namespace Sketching.Tool.Circle
 
 		public ToolSettings ToolSettings { get; set; }
 		public bool IsFilled { get; set; }
+		public bool IsStenciled { get; set; } = false;
 		public Point End { get; set; }
 		public bool IsValid => Start.X > 0 && End.X > 0;
 		public double MinSize { get; set; }

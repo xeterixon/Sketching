@@ -101,6 +101,9 @@
     <Compile Include="Renderer\IGeometryRenderer.cs" />
     <Compile Include="Renderer\IRenderer.cs" />
     <Compile Include="Helper\Messages.cs" />
+    <Compile Include="Extensions\GeometryVisualExtensions.cs" />
+    <Compile Include="Helper\ShaderFactory.cs" />
+    <Compile Include="Helper\Translation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp">

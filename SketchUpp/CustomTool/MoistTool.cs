@@ -13,6 +13,7 @@ namespace SketchUpp.CustomTool
 		public bool Active { get; set; }
 		public IMoist Geometry { get; set; } = new Moist();
 		public bool CanUseFill { get; set; }
+		public bool CanUseStencil { get; set; } = false;
 		public string CustomToolbarName { get; set; }
 		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
 		public bool ShowDefaultToolbar { get; set; }

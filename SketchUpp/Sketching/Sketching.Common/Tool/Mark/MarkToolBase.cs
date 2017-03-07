@@ -19,6 +19,7 @@ namespace Sketching.Tool.Mark
 		public string Name { get; set; }
 		public IMark Geometry { get; set; } = new Mark();
 		public bool CanUseFill { get; set; } = false;
+		public bool CanUseStencil { get; set; } = false;
 
 		IGeometryVisual ITool.Geometry
 		{

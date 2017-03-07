@@ -1,25 +1,40 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Sketching.Views.ToolSettingsView">
-  <ContentPage.Content>
-    <StackLayout Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-      <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="40">
-        <Image x:Name="thinLineImage" VerticalOptions="FillAndExpand" Aspect="AspectFit" HorizontalOptions="Start" WidthRequest="40"/>
-        <Slider x:Name="sizeSlider" HorizontalOptions="FillAndExpand" Maximum="{Binding Tool.Geometry.MaxSize}" Minimum="{Binding Tool.Geometry.MinSize}" Value="{Binding Tool.Geometry.Size}"/>
-        <Image x:Name="thickLineImage" VerticalOptions="FillAndExpand" Aspect="AspectFit" HorizontalOptions="End" WidthRequest="40"/>
-      </StackLayout>
-      <StackLayout IsVisible="{Binding Tool.CanUseFill}" Orientation="Horizontal">
-        <Label Text="Fill" VerticalTextAlignment="Center"/>
-        <Switch IsToggled="{Binding Tool.Geometry.IsFilled}"/>
-      </StackLayout>
-      <Grid x:Name="paletteGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <StackLayout x:Name="customColorsLayout" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-          <Label x:Name="customColorsTitle" />
-          <Grid x:Name="customColorsGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-          <Label x:Name="singleObjectLabel" IsVisible="False"/>
-          <BoxView HeightRequest="2" BackgroundColor="Gray" />
-        </StackLayout>
-        <Grid x:Name="colorGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-      </Grid>
-    </StackLayout>
-  </ContentPage.Content>
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:strings="clr-namespace:Sketching.Helper;assembly=Sketching.Common"
+	x:Class="Sketching.Views.ToolSettingsView">
+	<ContentPage.Content>
+		<StackLayout Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+			<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="40">
+				<Image x:Name="thinLineImage" VerticalOptions="FillAndExpand" Aspect="AspectFit" HorizontalOptions="Start" WidthRequest="40" />
+				<Slider 
+					x:Name="sizeSlider" HorizontalOptions="FillAndExpand" 
+					Maximum="{Binding Tool.Geometry.MaxSize}" 
+					Minimum="{Binding Tool.Geometry.MinSize}" 
+					Value="{Binding Tool.Geometry.Size}" />
+				<Image x:Name="thickLineImage" VerticalOptions="FillAndExpand" Aspect="AspectFit" HorizontalOptions="End" WidthRequest="40" />
+			</StackLayout>
+			<StackLayout Orientation="Horizontal">
+			<StackLayout IsVisible="{Binding Tool.CanUseFill}" Orientation="Horizontal">
+					<Label Text="{x:Static strings:Translation.Fill}" VerticalTextAlignment="Center" />
+					<Switch IsToggled="{Binding Tool.Geometry.IsFilled}" />
+				</StackLayout>
+				<StackLayout IsVisible="{Binding Tool.CanUseStencil}" Orientation="Horizontal">
+					<Label Text="{x:Static strings:Translation.Stencil}" VerticalTextAlignment="Center" />
+					<Switch IsToggled="{Binding Tool.Geometry.IsStenciled}" />
+				</StackLayout>
+			</StackLayout>
+				
+			<Grid x:Name="paletteGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+				<StackLayout x:Name="customColorsLayout" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+					<Label x:Name="customColorsTitle" />
+					<Grid x:Name="customColorsGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+					<Label x:Name="singleObjectLabel" IsVisible="False" />
+					<BoxView HeightRequest="2" BackgroundColor="Gray" />
+				</StackLayout>
+				<Grid x:Name="colorGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+			</Grid>
+		</StackLayout>
+	</ContentPage.Content>
 </ContentPage>

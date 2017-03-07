@@ -12,6 +12,8 @@ namespace Sketching.Tool.Oval
 		public bool Active { get; set; }
 		public IOval Geometry { get; set; } = new Oval();
 		public bool CanUseFill { get; set; } = true;
+		public bool CanUseStencil { get; set; } = true;
+
 
 		IGeometryVisual ITool.Geometry
 		{

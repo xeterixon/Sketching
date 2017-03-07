@@ -25,6 +25,7 @@ namespace SketchUpp.RulerTool
 		public bool Active { get; set; }
 
 		public bool CanUseFill { get; set; }
+		public bool CanUseStencil { get; set; } = false;
 
 		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
 

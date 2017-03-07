@@ -12,6 +12,7 @@ namespace Sketching.Interfaces
 		double Size { get; set; }
 		ToolSettings ToolSettings { get; set; }
 		bool IsFilled { get; set; }
+		bool IsStenciled { get; set; }
 		bool IsValid { get; }
 		double MinSize { get; set; }
 		double MaxSize { get; set; }

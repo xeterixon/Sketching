@@ -18,6 +18,8 @@ namespace Sketching.Tool.Stroke
 		public string Name { get; set; }
 		public IStroke Geometry { get; set; } = new Stroke();
 		public bool CanUseFill { get; set; } = true;
+		public bool CanUseStencil { get; set; } = true;
+
 
 		IGeometryVisual ITool.Geometry
 		{

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sketching.Extensions;
 using Sketching.Interfaces;
 using Sketching.Views;
 using Xamarin.Forms;
@@ -8,7 +9,10 @@ namespace Sketching.Tool.Stroke
 	public class Stroke : IStroke
 	{
 		public Stroke() : this(new ToolSettings { SelectedColor = Color.Black }, 8, false) { }
-		public Stroke(IGeometryVisual src) : this(src.ToolSettings, src.Size, src.IsFilled) { }
+		public Stroke(IGeometryVisual src) : this() 
+		{
+			src.CopyTo(this);
+		}
 		public Stroke(ToolSettings toolSettings, double size, bool isFilled)
 		{
 			ToolSettings = toolSettings;
@@ -21,6 +25,8 @@ namespace Sketching.Tool.Stroke
 		public double Size { get; set; }
 		public ToolSettings ToolSettings { get; set; }
 		public bool IsFilled { get; set; }
+		public bool IsStenciled { get; set; } = false;
+
 		public List<Point> Points { get; set; } = new List<Point>();
 		public bool HighLight { get; set; } = false;
 		public bool IsValid => Points.Count > 0;

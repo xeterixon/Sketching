@@ -28,19 +28,37 @@ namespace Sketching.Tool.Stroke
 				if (stroke.HighLight)
 				{
 					paint.StrokeCap = SKStrokeCap.Butt;
+					if (stroke.IsStenciled)
+					{
+						using (var shader = ShaderFactory.Line(stroke.ToolSettings.SelectedColor.ToSkiaColor()))
+						{
+							paint.Shader = shader;
+						}
+					}
 					paint.Color = stroke.ToolSettings.SelectedColor.ToFillColor().ToSkiaColor();
 					canvas.DrawPointsInPath(paint, points);
+					return;
 				}
 				else
 				{
 					canvas.DrawPoints(SKPointMode.Polygon, points, paint);
 				}
-				// Fill Stroke
-				if (!stroke.IsFilled) return;
 				if (!points.Any()) return;
 				paint.Color = stroke.ToolSettings.SelectedColor.ToFillColor().ToSkiaColor();
 				paint.IsStroke = false;
-				canvas.DrawPointsInPath(paint, points);
+				if (stroke.IsFilled) 
+				{
+					canvas.DrawPointsInPath(paint, points);
+
+				}
+				if (stroke.IsStenciled)
+				{
+					using (var shader = ShaderFactory.Line(stroke.ToolSettings.SelectedColor.ToSkiaColor()))
+					{
+						paint.Shader = shader;
+					}
+					canvas.DrawPointsInPath(paint, points);
+				}
 			}
 		}
 	}

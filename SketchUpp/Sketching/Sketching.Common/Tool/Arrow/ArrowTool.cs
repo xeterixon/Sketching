@@ -12,6 +12,7 @@ namespace Sketching.Tool.Arrow
 		public bool Active { get; set; }
 		public IArrow Geometry { get; set; } = new Arrow();
 		public bool CanUseFill { get; set; } = false;
+		public bool CanUseStencil { get; set; } = false;
 
 		IGeometryVisual ITool.Geometry
 		{

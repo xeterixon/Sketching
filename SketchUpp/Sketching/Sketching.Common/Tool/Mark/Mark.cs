@@ -1,4 +1,5 @@
-﻿using Sketching.Interfaces;
+﻿using Sketching.Extensions;
+using Sketching.Interfaces;
 using Sketching.Views;
 using Xamarin.Forms;
 
@@ -7,7 +8,10 @@ namespace Sketching.Tool.Mark
 	public class Mark : IMark
 	{
 		public Mark() : this(new ToolSettings { SelectedColor = Color.Black }, 40, false) { }
-		public Mark(IGeometryVisual src) : this(src.ToolSettings, src.Size, src.IsFilled) { }
+		public Mark(IGeometryVisual src) : this()
+		{
+			src.CopyTo(this);
+		}
 		public Mark(ToolSettings toolSettings, double size, bool isFilled)
 		{
 			ToolSettings = toolSettings;
@@ -20,6 +24,8 @@ namespace Sketching.Tool.Mark
 
 		public ToolSettings ToolSettings { get; set; }
 		public bool IsFilled { get; set; }
+		public bool IsStenciled { get; set; } = false;
+
 		public bool IsValid => Point.X > 0;
 		public double MinSize { get; set; }
 		public double MaxSize { get; set; }
