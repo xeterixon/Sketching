@@ -12,6 +12,7 @@ namespace Sketching.Tool.Rectangle
 		public bool Active { get; set; }
 		public IRectangle Geometry { get; set; } = new Rectangle();
 		public bool CanUseFill { get; set; } = true;
+		public bool CanUseStencil { get; set; } = true;
 
 		IGeometryVisual ITool.Geometry
 		{

@@ -12,6 +12,8 @@ namespace Sketching.Tool.Text
 		public bool Active { get; set; }
 		public IText Geometry { get; set; } = new Text();
 		public bool CanUseFill { get; set; } = true;
+		public bool CanUseStencil { get; set; } = false;
+
 		public string CustomToolbarName { get; set; }
 		public IEnumerable<KeyValuePair<string, Color>> CustomToolbarColors { get; set; }
 		public bool ShowDefaultToolbar { get; set; } = true;

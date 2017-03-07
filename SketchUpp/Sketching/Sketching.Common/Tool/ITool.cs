@@ -20,6 +20,7 @@ namespace Sketching.Tool
 		bool Active { get; set; }
 		IGeometryVisual Geometry { get; set; }
 		bool CanUseFill { get; set; }
+		bool CanUseStencil { get; set; }
 	}
 
 	public interface IStrokeTool : ITool<IStroke> { } // This interface is used by all stroke tools, line, curve, highlight etc

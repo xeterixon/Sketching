@@ -1,4 +1,5 @@
-﻿using Sketching.Interfaces;
+﻿using Sketching.Extensions;
+using Sketching.Interfaces;
 using Sketching.Views;
 using Xamarin.Forms;
 
@@ -7,7 +8,10 @@ namespace Sketching.Tool.Rectangle
 	public class Rectangle : IRectangle
 	{
 		public Rectangle() : this(new ToolSettings { SelectedColor = Color.Black }, 8, false) { }
-		public Rectangle(IGeometryVisual src) : this(src.ToolSettings, src.Size, src.IsFilled) { }
+		public Rectangle(IGeometryVisual src) : this() 
+		{
+			src.CopyTo(this);
+		}
 		public Rectangle(ToolSettings toolSettings, double size, bool isFilled)
 		{
 			Start = new Point(-1, -1);
@@ -21,6 +25,8 @@ namespace Sketching.Tool.Rectangle
 
 		public ToolSettings ToolSettings { get; set; }
 		public bool IsFilled { get; set; }
+		public bool IsStenciled { get; set; } = false;
+
 		public bool IsValid { get { return Start.X > 0 && End.X > 0; } }
 		public double MinSize { get; set; }
 		public double MaxSize { get; set; }

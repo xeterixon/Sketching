@@ -12,6 +12,7 @@ namespace Sketching.Tool.Circle
 		public bool Active { get; set; }
 		public ICircle Geometry { get; set; } = new Circle();
 		public bool CanUseFill { get; set; } = true;
+		public bool CanUseStencil { get; set; } = true;
 
 		IGeometryVisual ITool.Geometry
 		{

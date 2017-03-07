@@ -22,11 +22,21 @@ namespace Sketching.Tool.Rectangle
 				paint.IsStroke = true;
 				paint.StrokeWidth = (float)(rect.Size * scale);
 				canvas.DrawRect(Helper.Converter.ToSKRect(rect.Start, rect.End, scale), paint);
-				// Fill Rect
-				if (!rect.IsFilled) return;
+				// Fill and or stencil rect
 				paint.Color = rect.ToolSettings.SelectedColor.ToFillColor().ToSkiaColor();
 				paint.IsStroke = false;
-				canvas.DrawRect(Helper.Converter.ToSKRect(rect.Start, rect.End, scale), paint);
+				if (rect.IsFilled)
+				{
+					canvas.DrawRect(Helper.Converter.ToSKRect(rect.Start, rect.End, scale), paint);
+				}
+				if (rect.IsStenciled)
+				{
+					using (var shader = ShaderFactory.Line(rect.ToolSettings.SelectedColor.ToSkiaColor()))
+					{
+						paint.Shader = shader;
+					}
+					canvas.DrawRect(Helper.Converter.ToSKRect(rect.Start, rect.End, scale), paint);
+				}
 			}
 		}
 	}

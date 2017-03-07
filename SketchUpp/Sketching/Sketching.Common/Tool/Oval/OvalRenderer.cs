@@ -23,10 +23,22 @@ namespace Sketching.Tool.Oval
 				paint.StrokeWidth = (float)(oval.Size * scale);
 				canvas.DrawOval((float)(oval.Start.X * scale), (float)(oval.Start.Y * scale), (float)(oval.End.X - oval.Start.X) * (float)scale, (float)(oval.End.Y - oval.Start.Y) * (float)scale, paint);
 				// Fill Oval
-				if (!oval.IsFilled) return;
 				paint.Color = oval.ToolSettings.SelectedColor.ToFillColor().ToSkiaColor();
 				paint.IsStroke = false;
-				canvas.DrawOval((float)(oval.Start.X * scale), (float)(oval.Start.Y * scale), (float)(oval.End.X - oval.Start.X) * (float)scale, (float)(oval.End.Y - oval.Start.Y) * (float)scale, paint);
+				if (oval.IsFilled) 
+				{
+					canvas.DrawOval((float)(oval.Start.X * scale), (float)(oval.Start.Y * scale), (float)(oval.End.X - oval.Start.X) * (float)scale, (float)(oval.End.Y - oval.Start.Y) * (float)scale, paint);
+
+				}
+				if (oval.IsStenciled)
+				{
+					using (var shader = ShaderFactory.Line(oval.ToolSettings.SelectedColor.ToSkiaColor()))
+					{
+						paint.Shader = shader;
+					}
+					canvas.DrawOval((float)(oval.Start.X * scale), (float)(oval.Start.Y * scale), (float)(oval.End.X - oval.Start.X) * (float)scale, (float)(oval.End.Y - oval.Start.Y) * (float)scale, paint);
+
+				}
 			}
 		}
 	}

@@ -1,4 +1,5 @@
-﻿using Sketching.Interfaces;
+﻿using Sketching.Extensions;
+using Sketching.Interfaces;
 using Sketching.Views;
 using Xamarin.Forms;
 
@@ -12,20 +13,14 @@ namespace SketchUpp.RulerTool
 		}
 		public Ruler(IGeometryVisual v)
 		{
-			if (v != null)
-			{
-				ToolSettings = v.ToolSettings;
-				IsFilled = v.IsFilled;
-				MaxSize = v.MaxSize;
-				MinSize = v.MinSize;
-				Size = v.Size;
-			}
+			v.CopyTo(this);
 		}
 		public Color Color { get; set; } = Color.Black;
 
 		public Point End { get; set; } = Point.Zero;
 
 		public bool IsFilled { get; set; } = false;
+		public bool IsStenciled { get; set; } = false;
 
 		public bool IsValid { get { return Start != Point.Zero && End != Point.Zero; } }
 
