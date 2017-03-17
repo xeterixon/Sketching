@@ -30,6 +30,7 @@
 [1.1.4] - Linking assembly fix
 [1.1.5] - Toolbar fix
 [1.2.0] - Basic stencil support.
+[1.2.1] - Delegate some properties from SketchArea to SketchView.
 		</releaseNotes>
 		<dependencies>
 			<dependency id="Xamarin.Forms" version="2.3.3.175" />

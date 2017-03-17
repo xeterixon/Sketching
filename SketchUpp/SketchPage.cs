@@ -37,7 +37,8 @@ namespace SketchUpp
 				VerticalOptions = LayoutOptions.FillAndExpand,
 				HorizontalOptions = LayoutOptions.FillAndExpand,
 			};
-			_sketchView.SketchArea.CanDrawOutsideImageBounds = false;
+			_sketchView.CanDrawOutsideImageBounds = false;
+			_sketchView.EnableGrid = false;
 
 			// How to remove all tools
 			//_sketchView.RemoveAllToolbarItems();
@@ -124,7 +125,7 @@ namespace SketchUpp
 			}
 			if (bytes != null)
 			{
-				_sketchView.SketchArea.BackgroundImage = new BackgroundImage { Data = bytes };
+				_sketchView.BackgroundImage = new BackgroundImage { Data = bytes };
 			}
 		}
 		private async Task SelectImage()

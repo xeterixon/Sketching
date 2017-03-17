@@ -12,6 +12,7 @@ using Sketching.Tool.Oval;
 using Sketching.Tool.Rectangle;
 using Sketching.Tool.Stroke;
 using Sketching.Tool.Text;
+using Sketching.Interfaces;
 
 namespace Sketching.Views
 {
@@ -45,7 +46,22 @@ namespace Sketching.Views
 			get { return (double)GetValue(ToolbarHeightProperty); }
 			set { SetValue(ToolbarHeightProperty, value); }
 		}
+		public bool CanDrawOutsideImageBounds { 
+			get { return sketchArea.CanDrawOutsideImageBounds; }
+			set { sketchArea.CanDrawOutsideImageBounds = value;} 
+		}
+		public IImage BackgroundImage {
+			get { return sketchArea.BackgroundImage; }
+			set {
+				sketchArea.BackgroundImage = value;
+			}
+		}
 
+		public bool EnableGrid 
+		{
+			get { return sketchArea.EnableGrid ; }
+			set { sketchArea.EnableGrid = value; }
+		}
 		private static void ToolbarHeightPropertyChanged(BindableObject bindable, object oldValue, object newValue)
 		{
 			SetToolbarHeight(((SketchView)bindable).toolbarStack, (double)newValue);

@@ -28,7 +28,11 @@ namespace Sketching.Views
 			get { return (bool)GetValue(CanDrawOutsideImageBoundsProperty); }
 			set { SetValue(CanDrawOutsideImageBoundsProperty, value); }
 		}
-
+		public bool EnableGrid 
+		{
+			get { return _gridRenderer.Enabled; }
+			set { _gridRenderer.Enabled = value;}
+		}
 		private bool RestictArea => CanDrawOutsideImageBounds == false && BackgroundImage != null;
 		private Size LastCanvasSize = new Size();
 		private SKImage _snapShot;
