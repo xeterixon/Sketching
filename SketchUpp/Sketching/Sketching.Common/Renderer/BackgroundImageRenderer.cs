@@ -33,6 +33,9 @@ namespace Sketching.Renderer
 		}
 		private SKBitmap ResizeBitmap(SKRect canvasSize, byte[] data)
 		{
+			// This line "SKBitmap.Decode(data)" fails for some images on Android, when using SkiaSharp 1.57.0
+			// but not when using SkiaSharp 1.56.2! (Reported here: https://github.com/mono/SkiaSharp/issues/280)
+			// That's why this lib right now has an upper limit of the skia-dependency
 			using (var orgBitmap = SKBitmap.Decode(data)) {
 				Image.Width  = orgBitmap.Width;
 				Image.Height = orgBitmap.Height;

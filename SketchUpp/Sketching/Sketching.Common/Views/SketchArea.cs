@@ -72,7 +72,7 @@ namespace Sketching.Views
 			var image = RenderToOriginalResolutionAndClipToImage();
 			return new BackgroundImage
 			{
-				Data = image.Encode(SKEncodedImageFormat.Jpeg,  100).ToArray(),
+				Data = image.Encode(SKImageEncodeFormat.Jpeg,  100).ToArray(),
 				Width = image.Width,
 				Height = image.Height
 			};
@@ -82,7 +82,7 @@ namespace Sketching.Views
 			var image = new BackgroundImage();
 			if (_snapShot != null)
 			{
-				image.Data = _snapShot.Encode(SKEncodedImageFormat.Jpeg, 100).ToArray();
+				image.Data = _snapShot.Encode(SKImageEncodeFormat.Jpeg, 100).ToArray();
 				image.Width = _snapShot.Width;
 				image.Height = _snapShot.Height;
 			}
