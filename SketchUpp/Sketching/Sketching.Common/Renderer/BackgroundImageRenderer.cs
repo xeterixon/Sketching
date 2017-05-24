@@ -11,6 +11,7 @@ namespace Sketching.Renderer
 		private SKImage _scaledImage;
 		private IImage _image;
 		private int _lastClipWidth = -1;
+		private int _lastClipHeight = -1;
 		//NOTE The "ImageDisplay*" properties are used for clipping the drawing.... Doesn't work well, but well enough
 		public int ImageDisplayWidth = int.MaxValue;
 		public int ImageDisplayHeight =int.MaxValue;
@@ -51,10 +52,13 @@ namespace Sketching.Renderer
 		private void RenderImage(SKCanvas canvas) 
 		{
 			if (Image == null) return;
-			if (_lastClipWidth != canvas.ClipDeviceBounds.Width || _scaledImage == null) {
+			if (_lastClipWidth != canvas.ClipDeviceBounds.Width ||
+			    _lastClipHeight != canvas.ClipDeviceBounds.Height ||
+				_scaledImage == null) {
 				_scaledImage?.Dispose();
 				_scaledImage = ResizeImage(canvas.ClipDeviceBounds, Image.Data);
 				_lastClipWidth = canvas.ClipDeviceBounds.Width;
+				_lastClipHeight = canvas.ClipDeviceBounds.Height;
 			}
 			canvas.DrawImage(_scaledImage, 0, 0);
 
@@ -62,11 +66,14 @@ namespace Sketching.Renderer
 		private void RenderBitmap(SKCanvas canvas) 
 		{
 			if (Image == null) return;
-			if (_lastClipWidth != canvas.ClipDeviceBounds.Width || _scaledBitmap == null) 
+			if (_lastClipWidth != canvas.ClipDeviceBounds.Width ||
+			    _lastClipHeight != canvas.ClipDeviceBounds.Height ||
+				_scaledBitmap == null) 
 			{
 				_scaledBitmap?.Dispose();
 				_scaledBitmap = ResizeBitmap(canvas.ClipDeviceBounds, Image.Data);
 				_lastClipWidth = canvas.ClipDeviceBounds.Width;
+				_lastClipHeight = canvas.ClipDeviceBounds.Height;
 			}
 			canvas.DrawBitmap(_scaledBitmap, 0, 0);
 		}
