@@ -1,7 +1,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Cab.Mobile.Sketching</id>
-		<version>1.2.3</version>
+		<version>1.2.4</version>
 		<title>Sketching for Xamarin Forms</title>
 		<authors>TorbjornEriksson</authors>
 		<owners>CAB Group AB</owners>
@@ -33,7 +33,7 @@
 			[1.2.1] - Delegate some properties from SketchArea to SketchView.
 			[1.2.2] - Updated to latest SkiaSharp
 			[1.2.3] - Reverted from 1.57.0 to 1.56.2 of SkiaSharp. See this bug: https://github.com/mono/SkiaSharp/issues/280
-
+			[1.2.4] - Fixed an issue with the background-renderer (if height, but not width, changed, the background rendered incorrectly
 		</releaseNotes>
 		<dependencies>
 			<dependency id="Xamarin.Forms" version="2.3.3.175" />

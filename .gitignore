@@ -24,3 +24,6 @@ project.lock.json
 SketchUpp/UWP/obj
 SketchUpp/SketchUpp.sln.DotSettings.user
 SketchUpp/SketchUpp.sln.DotSettings.user
+/SketchUpp/buildandnugetpack.bat
+/SketchUpp/nugetpush.bat
+/SketchUpp/Cab.Mobile.Sketching.1.2.4.nupkg
